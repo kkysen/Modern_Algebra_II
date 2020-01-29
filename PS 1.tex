@@ -1,0 +1,166 @@
+\documentclass[fleqn]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{ulem}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{fancyvrb}
+\usepackage{cleveref}
+\usepackage{centernot}
+\usepackage{mathabx}
+
+\title{
+Math GU4042, Spring 2020 \\
+Modern Algebra II, Prof.\ Yihang Zhu \\
+Problem Set 1
+}
+\author{Khyber Sen}
+\date{1/31/2019}
+
+\setcounter{secnumdepth}{0}
+
+\begin{document}
+    
+    \maketitle
+    
+    Let $R$ be a ring with 1.
+    
+    \section{7.1.1}
+    Show that $(-1)^2 = 1$ in $R$.
+        
+        \subsection{Solution}
+        \begin{align}
+            (-1)^2 &= (-1)(-1) \\
+                &= -(-1) \because{} -1 \cdot x = -x
+                &= 1
+        \end{align}
+    
+    \section{7.1.2}
+    Prove that if $u$ is a unit in $R$ then so is $-u$.
+        
+        \subsection{Solution}
+        \begin{align}
+            u &\in R^x
+            u u^{-1} &= 1 \\
+            (-u)(-u^{-1}) &= u (-1)(-1) u^{-1} \\
+                &= u (1) u^{-1} \\
+                &= u u^{-1} \\
+                &= 1
+            \therefore{} (-u)^{-1} &= -u^{-1} \\
+            \therefore{} -u &\in R^x
+        \end{align}
+    
+    \section{7.1.3}
+    Let $R$ be a ring with identity and let $S$ be a subring of $R$ containing the identity.  Prove that if $u$ is a unit in $S$ then $u$ is a unit in $R$.  Show by example that the converse is false.
+        
+        \subsection{Solution}
+        \begin{align}
+            u &\in S^x \\
+            u u^{-1} &= 1 \in S, u, u^{-1} \in S \\
+            u, u^{-1} \in R \\
+            u u^{-1} &= 1 \in R, u, u^{-1} \in R \\
+            u &\in R
+        \end{align}
+    
+    \section{7.1.7}
+    The \textit{center} of a ring $R$ is $\{z \in R \mid zr = rz \forall r \in R\}$ (i.e.,\ is the set of all elements which commute with every element of $R$).  Prove that the center of a ring is a subring that contains the identity.
+        
+        \subsection{Solution}
+        Let $Z(R)$ denote the center of $R$.  The identity 1 is obviously in the center because $1x = x1 = x$ $\forall$ $x \in R$.  Now we just have to show that $Z(R) \leq R$, i.e.\ it's a subring.  $Z(R) \subseteq R$ obviously by definition, so we just have to show $Z(R)$ is closed under multiplication.  $\forall$ $z, w \in Z(R)$, $\forall$ $x \in R$,
+        \begin{align}
+            (zw)x &= z(wx) \\
+                &= z(xw) \because{} w \in Z(R) \\
+                &= (zx)w \\
+                &= (xz)w \because{} z \in Z(R) \\
+                &= x(zw)
+        \end{align}
+        Thus, $zw \in Z(R)$, so $Z(R)$ is closed under multiplication and is thus a subring of $R$.
+    
+    \section{7.13.(a, b)}
+    An element $x$ in $R$ is called \textit{nilpotent} if $x^m = 0$ for some $m \in \mathbb{Z}^+$.
+        
+        \subsection{(a)}
+        Show that if $n = a^k b$ for some integers $a$ and $b$ then $\bar{ab}$ is a nilpotent element of $\mathbb{Z}/n\mathbb{Z}$.
+            
+            \subsubsection{Solution}
+            \begin{align}
+                \bar{ab}^{a^k b} &= 0
+            \end{align}
+        
+        \subsection{(b)}
+        If $a \in \mathbb{Z}$ is an integer, show that the element $\bar{a} \in \mathbb{Z}/n\mathbb{Z}$ is nilpotent if and only if every prime divisor of $n$ is also a divisor of $a$.  In particular, determine the nilpotent elements of $\mathbb{Z}/72\mathbb{Z}$.
+        
+            \subsubsection{Solution}
+            
+    
+    \section{7.1.15}
+    A ring $R$ is called a \textit{Boolean ring} if $a^2 = a$ for all $a \in R$.  Prove that every Boolean ring is commutative.
+        
+        \subsection{Solution}
+        $\forall$ $a, b \in R$,
+        \begin{align}
+            a + b &= (a + b)^2 \\
+                &= (a + b)(a + b) \\
+                &= a^2 + ab + ba + b^2
+                &= a + ab + ba + b \\
+            0 &= ab + ba \\
+        \end{align}
+        
+    \break
+    
+    Let $R$ be a commutative ring with 1.
+    
+    \section{7.2.1}
+    Let $p(x) = 2x^3 - 3x^2 + 4x - 5$ and let $q(x) = 7x^3 + 33x - 4$.  In each of parts (a), (b) and (c) compute $p(x) + q(x)$ and $p(x)q(x)$ under the assumption that the coefficients of the two given polynomials are taken from the specified ring (where the integer coefficients are taken mod $n$ in parts (b) and (c)).
+        
+        \subsection{(a)}
+        $R = \mathbb{Z}$
+            
+            \subsubsection{Solution}
+            
+        
+        \subsection{(b)}
+        $R = \mathbb{Z}/2\mathbb{Z}$
+            
+            \subsubsection{Solution}
+            
+        
+        \subsection{(c)}
+        $R = \mathbb{Z}/3\mathbb{Z}$
+        
+            \subsubsection{Solution}
+            
+    
+    \section{7.2.3}
+    Define the set $R[[x]]$ of \textit{formal power series} in the indeterminate $x$ with coefficients from $R$ to be all formal infinite sums
+    \begin{align}
+        \sum\limits_{n = 0}^{\infty} a_n x^n &= a_0 + a_1 x + a_2 x^2 + a_3 x^3 + ...
+    \end{align}
+    Define addition and multiplication of power series in the same way as for power series with real or complex coefficients i.e.,\ extend polynomial addition and multiplication to power series as though they were ``polynomials of infinite degree'':
+    \begin{align}
+        \sum\limits_{n = 0}^{\infty} a_n x^n + \sum\limits_{n = 0}^{\infty} b_n x^n &= \sum\limits_{n = 0}^{\infty} (a_n + b_n) x^n \\
+        \sum\limits_{n = 0}^{\infty} a_n x^n \times \sum\limits_{n = 0}^{\infty} b_n x^n &= \sum\limits_{n = 0}^{\infty} \left(\sum\limits_{k = 0}^{n} a_k b_{n - k}\right) x^n
+    \end{align}
+    (The term ``formal'' is used here to indicate that convergence is not considered, so that formal power series need not represent functions on $R$.)
+        
+        \subsection{(a)}
+        Prove that $R[[x]]$ is a commutative ring with 1.
+            
+            \subsubsection{Solution}
+            
+        
+        \subsection{(b)}
+        Show that $1 - x$ is a unit in $R[[x]]$ with inverse $1 + x + x^2 + ...$.
+            
+            \subsubsection{Solution}
+            
+        
+        \subsection{(c)}
+        Prove that $\sum\limits_{n = 0}^{\infty} a_n x^n$ is a unit in $R[[x]]$ if and only if $a_0$ is a unit in $R$.
+            
+            \subsubsection{Solution}
+            
+    
+\end{document}
