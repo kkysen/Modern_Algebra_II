@@ -1,0 +1,286 @@
+\documentclass[fleqn]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{ulem}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{fancyvrb}
+\usepackage{cleveref}
+\usepackage{centernot}
+\usepackage{mathabx}
+
+\title{
+Math GU4042, Spring 2020 \\
+Modern Algebra II, Prof.\ Yihang Zhu \\
+HW 1
+}
+\author{Khyber Sen}
+\date{1/30/2019}
+
+\setcounter{secnumdepth}{0}
+
+\begin{document}
+    
+    \maketitle
+    
+    Let $R$ be a ring with 1.
+    
+    \section{7.1.1}
+    Show that $(-1)^2 = 1$ in $R$.
+        
+        \subsection{Solution}
+        \begin{align}
+            (-1)^2 &= (-1)(-1) \\
+                &= -(-1) \because{} -1 \cdot x = -x \\
+                &= 1
+        \end{align}
+    
+    \section{7.1.2}
+    Prove that if $u$ is a unit in $R$ then so is $-u$.
+        
+        \subsection{Solution}
+        \begin{align}
+            u &\in R^x \\
+            u u^{-1} &= 1 \\
+            (-u)(-u^{-1}) &= u (-1)(-1) u^{-1} \\
+                &= u (1) u^{-1} \\
+                &= u u^{-1} \\
+                &= 1 \\
+            \therefore{} (-u)^{-1} &= -u^{-1} \\
+            \therefore{} -u &\in R^x
+        \end{align}
+    
+    \section{7.1.3}
+    Let $R$ be a ring with identity and let $S$ be a subring of $R$ containing the identity.  Prove that if $u$ is a unit in $S$ then $u$ is a unit in $R$.  Show by example that the converse is false.
+        
+        \subsection{Solution}
+        \begin{align}
+            u &\in S^x \\
+            u u^{-1} &= 1 \in S, u, u^{-1} \in S \\
+            u, u^{-1} &\in R \\
+            u u^{-1} &= 1 \in R, u, u^{-1} \in R \\
+            u &\in R
+        \end{align}
+    
+    \section{7.1.7}
+    The \textit{center} of a ring $R$ is $\{z \in R \mid zr = rz \forall r \in R\}$ (i.e.,\ is the set of all elements which commute with every element of $R$).  Prove that the center of a ring is a subring that contains the identity.
+        
+        \subsection{Solution}
+        Let $Z(R)$ denote the center of $R$.  The identity 1 is obviously in the center because $1x = x1 = x$ $\forall$ $x \in R$.  Now we just have to show that $Z(R) \leq R$, i.e.\ it's a subring.  First we have to show $Z(R)$ is a subgroup of $R$ additively, i.e.\ it's closed under subtraction (addition and additive inverse).  Then we also have to show $Z(R)$ is closed under multiplication.  $\forall$ $z, w \in Z(R)$, $\forall$ $x \in R$,
+        \begin{align}
+            (z - w)x &= zx - wx \\
+                &= xz - xw \because{} z, w \in Z(R) \\
+                &= x(z - w) \\
+            &\therefore{} z - w \in Z(R) \\
+            (zw)x &= z(wx) \\
+                &= z(xw) \because{} w \in Z(R) \\
+                &= (zx)w \\
+                &= (xz)w \because{} z \in Z(R) \\
+                &= x(zw) \\
+            &\therefore{} zw \in Z(R) \\
+        \end{align}
+    
+    \section{7.13.(a, b)}
+    An element $x$ in $R$ is called \textit{nilpotent} if $x^m = 0$ for some $m \in \mathbb{Z}^+$.
+        
+        \subsection{(a)}
+        Show that if $n = a^k b$ for some integers $a$ and $b$ then $\widebar{ab}$ is a nilpotent element of $\mathbb{Z}/n\mathbb{Z}$.
+            
+            \subsubsection{Solution}
+            $\widebar{ab}$ is a nilpotent element of $\mathbb{Z}/n\mathbb{Z}$ iff $n \mid (ab)^m$ for some $m \in \mathbb{Z}$.  Let $m = k$, then
+            \begin{align}
+                (ab)^k &= a^k b^k \\
+                    &= a^k b b^{k - 1} \\
+                    &= n b^{k - 1} \\
+                &\therefore{} n \mid (ab)^k \\
+                &\therefore{} \widebar{(ab)^k} = \widebar{0}
+            \end{align}
+        
+        \subsection{(b)}
+        If $a \in \mathbb{Z}$ is an integer, show that the element $\widebar{a} \in \mathbb{Z}/n\mathbb{Z}$ is nilpotent if and only if every prime divisor of $n$ is also a divisor of $a$.  In particular, determine the nilpotent elements of $\mathbb{Z}/72\mathbb{Z}$.
+        
+            \subsubsection{Solution}
+            $\widebar{a} \in \mathbb{Z}/n\mathbb{Z}$ is nilpotent iff $\widebar{a^m} = \widebar{0}$, i.e.\ iff $n \mid a^m$.  We need to show $n \mid a^m \iff (p \text{ is prime}, p \mid n \implies p \mid a)$.  For the $\implies$ direction, since $p \mid n$ and $n \mid a^m$, we know $p \mid a^m$.  Since $p$ is prime, this also means $p \mid a$.
+            
+            For the $\impliedby$ direction, we know every prime divisor of $n$ is a prime divisor of $a$.  Thus, if the prime factorization of $n = \prod\limits_{i = 1}^{s} {p_i}^{j_i}$, then $a = \prod\limits_{i = 1}^{t} {p_i}^{k_i}$, where $s \leq t$.  Now let $m = \max(j_i)$.  Then
+            \begin{align}
+                a^m &= \left(\prod\limits_{i = 0}^{t} {p_i}^{k_i}\right)^m \\
+                    &= \prod\limits_{i = 0}^{t} {p_i}^{m k_i} \\
+                    &= \left(\prod\limits_{i = 0}^{s} {p_i}^{j_i}\right)\left(\prod\limits_{i = 0}^{t} {p_i}^{m k_i - j_i}\right) \\
+                    &= n \prod\limits_{i = 0}^{t} {p_i}^{m k_i - j_i}
+            \end{align}
+            Thus, $n \mid a^m$.
+    
+    \section{7.1.15}
+    A ring $R$ is called a \textit{Boolean ring} if $a^2 = a$ for all $a \in R$.  Prove that every Boolean ring is commutative.
+        
+        \subsection{Solution}
+        First, in a Boolean ring, every element is its own additive inverse: $\forall$ $a \in R$,
+        \begin{align}
+            -1 &= (-1)^2 = 1 \\
+            -1 \cdot a &= 1 \cdot a \\
+            a &= -a
+        \end{align}
+        Thus, $\forall$ $a, b \in R$,
+        \begin{align}
+            a + b &= (a + b)^2 \\
+                &= (a + b)(a + b) \\
+                &= a^2 + ab + ba + b^2 \\
+                &= a + ab + ba + b \\
+            0 &= ab + ba \\
+            ab &= -ba \\
+            ab &= ba
+        \end{align}
+        Thus, a Boolean ring is commutative.
+        
+    \break
+    
+    Let $R$ be a commutative ring with 1.
+    
+    \section{7.2.1}
+    Let $p(x) = 2x^3 - 3x^2 + 4x - 5$ and let $q(x) = 7x^3 + 33x - 4$.  In each of parts (a), (b) and (c) compute $p(x) + q(x)$ and $p(x)q(x)$ under the assumption that the coefficients of the two given polynomials are taken from the specified ring (where the integer coefficients are taken mod $n$ in parts (b) and (c)).
+        
+        \subsection{(a)}
+        $R = \mathbb{Z}$
+            
+            \subsubsection{Solution}
+            \begin{align}
+                p(x) + q(x) &= (2x^3 - 3x^2 + 4x - 5) + (7x^3 + 33x - 4) \\
+                    &= 9x^3 - 3x^2 + 37x - 9 \\
+                p(x)q(x) &= (2x^3 - 3x^2 + 4x - 5)(7x^3 + 33x - 4) \\
+                    &= (14x^6 + 66x^4 - 8x^3) \\
+                        &+ (-21x^5 - 99x^3 + 12x^2) \\
+                        &+ (28x^4 + 132x^2 - 16x) \\
+                        &+ (-35x^3 - 165x + 20) \\
+                    &= 14x^6 - 21x^5 + 94x^4 - 142x^3 + 144x^2 - 181x + 20
+            \end{align}
+        
+        \subsection{(b)}
+        $R = \mathbb{Z}/2\mathbb{Z}$
+            
+            \subsubsection{Solution}
+            \begin{align}
+                p(x) &= 2x^3 - 3x^2 + 4x - 5 \\
+                    &= 0x^3 - x^2 + 0x - 1 \\
+                    &= x^2 + 1 \\
+                q(x) &= 7x^3 + 33x - 4 \\
+                    &= x^3 + x - 0 \\
+                    &= x^3 + x \\
+                p(x) + q(x) &= (x^2 + 1) + (x^3 + x) \\
+                    &= x^3 + x^2 + x + 1 \\
+                p(x)q(x) &= (x^2 + 1)(x^3 + x) \\
+                    &= x^5 + x^3 + x^3 + x \\
+                    &= x^5 + x
+            \end{align}
+        
+        \subsection{(c)}
+        $R = \mathbb{Z}/3\mathbb{Z}$
+        
+            \subsubsection{Solution}
+            \begin{align}
+                p(x) &= 2x^3 - 3x^2 + 4x - 5 \\
+                    &= 2x^3 - 0x^2 + x - 2 \\
+                    &= 2x^3 + x + 1 \\
+                q(x) &= 7x^3 + 33x - 4 \\
+                    &= x^3 + 0x - 1 \\
+                    &= x^3 + 2 \\
+                p(x) + q(x) &= (2x^3 + x + 1) + (x^3 + 2) \\
+                    &= 3x^3 + x + 3 \\
+                    &= x \\
+                p(x)q(x) &= (2x^3 + x + 1)(x^3 + 2) \\
+                    &= 2x^6 + 4x^3 + x^4 + 2x + x^3 + 2 \\
+                    &= 2x^6 + x^4 + 5x^3 + 2x + 2 \\
+                    &= 2x^6 + x^4 + 2x^3 + 2x + 2
+            \end{align}
+    
+    \section{7.2.3}
+    Define the set $R[[x]]$ of \textit{formal power series} in the indeterminate $x$ with coefficients from $R$ to be all formal infinite sums
+    \begin{align}
+        \sum\limits_{n = 0}^{\infty} a_n x^n &= a_0 + a_1 x + a_2 x^2 + a_3 x^3 + ...
+    \end{align}
+    Define addition and multiplication of power series in the same way as for power series with real or complex coefficients i.e.,\ extend polynomial addition and multiplication to power series as though they were ``polynomials of infinite degree'':
+    \begin{align}
+        \sum\limits_{n = 0}^{\infty} a_n x^n + \sum\limits_{n = 0}^{\infty} b_n x^n &= \sum\limits_{n = 0}^{\infty} (a_n + b_n) x^n \\
+        \sum\limits_{n = 0}^{\infty} a_n x^n \times \sum\limits_{n = 0}^{\infty} b_n x^n &= \sum\limits_{n = 0}^{\infty} \left(\sum\limits_{k = 0}^{n} a_k b_{n - k}\right) x^n
+    \end{align}
+    (The term ``formal'' is used here to indicate that convergence is not considered, so that formal power series need not represent functions on $R$.)
+        
+        \subsection{(a)}
+        Prove that $R[[x]]$ is a commutative ring with 1.
+            
+            \subsubsection{Solution}
+            First, to show $R[[x]]$ is a commutative ring, we need to show $(R[[x]], +)$ is a group.  Addition of power series only adds corresponding terms, so we can think of this as isomorphic to adding functions from $\mathbb{N} \to R$ (like $R^\infty$).  Since the addition is coefficient-wise, the group properties of each coefficient in $R$ apply to the whole power series.
+            
+            Now we need to prove the extra axioms for a commutative ring, namely that multiplication is associative and commutative, multiplication distributes over addition, and there is a multiplicative identity, 1.  We can define 1 to be the 1 function, i.e.\ with $a_0 = 1$.  In multiplying any power series by 1, each term is multiplied against this 1, resulting in the same power series, so this 1 power series is indeed the multiplicative identity.  For the remaining axioms, \\
+            
+            \textbf{associativity}:
+            \begin{align}
+                \sum\limits_{n = 0}^{\infty} a_n x^n \times \left(\sum\limits_{n = 0}^{\infty} b_n x^n \times \sum\limits_{n = 0}^{\infty} c_n x^n\right)
+                    &= \sum\limits_{n = 0}^{\infty} a_n x^n \times \sum\limits_{n = 0}^{\infty}\left(\sum\limits_{k = 0}^{n} b_k c_{n - k}\right) x^n \\
+                    &= \sum\limits_{n = 0}^{\infty} \left(\sum\limits_{j = 0}^{n} a_j \left(\sum\limits_{k = 0}^{n - j} b_k c_{(n - j) - k}\right)\right) x^n \\
+                    &= \sum\limits_{n = 0}^{\infty} \left(\sum\limits_{j = 0}^{n} \sum\limits_{k = 0}^{n - j} a_j b_k c_{n - j - k}\right) x^n \\
+                    &= \sum\limits_{n = 0}^{\infty} \left(\sum\limits_{j = 0}^{n} \sum\limits_{k = 0}^{n - j} a_j b_k c_i\right) x^n, j + k + i = n \\
+                \left(\sum\limits_{n = 0}^{\infty} a_n x^n \times \sum\limits_{n = 0}^{\infty} b_n x^n\right) \times \sum\limits_{n = 0}^{\infty} c_n x^n
+                    &= \sum\limits_{n = 0}^{\infty} \left(\sum\limits_{k = 0}^{n} a_k b_{n - k}\right) x^n \times \sum\limits_{n = 0}^{\infty} c_n x^n \\
+                    &= \sum\limits_{n = 0}^{\infty} \left(\sum\limits_{j = 0}^{n} \left(\sum\limits_{k = 0}^{j} a_k b_{j - k}\right) c_{n - j}\right) x^n \\
+                    &= \sum\limits_{n = 0}^{\infty} \left(\sum\limits_{j = 0}^{n} \sum\limits_{k = 0}^{j} a_k b_{j - k} c_{n - j}\right) x^n \\
+                    &= \sum\limits_{n = 0}^{\infty} \left(\sum\limits_{j = 0}^{n} \sum\limits_{k = 0}^{n - j} a_k b_{(n - j) - k} c_{n - (n - j)}\right) x^n \\
+                    &= \sum\limits_{n = 0}^{\infty} \left(\sum\limits_{j = 0}^{n} \sum\limits_{k = 0}^{n - j} a_k b_{n - j - k} c_j\right) x^n \\
+                    &= \sum\limits_{n = 0}^{\infty} \left(\sum\limits_{j = 0}^{n} \sum\limits_{k = 0}^{n - j} a_j b_k c_i\right) x^n, j + k + i = n
+            \end{align}
+            
+            
+            \textbf{commutativity}:
+            \begin{align}
+                \sum\limits_{n = 0}^{\infty} a_n x^n \times \sum\limits_{n = 0}^{\infty} b_n x^n 
+                    &= \sum\limits_{n = 0}^{\infty} \left(\sum\limits_{k = 0}^{n} a_k b_{n - k}\right) x^n \\
+                    &= \sum\limits_{n = 0}^{\infty} \left(\sum\limits_{k = 0}^{n} a_{n - k} b_n\right) x^n \\
+                    &= \sum\limits_{n = 0}^{\infty} \left(\sum\limits_{k = 0}^{n} b_n a_{n - k}\right) x^n \\
+                    &= \sum\limits_{n = 0}^{\infty} b_n x^n \times \sum\limits_{n = 0}^{\infty} a_n x^n
+            \end{align}
+            
+            \textbf{distributivity}:
+            \begin{align}
+                \sum\limits_{n = 0}^{\infty} a_n x^n \times \left(\sum\limits_{n = 0}^{\infty} b_n x^n + \sum\limits_{n = 0}^{\infty} c_n x^n\right)
+                    &= \sum\limits_{n = 0}^{\infty} a_n x^n \times \sum\limits_{n = 0}^{\infty} (b_n + c_n) x^n \\
+                    &= \sum\limits_{n = 0}^{\infty} \left(\sum\limits_{k = 0}^{n} a_k (b_n + c_n)_{n - k}\right) x^n \\
+                    &= \sum\limits_{n = 0}^{\infty} \left(\sum\limits_{k = 0}^{n} a_k (b_{n - k} + c_{n - k})\right) x^n \\
+                    &= \sum\limits_{n = 0}^{\infty} \left(\sum\limits_{k = 0}^{n} a_k b_{n - k} + a_k c_{n - k}\right) x^n \\
+                    &= \sum\limits_{n = 0}^{\infty} \left(\sum\limits_{k = 0}^{n} a_k b_{n - k}\right) x^n + \sum\limits_{n = 0}^{\infty} \left(\sum\limits_{k = 0}^{n} a_k c_{n - k}\right) x^n \\
+                    &= \left(\sum\limits_{n = 0}^{\infty} a_n x^n \times \sum\limits_{n = 0}^{\infty} b_n x^n\right) + \left(\sum\limits_{n = 0}^{\infty} a_n x^n \times \sum\limits_{n = 0}^{\infty} c_n x^n\right)
+            \end{align}
+            Note that proving the other direction for distributivity is unnecessary since multiplication is commutative.
+        
+        \subsection{(b)}
+        Show that $1 - x$ is a unit in $R[[x]]$ with inverse $1 + x + x^2 + ...$.
+            
+            \subsubsection{Solution}
+            $R[[x]]$ is a commutative ring, so we only have to show the multiplication in one direction:
+            \begin{align}
+                (1 - x)(1 + x + x^2 + ...)
+                    &= (1 - x) \sum\limits_{n = 0}^{\infty} x^n \\
+                    &= \sum\limits_{n = 0}^{\infty} x^n - \sum\limits_{n = 0}^{\infty} x^{n + 1} \\
+                    &= x^0 + \sum\limits_{n = 1}^{\infty} x^n - \sum\limits_{n = 1}^{\infty} x^n \\
+                    &= 1
+            \end{align}
+        
+        \subsection{(c)}
+        Prove that $\sum\limits_{n = 0}^{\infty} a_n x^n$ is a unit in $R[[x]]$ if and only if $a_0$ is a unit in $R$.
+            
+            \subsubsection{Solution}
+            For the $\implies$ direction, $\sum\limits_{n = 0}^{\infty} a_n x^n$ is a unit, so $\exists$ an inverse $\sum\limits_{n = 0}^{\infty} b_n x^n$ s.t.\ $\left(\sum\limits_{n = 0}^{\infty} a_n x^n\right)\left(\sum\limits_{n = 0}^{\infty} b_n x^n\right) = 1$.  Let $\sum\limits_{n = 0}^{\infty} c_n x^n = \left(\sum\limits_{n = 0}^{\infty} a_n x^n\right)\left(\sum\limits_{n = 0}^{\infty} b_n x^n\right)$, where $c_n = \sum\limits_{k = 0}^{n} a_k b_{n - k}$.  For $\sum\limits_{n = 0}^{\infty} c_n x^n = 1$, we know $c_0 = 1$.  $c_0 = \sum\limits_0^0 a_0 b_{0 - 0} = a_0 b_0$, so $a_0 b_0 = 1$, meaning $a_0$ must be a unit with ${a_0}^{-1} = b_0$.
+            
+            For the $\impliedby$ direction, to prove $\sum\limits_{n = 0}^{\infty} a_n x^n$ is a unit, we need to show $\exists$ $\sum\limits_{n = 0}^{\infty} b_n x^n$ s.t.\ $\left(\sum\limits_{n = 0}^{\infty} a_n x^n\right)\left(\sum\limits_{n = 0}^{\infty} b_n x^n\right) = 1$.  Note that $R[[x]]$ is commutative, so just one direction for multiplication suffices.  $\left(\sum\limits_{n = 0}^{\infty} a_n x^n\right)\left(\sum\limits_{n = 0}^{\infty} b_n x^n\right) = \sum\limits_{n = 0}^{\infty} c_n x^n$, where $c_n = \sum\limits_{k = 0}^{n} a_k b_{n - k}$.  For this to be 1, we need $c_0 = 1$ and $c_n = 0$ $\forall$ $n \neq 0$.  $c_0 = \sum\limits_0^0 a_0 b_{0 - 0}$.  Since $a_0$ is a unit, we know $a_0 {a_0}^{-1} = 1$, so let $b_0 = {a_0}^{-1}$, so then $c_0 = 0$.  Now let $b_n = -{a_0}^{-1} \sum\limits_{k = 1}^{n} a_k b_{n - k}$ $\forall$ $n \neq 0$.  Then $\forall$ $n \neq 0$, 
+            \begin{align}
+                c_n &= \sum\limits_{k = 0}^{n} a_k b_{n - k} \\
+                    &= \sum\limits_{k = 0}^{n} a_k \left(-{a_0}^{-1} \sum\limits_{j = 1}^{n - k} a_k b_{(n - k) - j}\right) \\
+                    &= a_0 \left(-{a_0}^{-1} \sum\limits_{j = 1}^{n} a_k b_{n - j}\right) + \sum\limits_{k = 1}^{n} a_k \left(-{a_0}^{-1} \sum\limits_{j = 1}^{n - k} a_k b_{(n - k) - j}\right) \\
+                    &= -\sum\limits_{j = 1}^{n} a_k b_{n - j} + \sum\limits_{k = 1}^{n} a_k \left(-{a_0}^{-1} \sum\limits_{j = 1}^{n - k} a_k b_{(n - k) - j}\right) \\
+                    &= -\sum\limits_{k = 1}^{n} a_k b_{n - k} + \sum\limits_{k = 1}^{n} a_k b_{n - k} \because{} b_{n - k} = -{a_0}^{-1} \sum\limits_{j = 1}^{n - k} a_k b_{(n - k) - j} \text{ by definition}\\
+                    &= 0
+            \end{align}
+            Thus, $\sum\limits_{n = 0}^{\infty} c_n x^n = 1$, so $\sum\limits_{n = 0}^{\infty} a_n x^n$ is a unit.
+    
+\end{document}
