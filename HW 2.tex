@@ -1,0 +1,131 @@
+\documentclass[fleqn]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{ulem}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{fancyvrb}
+\usepackage{cleveref}
+\usepackage{centernot}
+\usepackage{mathabx}
+
+\title{
+Math GU4042, Spring 2020 \\
+Modern Algebra II, Prof.\ Yihang Zhu \\
+HW 2
+}
+\author{Khyber Sen}
+\date{2/6/2019}
+
+\setcounter{secnumdepth}{0}
+
+\begin{document}
+    
+    \maketitle
+    
+    \section{7.1.21}
+    Let $X$ be any nonempty set and let $\mathcal{P}(X)$ be the set of all subsets of $X$ (the \textit{power set} of $X$).  Define addition and multiplication on $\mathcal{P}(X)$ by
+    \begin{align}
+        A + B &= (A - B) \cup (B - A) \\
+        A \times B &= A \cap B
+    \end{align}
+    i.e.,\ addition is symmetric difference and multiplication is intersection.
+        
+        \subsection{(a)}
+        Prove that $\mathcal{P}(X)$ is a ring under these operations ($\mathcal{P}(X)$ and its subrings are often referred to as \textit{rings of sets}).
+            
+            \subsubsection{Solution}
+            
+        
+        \subsection{(b)}
+        Prove that this ring is commutative, has an identity, and is a Boolean ring.
+        
+            \subsubsection{Solution}
+            
+    
+    HINT here the definition of a Boolean ring is in \#15
+    
+    \section{7.3.10.(a, b)}
+    Decide which of the following are ideals of the ring $\mathbb{Z}[x]$:
+        
+        \subsection{(a)}
+        the set of all polynomials whose constant term is a multiple of 3
+            
+            \subsubsection{Solution}
+            
+        
+        \subsection{(b)}
+        the set of all polynomials whose coefficient of $x^2$ is a multiple of 3
+        
+            \subsubsection{Solution}
+            
+    
+    \section{7.3.16}
+    Let $\varphi: R \to S$ be a surjective homomorphism of rings.  Prove that the image of the center of $R$ is contained in the center of $S$.
+    
+    \section{7.3.24}
+    Let $\varphi: R \to S$ be a ring homomorphism.
+        
+        \subsection{(a)}
+        Prove that if $J$ is an ideal of $S$ then $\varphi^{-1}(J)$ is an ideal of $R$.  Apply this to the special case when $R$ is a subring of $S$ and $\varphi$ is the inclusion homomorphism to deduce that if $J$ is an ideal of $S$ then $J \cap R$ is an ideal of $R$.
+            
+            \subsubsection{Solution}
+            
+        
+        \subsection{(b)}
+        Prove that $\varphi$ is surjective and $I$ is an ideal of $R$, then $\varphi(I)$ is an ideal of $S$.  Give an example where this fails if $\varphi$ is not surjective.
+        
+            \subsubsection{Solution}
+            
+    
+    \section{7.3.25}
+    Assume $R$ is a commutative ring with 1.  Prove that Binomial Theorem
+    \begin{align}
+        (a + b)^n = \sum\limits_{k = 0}^{n} \binom{n}{k} a^k b^{n - k}
+    \end{align}
+    holds in $R$, where the binomial coefficient $\binom{n}{k}$ is interpreted in $R$ as the sum $1 + 1 + ... + 1$ of the identity 1 in $R$ taken $\binom{n}{k}$ times.
+    
+    HINT prove by induction
+        
+        \subsection{Solution}
+        
+    
+    \section{7.3.27}
+    Prove that a nonzero Boolean ring has characteristic 2.
+        
+        \subsection{Solution}
+        
+    
+    \section{7.4.15.(a, c)}
+    Let $x^2 + x + 1$ be an element of the polynomial ring $E = \mathbb{F}_2[x]$ and use the bar notation to denote passage to the quotient ring $\mathbb{F}_2[x] / (x^2 + x + 1)$.
+    
+        \subsection{(a)}
+        Prove that $\widebar{E}$ has 4 elements: $\widebar{0}, \widebar{1}, \widebar{x}, \widebar{x + 1}$.
+            
+            \subsubsection{Solution}
+            
+        
+        \subsection{(c)}
+        Write out the $4 \times 4$ multiplication table for $\widebar{E}$ and prove that $\widebar{E}^\times$ is isomorphic to the cyclic group of order 3.  Deduce that $\widebar{E}$ is a field.
+        
+            \subsubsection{Solution}
+            
+    
+    \section{7.4.16}
+    Let $x^4 - 16$ be an element of the polynomial ring $E = \mathbb{Z}[x]$ and use the bar notation to denote passage to the quotient ring $\mathbb{Z}[x] / (x^4 - 16)$.
+        
+        \subsection{(a)}
+        Find a polynomial of degree $\leq 3$ that is congruent to $7x^13 - 11x^9 + 5x^5 - 2x^3 + 3$ modulo $(x^4 - 16)$.
+            
+            \subsubsection{Solution}
+            
+        
+        \subsection{(b)}
+        Prove that $\widebar{x - 2}$ and $\widebar{x + 2}$ are zero divisors in $\widebar{E}$.
+        
+            \subsubsection{Solution}
+            
+    
+\end{document}
