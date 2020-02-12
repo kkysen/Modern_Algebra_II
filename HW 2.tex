@@ -11,6 +11,10 @@
 \usepackage{centernot}
 \usepackage{mathabx}
 
+\DeclareMathOperator{\im}{im}
+
+\newcommand*\xor{\thickspace \oplus \thickspace}
+
 \title{
 Math GU4042, Spring 2020 \\
 Modern Algebra II, Prof.\ Yihang Zhu \\
@@ -37,15 +41,56 @@ HW 2
         Prove that $\mathcal{P}(X)$ is a ring under these operations ($\mathcal{P}(X)$ and its subrings are often referred to as \textit{rings of sets}).
             
             \subsubsection{Solution}
-            
+            For a given binary boolean operator $f$ that forms a commutative monoid (i.e.\ an abelian group without inverses), define the binary set operation $g(A, B) := \{x \mid f(x \in A, x \in B)\}$.  Now we can show $g$ is also associative and commutative:
+            \begin{align}
+                g(g(A, B), C) &= g(\{x \in X \mid f(x \in A, x \in B)\}, C) \\
+                    &= \{y \in X \mid f(y \in \{x \mid f(x \in A, x \in B)\}, y \in C)\} \\
+                    &= \{y \in X \mid f(f(y \in A, y \in B), y \in C)\} \\
+                    &= \{y \in X \mid f(y \in A, f(y \in B, y \in C))\} \\
+                    &= \{y \in X \mid f(y \in A, y \in \{x \in X \mid f(x \in B, x \in C)\})\} \\
+                    &= g(A, \{x \in X \mid f(x \in B, x \in C)\}) \\
+                    &= g(A, g(B, C)) \\
+                g(A, B) &= \{x \in X \mid f(x \in A, x \in B)\} \\
+                    &= \{x \in X \mid f(x \in B, x \in A)\} \\
+                    &= g(B, A) \\
+                1 := \{x \in X \mid 1\} \\
+                g(1, A) &= \{x \in X \mid f(x \in X, x \in A)\} \\
+                    &= \{x \in X \mid f(1, x \in A)\} \\
+                    &= \{x \in X \mid x \in A\} \\
+                    &= A
+            \end{align}
+            Applying this to the boolean operator $\xor$ (xor), we get $+$, and applying this to $\land$ (and), we get $\times$.  Thus we know $+$ and $\times$ are a commutative monoid in $\mathcal{P}(X)$, i.e.\ they are associative, commutative, and have an identity.  For the identities, false is the identity for $\xor$ and true is the identity for $\land$, so we get
+            \begin{align}
+                0 &= \{x \in X \mid \text{false}\} = \{\} \\
+                1 &= \{x \in X \mid \text{true}\} = X
+            \end{align}
+            Now we just have to prove that $+$ has inverses and $\times$ distributes over $+$.  For the additive inverse, define $-A := A$.  Thus,
+            \begin{align}
+                A + (-A) &= \{x \in X \mid x \in A \xor x \in -A\} \\
+                    &= \{x \in X \mid x \in A \xor x \in A\} \\
+                    &= \{x \in X \mid \text{false}\} \\
+                    &= \{\} \\
+                    &= 0
+            \end{align}
+            For distributivity (in one direction due to commutivity),
+            \begin{align}
+                A(B + C) &= A \times (B + C) \\
+                    &= A \times \{x \in X \mid x \in B \xor x \in C\} \\
+                    &= \{y \in X \mid y \in A \land y \in \{x \in X \mid x \in B \xor x \in C\}\} \\
+                    &= \{y \in X \mid y \in A \land (y \in B \xor y \in C)\} \\
+                    &= \{y \in X \mid (y \in A \land y \in B) \xor (y \in A \land y \in C)\} \\
+                    &= \{y \in X \mid y \in \{x \in X \mid x \in A \land x \in B\} \xor y \in \{x \in X \mid x \in A \land x \in B\}\} \\
+                    &= \{y \in X \mid y \in (A \times B) \xor y \in (A \times B)\} \\
+                    &= (A \times B) + (A \times C) \\
+                    &= AB + AC
+            \end{align}
         
         \subsection{(b)}
         Prove that this ring is commutative, has an identity, and is a Boolean ring.
         
             \subsubsection{Solution}
-            
-    
-    HINT here the definition of a Boolean ring is in \#15
+            I already proved above that multiplication is commutative and has an identity.  \\
+            We also know $A^2 = A \times A = A \cap A = A$, so the ring is also a Boolean ring.
     
     \section{7.3.10.(a, b)}
     Decide which of the following are ideals of the ring $\mathbb{Z}[x]$:
@@ -54,17 +99,28 @@ HW 2
         the set of all polynomials whose constant term is a multiple of 3
             
             \subsubsection{Solution}
-            
+            This set is closed under subtraction so it is a subgroup.  Then for the absorbing property, the constant term of the product of polynomials only depends on the constant terms of the multiplying polynomials.  Thus if the multiplicands have constant terms that are multiples of 3, then the constant term of the product must be a multiple of 9, which is a multiple of 3.  Therefore, this set is an ideal of $\mathbb{Z}[x]$.
         
         \subsection{(b)}
         the set of all polynomials whose coefficient of $x^2$ is a multiple of 3
         
             \subsubsection{Solution}
-            
+            This doesn't satisfy the absorbing property, because the $x^2$ term of the product doesn't only depend on the $x^2$ term of the multiplicands.  For example, $x$ is in this set with a $0 x^2$ coefficient, but $x \times x = x^2$, which is not in this set.
     
     \section{7.3.16}
     Let $\varphi: R \to S$ be a surjective homomorphism of rings.  Prove that the image of the center of $R$ is contained in the center of $S$.
-    
+        
+        \subsection{Solution}
+        Let $Z(X)$ denote the center of the ring $X$.  Then $\forall$ $z \in Z(R)$ and $\forall$ $s \in S$, $\exists$ $r \in R$ s.t.\ $\varphi(r) = s$ because $\varphi$ is surjective.  Then we know that
+        \begin{align}
+            \varphi(z) s &= \varphi(z) \varphi(r) \\
+                &= \varphi(zr) \because{} \varphi \text{ is a homomorphism} \\
+                &= \varphi(rz) \because{} z \in Z(R) \\
+                &= \varphi(r) \varphi(z) \because{} \varphi \text{ is a homomorphism} \\
+                &= s \varphi(z)
+        \end{align}
+        Thus, $\varphi(z)$ commutes with all $s \in S$, so $\varphi(z) \in Z(S)$, meaning $\im(Z(R)) = Z(S)$.
+        
     \section{7.3.24}
     Let $\varphi: R \to S$ be a ring homomorphism.
         
@@ -72,13 +128,21 @@ HW 2
         Prove that if $J$ is an ideal of $S$ then $\varphi^{-1}(J)$ is an ideal of $R$.  Apply this to the special case when $R$ is a subring of $S$ and $\varphi$ is the inclusion homomorphism to deduce that if $J$ is an ideal of $S$ then $J \cap R$ is an ideal of $R$.
             
             \subsubsection{Solution}
+            $\varphi^{-1}(J) = \{r \in R \mid \varphi(r) \in J\}$.  $J$ is an ideal, so it's also a subgroup containing 0, so $\varphi(0) \in J$ since $\varphi(0) = 0$ since $\varphi$ is a homomorphism.  To show $\varphi^{-1}(J)$ is a subgroup, $\forall$ $x, y \in \varphi^{-1}(J)$, we know $\varphi(x), \varphi(y) \in J$.  Since $J$ is a group, $\varphi(x) - \varphi(y) \in J$.  Then by $\varphi$ being a homomorphism, we know $\varphi(x - y) \in J$.  This means $x - y \in \varphi^{-1}(J)$, so $\varphi^{-1}(J)$ is a subgroup.  
             
+            For the absorbing property, $\forall$ $x \in \varphi^{-1}(J)$, $r \in R$, $\varphi(rx) = \varphi(r) \varphi(x)$.  $\varphi(r) \in S$ and $\varphi(x) \in J$.  Since $J$ is an ideal, this means $\varphi(r) \varphi(x) \in J$, so therefore $rx \in \varphi^{-1}(J)$.  This same argument also works to show $xr \in \varphi^{-1}(J)$.
+            
+            If $\varphi$ is just the inclusions homomorphism, i.e.\ if $\varphi = id$, then $\varphi^{-1}(J) = J \cap R$ because $\varphi^{-1}(A) \subseteq R$ $\forall$ $S$.  Thus, we can apply the theorem we just proved to conclude $J \cap R$ is an ideal of $R$.
         
         \subsection{(b)}
-        Prove that $\varphi$ is surjective and $I$ is an ideal of $R$, then $\varphi(I)$ is an ideal of $S$.  Give an example where this fails if $\varphi$ is not surjective.
+        Prove that if $\varphi$ is surjective and $I$ is an ideal of $R$, then $\varphi(I)$ is an ideal of $S$.  Give an example where this fails if $\varphi$ is not surjective.
         
             \subsubsection{Solution}
+            To show $\varphi(I)$ is an ideal of $S$, first we need to show $\varphi(I)$ is a subgroup of $S$, i.e.\ $\forall$ $x, y \in I$, we need to show $\varphi(x) - \varphi(y) \in \varphi(I)$.  $\varphi(x) - \varphi(y) = \varphi(x - y)$ and $x - y \in I$, so $\varphi(x - y) \in \varphi(I)$.  Thus, $\varphi(I)$ is a subgroup under addition.
             
+            For the absorbing property, $\forall$ $x \in I$, $s \in S$, we need to show $s\varphi(x) \in \varphi(I)$ and $\varphi(x)s \in \varphi(I)$.  Since $\varphi$ is surjective, $\exists$ $r \in R$ s.t.\ $\varphi(r) = s$.  $s\varphi(x) = \varphi(r)\varphi(x) = \varphi(rx) \in \varphi(I)$ because $rx \in I$ by the absorbing property since $x \in I$.  The same holds true for the reverse direction as well by the same argument.  Thus, $\varphi(I)$ is an ideal of $S$.
+            
+            If $\varphi$ is not surjective, for example, if $\varphi: \mathbb{Z} \to \mathbb{Q} = id$, then $\varphi$ isn't surjective.  Consider the ideal $(n) = n\mathbb{Z}$ of $\mathbb{Z}$ for some $n$.  $\varphi((n)) = (n)$, but this is no longer an ideal in $\mathbb{Q}$, since, for example, if $n = 3$, $\frac{1}{2} 3 = \frac{3}{2} \notin (3) = 3 \mathbb{Z}$.  Thus, this can fail when $\varphi$ is not surjective.
     
     \section{7.3.25}
     Assume $R$ is a commutative ring with 1.  Prove that Binomial Theorem
@@ -87,45 +151,83 @@ HW 2
     \end{align}
     holds in $R$, where the binomial coefficient $\binom{n}{k}$ is interpreted in $R$ as the sum $1 + 1 + ... + 1$ of the identity 1 in $R$ taken $\binom{n}{k}$ times.
     
-    HINT prove by induction
-        
         \subsection{Solution}
-        
+        We can prove the binomial theorem in an arbitrary commutative ring using induction on $n$.  For the base case $n = 0$, $(a + b)^0 = 1$ and $\sum\limits_{k = 0}^{0} \binom{0}{k} a^k b^{0 - k} = \binom{0}{0} a^0 b^{0 - 0} = (1)(1)(1) = 1$.  For the inductive case, assume the binomial theorem is true for $n$, and we will prove it for $n + 1$:
+        \begin{align}
+            (a + b)^{n + 1} &= (a + b)^n (a + b) \\
+                &= (a + b) \sum\limits_{k = 0}^{n} \binom{n}{k} a^{k} b^{n - k} \\
+                &= a \sum\limits_{k = 0}^{n} \binom{n}{k} a^{k} b^{n - k} + b \sum\limits_{k = 0}^{n} \binom{n}{k} a^{k} b^{n - k} \\
+                &= \sum\limits_{k = 0}^{n} \binom{n}{k} a^{k + 1} b^{n - k} + \sum\limits_{k = 0}^{n} \binom{n}{k} a^{k} b^{n + 1 - k} \\
+                &= \sum\limits_{k = 1}^{n + 1} \binom{n}{k - 1} a^{k} b^{n + 1 - k} + \sum\limits_{k = 0}^{n} \binom{n}{k} a^{k} b^{n + 1 - k} \\
+                &= \binom{n}{(n + 1) - 1} a^{n + 1} b^{n + 1 - (n + 1)} + \sum\limits_{k = 1}^{n} \binom{n}{k - 1} a^{k} b^{n + 1 - k} + \sum\limits_{k = 1}^{n} \binom{n}{k} a^{k} b^{n + 1 - k} + \binom{n}{0} a^{0} b^{n + 1 - 0} \\
+                &= \binom{n}{n} a^{n + 1} b^{n + 1 - (n + 1)} + \sum\limits_{k = 1}^{n} \left(\binom{n}{k - 1} + \binom{n}{k}\right) a^{k} b^{n + 1 - k} + \binom{n}{0} a^{0} b^{n + 1 - 0} \\
+                &= \binom{n + 1}{n + 1} a^{n + 1} b^{n + 1 - (n + 1)} + \sum\limits_{k = 1}^{n} \binom{n + 1}{k} a^{k} b^{n + 1 - k} + \binom{n + 1}{0} a^{0} b^{n + 1 - 0} \\
+                &= \sum\limits_{k = 0}^{n + 1} \binom{n + 1}{k} a^{k} b^{n + 1 - k}
+        \end{align}
     
     \section{7.3.27}
     Prove that a nonzero Boolean ring has characteristic 2.
         
         \subsection{Solution}
-        
+        In a boolean ring $R$, $x^2 = x$ $\forall$ $x \in R$.  Thus, $(-1)^2 = -1$, so $1 = -1$.  Therefore, elements are their own additive inverses, so $1 + 1 = 1 + (-1) = 0$, so the characteristic is at most 2.  Since the ring is not the zero ring, which is the only ring with characteristic 1, a nonzero boolean ring must have characteristic 2.
     
     \section{7.4.15.(a, c)}
     Let $x^2 + x + 1$ be an element of the polynomial ring $E = \mathbb{F}_2[x]$ and use the bar notation to denote passage to the quotient ring $\mathbb{F}_2[x] / (x^2 + x + 1)$.
     
         \subsection{(a)}
-        Prove that $\widebar{E}$ has 4 elements: $\widebar{0}, \widebar{1}, \widebar{x}, \widebar{x + 1}$.
+        Prove that $\overline{E}$ has 4 elements: $\overline{0}, \overline{1}, \overline{x}, \overline{x + 1}$.
             
             \subsubsection{Solution}
-            
+            $\overline{E}$ definitely can't have any polynomials $> 2$, because those can just be divided out by $x^2 + x + 1$ until you get a polynomial of degree $\leq 2$.  Polynomials of degree 2 also can be factored out by $x^2 = x + 1$.  Then, since $\mathbb{F}_2$ only has two elements, we are left with 4 polynomials of degree $< 2$ and coefficients in $\mathbb{F}_2$: $\overline{0}, \overline{1}, \overline{x}, \overline{x + 1}$.
         
         \subsection{(c)}
-        Write out the $4 \times 4$ multiplication table for $\widebar{E}$ and prove that $\widebar{E}^\times$ is isomorphic to the cyclic group of order 3.  Deduce that $\widebar{E}$ is a field.
+        Write out the $4 \times 4$ multiplication table for $\overline{E}$ and prove that $\overline{E}^\times$ is isomorphic to the cyclic group of order 3.  Deduce that $\overline{E}$ is a field.
         
             \subsubsection{Solution}
+            Here's the multiplication table for $\overline{E}$.  It's constructed simply multiplying the polynomials and then factoring out the $\overline{x^2 + x + 1}$'s knowing that $\overline{x^2 + x + 1} = \overline{0}$: \\
             
+            \begin{tabular}{c|c|c|c|c|}
+                $\times$ & $\overline{0}$ & $\overline{1}$ & $\overline{x}$ & $\overline{x + 1}$ \\
+                \hline $\overline{0}$ & $\overline{0}$ & $\overline{0}$ & $\overline{0}$ & $\overline{0}$ \\
+                \hline $\overline{1}$ & $\overline{0}$ & $\overline{1}$ & $\overline{x}$ & $\overline{x + 1}$ \\
+                \hline $\overline{x}$ & $\overline{0}$ & $\overline{x}$ & $\overline{x + 1}$ & $\overline{1}$ \\
+                \hline $\overline{x + 1}$ & $\overline{0}$ & $\overline{x + 1}$ & $\overline{1}$ & $\overline{x}$ \\
+                \hline
+            \end{tabular}
+            
+            \noindent
+            Looking at the multiplication table, it's easy to see that $\overline{E}^\times = \{\overline{1}, \overline{x}, \overline{x + 1}\}$ is isomorphic to $\mathbb{Z}/3\mathbb{Z}$.  Since $\overline{E}^\times$ is a group, it has multiplicative inverses, meaning $\overline{E}$ is a field.
     
     \section{7.4.16}
     Let $x^4 - 16$ be an element of the polynomial ring $E = \mathbb{Z}[x]$ and use the bar notation to denote passage to the quotient ring $\mathbb{Z}[x] / (x^4 - 16)$.
         
         \subsection{(a)}
-        Find a polynomial of degree $\leq 3$ that is congruent to $7x^13 - 11x^9 + 5x^5 - 2x^3 + 3$ modulo $(x^4 - 16)$.
+        Find a polynomial of degree $\leq 3$ that is congruent to $7x^{13} - 11x^9 + 5x^5 - 2x^3 + 3$ modulo $(x^4 - 16)$.
             
             \subsubsection{Solution}
-            
+            \begin{align}
+                \overline{x^4} &= \overline{16} \\
+                \overline{7x^{13} - 11x^9 + 5x^5 - 2x^3 + 3}
+                    &= \overline{7x (x^4)^3 - 11x (x^4)^2 + 5x (x^4) - 2x^3 + 3} \\
+                    &= \overline{7x (16)^3 - 11x (16)^2 + 5x (16) - 2x^3 + 3} \\
+                    &= \overline{(4096)(7x) - (256)(11x) + (16)(5x) - 2x^3 + 3} \\
+                    &= \overline{(4096)(7x) - (256)(11x) + (16)(5x) - 2x^3 + 3} \\
+                    &= \overline{28672x - 2816x + 80x - 2x^3 + 3} \\
+                    &= \overline{-2x^3 + 25936x + 3}
+            \end{align}
         
         \subsection{(b)}
-        Prove that $\widebar{x - 2}$ and $\widebar{x + 2}$ are zero divisors in $\widebar{E}$.
+        Prove that $\overline{x - 2}$ and $\overline{x + 2}$ are zero divisors in $\overline{E}$.
         
             \subsubsection{Solution}
-            
+            $\overline{x - 2}$ and $\overline{x + 2}$ are factors of $\overline{x^4 - 16}$, so they are zero divisors.  That is,
+            \begin{align}
+                \overline{x - 2} \overline{x + 2} \overline{x^2 + 4}
+                    &= \overline{(x - 2)(x + 2)(x^2 + 4)} \\
+                    &= \overline{(x^2 - 4)(x^2 + 4)} \\
+                    &= \overline{x^4 - 16} \\
+                    &= \overline{0}
+            \end{align}
+            Thus, $\overline{x - 2}$ is a zero divisor with $\overline{(x + 2)(x^2 + 4)}$ and $\overline{x + 2}$ is a zero divisor with $\overline{(x - 2)(x^2 + 4)}$.
     
 \end{document}

@@ -1,0 +1,140 @@
+\documentclass[fleqn]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{ulem}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathabx}
+
+\title{
+Math GU4042, Spring 2020 \\
+Modern Algebra II, Prof.\ Yihang Zhu \\
+HW 3
+}
+\author{Khyber Sen}
+\date{2/13/2019}
+
+\setcounter{secnumdepth}{0}
+
+\begin{document}
+    
+    \maketitle
+    
+    \section{7.1.14}
+    Let $x$ be a nilpotent element of the commutative ring $R$.
+        
+        \subsection{(a)}
+        Prove that $x$ is either zero or a zero divisor.
+            
+            \subsubsection{Solution}
+            
+        
+        \subsection{(b)}
+        Prove that $rx$ is nilpotent for all $r \in R$.
+            
+            \subsubsection{Solution}
+            
+        
+        \subsection{(c)}
+        Prove that $1 + x$ is a unit in $R$.
+            
+            \subsubsection{Solution}
+            
+        
+        \subsection{(d)}
+        Deduce that the sum of a nilpotent element and a unit is a unit.
+        
+            \subsubsection{Solution}
+            
+    
+    \section{7.3.29}
+    Let $R$ be a commutative ring.  Recall that an element $x \in R$ is nilpotent if $x^n = 0$ for some $n \in \mathbb{Z}^+$.  Prove that the set of nilpotent elements form an ideal---called the \textit{nilradical} of $R$ and denoted by $\mathfrak{N}(R)$.  [Use the Binomial Theorem to show $\mathfrak{N}(R)$ is closed under addition.]
+        
+        \subsection{Solution}
+        
+    
+    \section{7.3.30}
+    Prove that if $R$ is a commutative ring and $\mathfrak{N}(R)$ is its nilradical then zero is the only nilpotent element of $R/\mathfrak{N}(R)$ i.e., prove that $\mathfrak({R/\mathfrak{N}(R)}) = 0$.
+        
+        \subsection{Solution}
+        
+    
+    \section{7.3.31}
+    Prove that the elements $\begin{pmatrix}
+        0 & 1 \\
+        0 & 0
+    \end{pmatrix}$ and $\begin{pmatrix}
+        0 & 0 \\
+        1 & 0
+    \end{pmatrix}$ are nilpotent elements of $M_2(\mathbb{Z})$ whose sum is not nilpotent (note that these two matrices do not commute).  Deduce that the set of nilpotent elements in the noncommutative ring $M_2(\mathbb{Z})$ is not an ideal.
+        
+        \subsection{Solution}
+        
+    
+    \section{7.3.33}
+    Assume $R$ is commutative.  Let $p(x) = a_n x^n + a_{n - 1} x^{n - 1} + ... + a_1 x + a_0$ be an element of the polynomial ring $R[x]$.
+        
+        \subsection{(a)}
+        Prove that $p(x)$ is a unit in $R[x]$ if and only if $a_0$ is a unit and $a_1, a_2, ..., a_n$ are nilpotent in $R$.
+            
+            \subsubsection{Solution}
+            
+        
+        \subsection{(b)}
+        Prove that $p(x)$ is nilpotent in $R[x]$ if and only if $a_0, a_1, ..., a_n$ are nilpotent elements of $R$.
+        
+            \subsubsection{Solution}
+            
+    
+    \section{7.4.14}
+    Assume $R$ is commutative.  Let $x$ be an indeterminate, let $f(x)$ be a monic polynomial in $R[x]$ of degree $n \geq 1$ and use the bar notation to denote passage to the quotient ring $R[x]/(f(x))$.
+        
+        \subsection{(a)}
+        Show that every element of $R[x]/(f(x))$ is of the form $\overline{p(x)}$ for some polynomial $p(x) \in R[x]$ of degree less than $n$, i.e., 
+        \begin{align}
+            R[x]/(f(x)) &= \{\overline{a_0} + \overline{a_1 x} + ... + \overline{a_{n - 1} x^{n - 1}} \mid a_0, a_1, ..., a_{n - 1} \in R\}
+        \end{align}
+        [If $f(x) = x^n + b_{n - 1} x^{n - 1} + ... + b_0$ then $\overline{x^n} = \overline{-(b_{n - 1} x^{n - 1} + ... + b_0)}$.  Use this to reduce powers of $\overline{x}$ in the quotient ring.]
+            
+            \subsubsection{Solution}
+            
+        
+        \subsection{(b)}
+        Prove that if $p(x)$ and $q(x)$ are distinct polynomials in $R[x]$ which are both of degree less than $n$, then $\overline{p(x)} \neq \overline{q(x)}$.  [Otherwise $p(x) - q(x)$ is an $R[x]$-multiple of the monic polynomial $f(x)$.]
+            
+            \subsubsection{Solution}
+            
+        
+        \subsection{(c)}
+        If $f(x) = a(x) b(x)$ where both $a(x)$ and $b(x)$ have degree less than $n$, prove that $\overline{a(x)}$ is a zero divisor in $R[x]/(f(x))$.
+            
+            \subsubsection{Solution}
+            
+        
+        \subsection{(d)}
+        If $f(x) = x^n - a$ for some nilpotent element $a \in R$, prove that $\overline{x}$ is nilpotent in $R[x]/(f(x))$.
+            
+            \subsubsection{Solution}
+            
+        
+        \subsection{(e)}
+        Let $p$ be a prime, assume $R = \mathbb{F}_p$ and $f(x) = x^p - a$ for some $a \in \mathbb{F}_p$.  Prove that $\overline{x - a}$ is nilpotent in $R[x]/(f(x))$.
+            
+            \subsubsection{Solution}
+            
+    
+    \section{7.5.3}
+    Let $F$ be a field.  Prove that $F$ contains a unique smallest subfield $F_0$ and that $F_0$ is isomorphic to either $\mathbb{Q}$ or $\mathbb{Z}/p\mathbb{Z}$ for some prime $p$ ($F_0$ is called the \textit{prime subfield} of $F$).
+        
+        \subsection{Solution}
+        
+    
+    \section{7.5.4}
+    Prove that any subfield of $\mathbb{R}$ must contain $\mathbb{Q}$.
+        
+        \subsection{Solution}
+        
+    
+\end{document}
