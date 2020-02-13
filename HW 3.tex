@@ -29,37 +29,59 @@ HW 3
         Prove that $x$ is either zero or a zero divisor.
             
             \subsubsection{Solution}
-            
+            0 is a zero divisor, so we can simplify this to just proving that $x$ is a zero divisor, i.e.\ $\exists$ $y \in R$ s.t.\ $xy = 0$.  Note that $R$ is commutative, so this is equivalent to $yx = 0$ as well.  Since $x$ is nilpotent, $\exists$ $n \in \mathbb{Z}^+$ s.t.\ $x^n = 0$.  Thus, $x x^{n - 1} = 0$.  Thus, $x$ is a zero divisor with $x^{n - 1}$.
         
         \subsection{(b)}
         Prove that $rx$ is nilpotent for all $r \in R$.
             
             \subsubsection{Solution}
-            
+            Since $x$ is nilpotent, $\exists$ $n \in \mathbb{Z}^+$ s.t.\ $x^n = 0$.  This same $n$ works to show $rx$ is also nilpotent.  $(rx)^n = r^n x^n$ because the ring is commutative, and then $r^n x^n = r^n \cdot 0 = 0$.
         
         \subsection{(c)}
         Prove that $1 + x$ is a unit in $R$.
             
             \subsubsection{Solution}
-            
+            See the proof for part (d).  1 is a unit, so that proof can be applied to show $1 + x$ is a unit in $R$.
         
         \subsection{(d)}
         Deduce that the sum of a nilpotent element and a unit is a unit.
         
             \subsubsection{Solution}
-            
+            Let $x$ be a nilpotent element and $y$ be a unit.  We need to prove that $x + y$ is a unit.  Let $n$ be such that $x^n = 0$ since we know $x$ is nilpotent, and because $y$ is a unit, we know $y^{-1}$ $\exists$.  Then consider $z = \sum\limits_{k = 0}^{n - 1} (-1)^k x^k y^{-(k + 1)}$.  We will show that $(x + y)z = 1$ and thus $x + y$ is a unit:
+            \begin{align}
+                (x + y)z &= (x + y) \sum\limits_{k = 0}^{n - 1} (-1)^k x^k y^{-(k + 1)} \\
+                    &= (x + y)(y^{-1} - x y^{-2} + x^2 y^{-3} - x^3 y^{-4} + ... + (-1)^{n - 1} y^{-n} x^n) \\
+                    &= (x y^{-1} - x^2 y^{-2} + x^3 y^{-3} - x^4 y^{-4} + ... + x (-1)^{n - 1} y^{-n} x^n) \\
+                    &+ (y^0 - x y^{-1} + x^2 y^{-2} - x^3 y^{-3} + ... + y (-1)^{n - 1} y^{-n} x^n) \\
+                    &= y^0 + x (-1)^{n - 1} y^{-n} x^n \\
+                    &= 1 + (...) 0 \\
+                    &= 1
+            \end{align}
     
     \section{7.3.29}
     Let $R$ be a commutative ring.  Recall that an element $x \in R$ is nilpotent if $x^n = 0$ for some $n \in \mathbb{Z}^+$.  Prove that the set of nilpotent elements form an ideal---called the \textit{nilradical} of $R$ and denoted by $\mathfrak{N}(R)$.  [Use the Binomial Theorem to show $\mathfrak{N}(R)$ is closed under addition.]
         
         \subsection{Solution}
+        First, to show $\mathfrak{N}(R)$ is a subgroup under addition, we need to show it contains 0, is closed under inverses, and is closed under addition.  $\mathfrak{N}(R)$ obviously contains 0, which is trivially nilpotent.  For inverses, if $x \in \mathfrak{N}(R)$, then $x^n = 0$, then $(-x)^n = (-1)^n x^n = (-1)^n \cdot 0 = 0$, so $\mathfrak{N}(R)$ is closed under additive inverses.  For addition, if $x, y \in \mathfrak{N}(R)$, i.e.\ $x^n = 0$ and $y^m = 0$, then we need to show $(x + y) \in \mathfrak{N}(R)$.  Using the binomial theorem, we know
+        \begin{align}
+            (x + y)^{n + m} &= \sum\limits_{k = 0}^{n + m} \binom{n + m}{k} x^k y^{n + m - k} \\
+                &= \sum\limits_{k = 0}^{n - 1} \binom{n + m}{k} x^k y^{n + m - k} + \sum\limits_{k = n}^{n + m} x^k y^{n + m - k} \\
+                &= \sum\limits_{k = 0}^{n - 1} \binom{n + m}{k} x^k y^{n + m - k} + \sum\limits_{k = 0}^{m} x^{k + n} y^{n + m - (k + n)} \\
+                &= \sum\limits_{k = 0}^{n - 1} \binom{n + m}{k} x^k y^{n + m - k} + \sum\limits_{k = 0}^{m} x^n x^k y^{m - k} \\
+                &= y^m \sum\limits_{k = 0}^{n - 1} \binom{n + m}{k} x^k y^{n - k} + x^n \sum\limits_{k = 0}^{m} x^k y^{m - k} \\
+                &= 0 \sum\limits_{k = 0}^{n - 1} \binom{n + m}{k} x^k y^{n - k} + 0 \sum\limits_{k = 0}^{m} x^k y^{m - k} \\
+                &= 0 + 0 = 0
+        \end{align}
         
+        For the absorbing property, we already know from 7.1.14(b) if $x$ is nilpotent and $r \in R$, then $rx$ is also nilpotent, so thus $\mathfrak{N}(R)$ is an ideal.
     
     \section{7.3.30}
-    Prove that if $R$ is a commutative ring and $\mathfrak{N}(R)$ is its nilradical then zero is the only nilpotent element of $R/\mathfrak{N}(R)$ i.e., prove that $\mathfrak({R/\mathfrak{N}(R)}) = 0$.
+    Prove that if $R$ is a commutative ring and $\mathfrak{N}(R)$ is its nilradical then zero is the only nilpotent element of $R/\mathfrak{N}(R)$ i.e., prove that $\mathfrak{N}({R/\mathfrak{N}(R)}) = 0$.
         
         \subsection{Solution}
+        0 is obviously always nilpotent, so we just have to show if $x \in R/\mathfrak{N}$ and $x \neq 0$, then $x$ is not nilpotent, i.e.\ $x^n \neq 0$ $\forall$ $n \in \mathbb{Z}^+$.
         
+        TODO
     
     \section{7.3.31}
     Prove that the elements $\begin{pmatrix}
@@ -71,7 +93,48 @@ HW 3
     \end{pmatrix}$ are nilpotent elements of $M_2(\mathbb{Z})$ whose sum is not nilpotent (note that these two matrices do not commute).  Deduce that the set of nilpotent elements in the noncommutative ring $M_2(\mathbb{Z})$ is not an ideal.
         
         \subsection{Solution}
-        
+        The matrices are both nilpotent (when squared):
+        \begin{align}
+            \begin{bmatrix}
+                0 & 1 \\
+                0 & 0
+            \end{bmatrix} \begin{bmatrix}
+                0 & 1 \\
+                0 & 0
+            \end{bmatrix} &= \begin{bmatrix}
+                0 & 0 \\
+                0 & 0
+            \end{bmatrix} = 0 \\
+            \begin{bmatrix}
+                0 & 0 \\
+                1 & 0
+            \end{bmatrix} \begin{bmatrix}
+                0 & 0 \\
+                1 & 0
+            \end{bmatrix} &= \begin{bmatrix}
+                0 & 0 \\
+                0 & 0
+            \end{bmatrix} = 0
+        \end{align}
+        To show that $\mathfrak{N}(M_2(\mathbb{Z}))$ is not an ideal, we can show it doesn't follow the absorbing property if we look at these two given matrices.  Their product, $\begin{bmatrix}
+            0 & 1 \\
+            0 & 0
+        \end{bmatrix} \begin{bmatrix}
+            0 & 0 \\
+            1 & 0
+        \end{bmatrix} = \begin{bmatrix}
+            1 & 0 \\
+            0 & 0
+        \end{bmatrix}$, is diagonal, so we can compute its integral powers easily: $\begin{bmatrix}
+            1 & 0 \\
+            0 & 0
+        \end{bmatrix}^n = \begin{bmatrix}
+            1^n & 0 \\
+            0 & 0^n
+        \end{bmatrix} = \begin{bmatrix}
+            1 & 0 \\
+            0 & 0
+        \end{bmatrix} \neq 0$.  Thus their product is not nilpotent, meaning the nilradical of such a noncommutative ring isn't ideal.
     
     \section{7.3.33}
     Assume $R$ is commutative.  Let $p(x) = a_n x^n + a_{n - 1} x^{n - 1} + ... + a_1 x + a_0$ be an element of the polynomial ring $R[x]$.
@@ -80,7 +143,17 @@ HW 3
         Prove that $p(x)$ is a unit in $R[x]$ if and only if $a_0$ is a unit and $a_1, a_2, ..., a_n$ are nilpotent in $R$.
             
             \subsubsection{Solution}
-            
+            Let $p(x) = \sum\limits_{k = 0}^{n} a_k x^k$, $q(x) = \sum\limits_{k = 0}^{n} b_k x^k$, and $r(x) = \sum\limits_{k = 0}^{n} c_k x^k$.  We want to show that $p(x)$ is a unit, i.e.\ $p(x)q(x) = r(x) = 1 \iff a_0 \in R^\times$ and $a_1, ..., a_n \in \mathfrak{N}(R)$.  For the $\impliedby$ direction, given $a_0$ is a unit and $a_1, ..., a_n$ are nilpotent, we need to show $c_0 = 1$ and $c_k = 0$ $\forall$ $k \neq 0$.  $c_k = \sum\limits_{j = 0}^{k} a_j b_{n - j}$.  Let $b_0 = {a_0}^{-1}$, which we know exists since $a_0$ is a unit.  Then $c_0 = \sum\limits_{j = 0}^0 a_j b_{0 - j} = a_0 b_0 = a_0 {a_0}^{-1} = 1$.  Then $\forall$ $k \neq 0$, let $b_k = -{a_0}^{-1} \sum\limits_{j = 1}^{k} a_j b_{k - j}$.  Then,
+            \begin{align}
+                c_k &= \sum\limits_{j = 0}^{k} a_j b_{k - j} \\
+                    &= \sum\limits_{j = 0}^{k} a_j \left(-{a_0}^{-1} \sum\limits_{j = 1}^{k - j} a_j b_{(k - j) - j}\right) \\
+                    &= a_0 \left(-{a_0}^{-1} \sum\limits_{j = 1}^{k} a_j b_{k - j}\right) + \sum\limits_{j = 1}^{k} a_j \left(-{a_0}^{-1} \sum\limits_{j = 1}^{k - j} a_j b_{(k - j) - j}\right) \\
+                    &= -\sum\limits_{j = 1}^{k} a_j b_{k - j} + \sum\limits_{j = 1}^{k} a_j \left(-{a_0}^{-1} \sum\limits_{j = 1}^{k - j} a_j b_{(k - j) - j}\right) \\
+                    &= -\sum\limits_{j = 1}^{k} a_j b_{k - j} + \sum\limits_{j = 1}^{k} a_j b_{k - j} \because{} b_{k - j} = -{a_0}^{-1} \sum\limits_{j = 1}^{k - j} a_j b_{(k - j) - j} \text{ by definition}\\
+                    &= 0
+            \end{align}
+            TODO why do $a_1, ..., a_n$ have to be nilpotent
+        
         
         \subsection{(b)}
         Prove that $p(x)$ is nilpotent in $R[x]$ if and only if $a_0, a_1, ..., a_n$ are nilpotent elements of $R$.
