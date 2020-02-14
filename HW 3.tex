@@ -16,6 +16,8 @@ HW 3
 \author{Khyber Sen}
 \date{2/13/2019}
 
+\DeclareMathOperator{\Char}{char}
+
 \setcounter{secnumdepth}{0}
 
 \begin{document}
@@ -79,9 +81,7 @@ HW 3
     Prove that if $R$ is a commutative ring and $\mathfrak{N}(R)$ is its nilradical then zero is the only nilpotent element of $R/\mathfrak{N}(R)$ i.e., prove that $\mathfrak{N}({R/\mathfrak{N}(R)}) = 0$.
         
         \subsection{Solution}
-        0 is obviously always nilpotent, so we just have to show if $x \in R/\mathfrak{N}$ and $x \neq 0$, then $x$ is not nilpotent, i.e.\ $x^n \neq 0$ $\forall$ $n \in \mathbb{Z}^+$.
-        
-        TODO
+        $\forall$ $\overline{x} \in \mathfrak{N}(R/\mathfrak{N}(R))$, where the bar denotes passage to the quotient ring, $\overline{x}^n = \overline{0}$ since $\overline{x}$ is nilpotent.  Since $\overline{x}^n = \overline{0}$, $\overline{x^n} = 0$, so $x^n \in \mathfrak{N}(R)$.  Therefore, $\exists$ $m \in \mathbb{Z}^+$ s.t.\ $(x^n)^m = 0$, so $x^{nm} = 0$, meaning $x \in \mathfrak{N}(R)$.  Therefore, $\overline{x} = \overline{0}$, so $\mathfrak{N}(R/\mathfrak{N}(R)) = 0 = \{\overline{0}\}$.
     
     \section{7.3.31}
     Prove that the elements $\begin{pmatrix}
@@ -135,7 +135,7 @@ HW 3
             1 & 0 \\
             0 & 0
         \end{bmatrix} \neq 0$.  Thus their product is not nilpotent, meaning the nilradical of such a noncommutative ring isn't ideal.
-    
+
     \section{7.3.33}
     Assume $R$ is commutative.  Let $p(x) = a_n x^n + a_{n - 1} x^{n - 1} + ... + a_1 x + a_0$ be an element of the polynomial ring $R[x]$.
         
@@ -143,23 +143,20 @@ HW 3
         Prove that $p(x)$ is a unit in $R[x]$ if and only if $a_0$ is a unit and $a_1, a_2, ..., a_n$ are nilpotent in $R$.
             
             \subsubsection{Solution}
-            Let $p(x) = \sum\limits_{k = 0}^{n} a_k x^k$, $q(x) = \sum\limits_{k = 0}^{n} b_k x^k$, and $r(x) = \sum\limits_{k = 0}^{n} c_k x^k$.  We want to show that $p(x)$ is a unit, i.e.\ $p(x)q(x) = r(x) = 1 \iff a_0 \in R^\times$ and $a_1, ..., a_n \in \mathfrak{N}(R)$.  For the $\impliedby$ direction, given $a_0$ is a unit and $a_1, ..., a_n$ are nilpotent, we need to show $c_0 = 1$ and $c_k = 0$ $\forall$ $k \neq 0$.  $c_k = \sum\limits_{j = 0}^{k} a_j b_{n - j}$.  Let $b_0 = {a_0}^{-1}$, which we know exists since $a_0$ is a unit.  Then $c_0 = \sum\limits_{j = 0}^0 a_j b_{0 - j} = a_0 b_0 = a_0 {a_0}^{-1} = 1$.  Then $\forall$ $k \neq 0$, let $b_k = -{a_0}^{-1} \sum\limits_{j = 1}^{k} a_j b_{k - j}$.  Then,
-            \begin{align}
-                c_k &= \sum\limits_{j = 0}^{k} a_j b_{k - j} \\
-                    &= \sum\limits_{j = 0}^{k} a_j \left(-{a_0}^{-1} \sum\limits_{j = 1}^{k - j} a_j b_{(k - j) - j}\right) \\
-                    &= a_0 \left(-{a_0}^{-1} \sum\limits_{j = 1}^{k} a_j b_{k - j}\right) + \sum\limits_{j = 1}^{k} a_j \left(-{a_0}^{-1} \sum\limits_{j = 1}^{k - j} a_j b_{(k - j) - j}\right) \\
-                    &= -\sum\limits_{j = 1}^{k} a_j b_{k - j} + \sum\limits_{j = 1}^{k} a_j \left(-{a_0}^{-1} \sum\limits_{j = 1}^{k - j} a_j b_{(k - j) - j}\right) \\
-                    &= -\sum\limits_{j = 1}^{k} a_j b_{k - j} + \sum\limits_{j = 1}^{k} a_j b_{k - j} \because{} b_{k - j} = -{a_0}^{-1} \sum\limits_{j = 1}^{k - j} a_j b_{(k - j) - j} \text{ by definition}\\
-                    &= 0
-            \end{align}
-            TODO why do $a_1, ..., a_n$ have to be nilpotent
+            For the $\implies$ direction, $p(x)$ is a unit, so we know $\exists$ $p^{-1}(x)$ s.t.\ $p(x) p^{-1}(x) = 1$.  Let $p(x) = \sum\limits_{k = 0}^{n} a_k x^k$, $p^{-1}(x) = \sum\limits_{k = 0}^{n} b_k x^k$.  For $p(x)p^{-1}(x)$ to be 1, the constant term of the product must be 1.  This constant term is given by $a_0 b_0$.  Thus, $a_0 b_0 = 1$, meaning $a_0$ is a unit and ${a_0}^{-1} = b_0$.
+            
+            Furthermore, for $p(x)p^{-1}(x)$ to be 1, all the other non-constant coefficients must be 0, so $c_k = \sum\limits_{i = 0}^{k} a_i b_{k - i} = 0$ $\forall$ $k \in 1..n$.  If we multiply $c_k$ by ${a_n}^{n - k}$ and substitute between different $c_k$, we then get $0 = c_k {a_n}^{n - k} = {a_n}^{n - k + 1} b_{n - k}$.  Thus, ${a_n}^{n + 1} b_0 = 0$.  Since $b_0$ is a unit, we can divide it out, giving us ${a_n}^{n + 1} = 0$, meaning $a_n$ is nilpotent.  Since the nilradical is an ideal, this means that $a_n x^n$ and $p(x) - a_n x^n$ are also nilpotent.  Now we've reduced $p(x)$ to a lower degree, and we can now apply the same argument to keep showing $a_k$ is nilpotent $\forall$ $k \in n..1$.
+            
+            For the $\impliedby$ direction, we know $p(x) - a_0$ is nilpotent by part (b) below, since it's constant term is 0, which is nilpotent, and all the other coefficients, $a_1, ..., a_n$ are nilpotent.  From problem 7.1.14(d), we know the sum of a nilpotent element and a unit is a unit, and we have $p(x) - a_0$ is nilpotent and $a_0$ is a unit, so their sum $p(x) - a_0 + a_0 = p(x)$ is also a unit.
         
         
         \subsection{(b)}
         Prove that $p(x)$ is nilpotent in $R[x]$ if and only if $a_0, a_1, ..., a_n$ are nilpotent elements of $R$.
         
             \subsubsection{Solution}
+            For the $\implies$ direction, if $p(x)$ is nilpotent, then $\exists$ $m$ s.t.\ $p(x)^{m_0} = 0$.  In particular, this means that ${p(x)^{m_0}}_0 = 0$, so we know ${a_0}^{m_0} = 0$, meaning $a_0$ is nilpotent, both in $R$ and $R[x]$.  Since both $a_0$ and $p(x)$ are nilpotent in $R[x]$, their difference, $p(x) - a_0$, is also nilpotent.  $p(x) - a_0$ has a 0 constant term, so we can now apply the argument from before to the next term, i.e.\ ${(p(x) - a_0)^{m_1}}_1 = 0$, so ${a_1}^{m_1}$, meaning $a_1$ is also nilpotent.  Repeating this argument, we see that all $a_0, ..., a_n$ are all nilpotent.
             
+            For the $\impliedby$ direction, if $a_0, ..., a_n$ are all nilpotent in $R$, then they are also all nilpotent in $R[x]$.  Furthermore, for each nilpotent $a_i$, $a_i x^i$ is also nilpotent since $\mathfrak{N}(R[x])$ is an ideal.  Summing these nilpotent terms together, we get $p(x)$, which is also nilpotent, again since $\mathfrak{N}(R[x])$ is an ideal.
     
     \section{7.4.14}
     Assume $R$ is commutative.  Let $x$ be an indeterminate, let $f(x)$ be a monic polynomial in $R[x]$ of degree $n \geq 1$ and use the bar notation to denote passage to the quotient ring $R[x]/(f(x))$.
@@ -172,42 +169,55 @@ HW 3
         [If $f(x) = x^n + b_{n - 1} x^{n - 1} + ... + b_0$ then $\overline{x^n} = \overline{-(b_{n - 1} x^{n - 1} + ... + b_0)}$.  Use this to reduce powers of $\overline{x}$ in the quotient ring.]
             
             \subsubsection{Solution}
-            
+            It's obvious that every element of $R[x]/(f(x))$ is of the form $\overline{p(x)}$ for some polynomial $p(x) \in R[x]$; we just have to show the degree of $p(x)$ is $< n$.  Let $m$ be the degree of $p(x)$. If $m < n$, then the proof is done, and if $m \geq n$, we just have to show $\overline{p(x)} = \overline{q(x)}$ where $q(x)$ is of degree $< n$.  Since $\overline{f(x)} = \overline{0}$, $\overline{\sum\limits_{k = 0}^{n} a_k x^k} = \overline{0}$ (where $a_n = 1$), so $\overline{x^n} = \overline{-\sum\limits_{k = 0}^{n - 1} a_k x^k}$.  This means for every $x^k$ term in $p(x)$ where $k \geq n$, we can factor out an $\overline{x^n}$ and replace it with $\overline{-\sum\limits_{k = 0}^{n - 1} a_k x^k}$, which has degree $< n$.  This allows us to find an equivalent polynomial $q(x)$ with degree $< n$ but still have $\overline{p(x)} = \overline{q(x)}$.
         
         \subsection{(b)}
         Prove that if $p(x)$ and $q(x)$ are distinct polynomials in $R[x]$ which are both of degree less than $n$, then $\overline{p(x)} \neq \overline{q(x)}$.  [Otherwise $p(x) - q(x)$ is an $R[x]$-multiple of the monic polynomial $f(x)$.]
             
             \subsubsection{Solution}
-            
+            Assume $\overline{p(x)} = \overline{q(x)}$.  Then $\overline{p(x) - q(x)} = \overline{0}$, so $p(x) - q(x) = r(x)f(x)$.  Since $p(x) - q(x)$ are both of degree $< n$, $p(x) - q(x)$ is also of degree of $< n$.  However, $f(x)$ is of degree $n$, so $r(x)$ must be 0 to cancel out the higher degree from $f(x)$.  Thus, we have $p(x) - q(x)$, meaning $p(x) = q(x)$, which is a contradiction.  Thus, we must have $\overline{p(x)} \neq \overline{q(x)}$.
         
         \subsection{(c)}
         If $f(x) = a(x) b(x)$ where both $a(x)$ and $b(x)$ have degree less than $n$, prove that $\overline{a(x)}$ is a zero divisor in $R[x]/(f(x))$.
             
             \subsubsection{Solution}
-            
+            Since $a(x)$ and $b(x)$ both have degree $< n$, we know $\overline{a(x)} \neq 0$ and $\overline{b(x)} \neq 0$.  But we also have $f(x) = a(x)b(x)$, so $\overline{a(x)}\overline{b(x)} = \overline{a(x)b(x)} = \overline{f(x)} = \overline{0}$, which means $\overline{a(x)}$ and $\overline{b(x)}$ are both zero divisors in $R[x]/(f(x))$.
         
         \subsection{(d)}
         If $f(x) = x^n - a$ for some nilpotent element $a \in R$, prove that $\overline{x}$ is nilpotent in $R[x]/(f(x))$.
             
             \subsubsection{Solution}
-            
+            Firstly, $\overline{x^n - a} = \overline{f(x)} = \overline{0}$, so $\overline{x^n} = \overline{a}$.  Then, since $a$ is nilpotent in $R$, $\exists$ $m$ s.t.\ $a^m = 0$.  Therefore, $\overline{x}^{nm} = \overline{x^n}^m = \overline{a}^m = \overline{a^m} = \overline{0}$, meaning $\overline{x}$ is nilpotent in $R[x]/(f(x))$.
         
         \subsection{(e)}
         Let $p$ be a prime, assume $R = \mathbb{F}_p$ and $f(x) = x^p - a$ for some $a \in \mathbb{F}_p$.  Prove that $\overline{x - a}$ is nilpotent in $R[x]/(f(x))$.
             
             \subsubsection{Solution}
-            
+            Firstly, $\overline{x^p - a} = \overline{f(x)} = \overline{0}$, so $\overline{x^p} = \overline{a}$.  Then
+            \begin{align}
+                \overline{x - a}^p &= \overline{(x - a)^p} \\
+                    &= \overline{\sum\limits_{k = 0}^{p} \binom{p}{k} x^k (-a)^{p - k}} \\
+                    &= \overline{x^p + (-a)^p + \sum\limits_{k = 1}^{p - 1} \binom{p}{k} x^p (-a)^{p - k}} \\
+                    &= \overline{x^p + (-a)^p} \\
+                    &= \overline{x^p + (-a)} \\
+                    &= \overline{x^p - a} \\
+                    &= \overline{a} - \overline{a} \\
+                    &= \overline{0}
+            \end{align}
+            $\sum\limits_{k = 1}^{p - 1} \binom{p}{k} x^p (-a)^{p - k} = 0$ is true because $\binom{p}{k}$ is a multiple of $p$ $\forall k \in 1..p - 1$, and since $\Char(\mathbb{F}_p) = p$, multiplying by $p$ is multiplying by 0.  Furthermore, for prime $p$ in $\mathbb{F}_p$, we know $a^p = a$, which explains the next step.
     
     \section{7.5.3}
     Let $F$ be a field.  Prove that $F$ contains a unique smallest subfield $F_0$ and that $F_0$ is isomorphic to either $\mathbb{Q}$ or $\mathbb{Z}/p\mathbb{Z}$ for some prime $p$ ($F_0$ is called the \textit{prime subfield} of $F$).
         
         \subsection{Solution}
+        Since the intersection of subgroups of some group is also a subgroup of that group, we know that the intersection of subfields is also a subfield since a field is just an additive and multiplicative group.  Now let $F_0$ be the intersection, which is unique, of all subfields of $F$.  Then it is contained in every subfield, so it is the smallest subfield.
         
+        Now, since $F_0$ is a field and thus a domain, $\Char(F_0)$ is either 0 are a prime $p$.  By closure as an additive group, $\sum\limits_{i = 1}^{n} \in F_0, n \in \mathbb{Z}$.  If $\Char(F_0)$, this generates all of $\mathbb{Z}$; otherwise, it generates $\mathbb{Z}/p\mathbb{Z}$, meaning $F_0$ contains either $\mathbb{Z}$ or $\mathbb{Z}/p\mathbb{Z}$.  The latter is a field, and since $F_0$ is the smallest subfield, if $\Char(F_0) \neq 0$, then $\mathbb{Z}/p\mathbb{Z} \subseteq F_0$, so $F_0 \cong \mathbb{Z}/p\mathbb{Z}$.  If $\Char(F_0) = 0$, then $\mathbb{Z} \subseteq F_0$.  $\mathbb{Z}$ isn't a field, however, so we can't make that same argument.  However, since $F_0$ contains $\mathbb{Z}$, it must also contain $\mathbb{Q}$ by closure as a multiplicative group, because $\forall$ $x, y \in \mathbb{Z}$ s.t.\ $y \neq 0$, $\frac{x}{y} \in F_0$ by closure and $\frac{x}{y} \in \mathbb{Q}$.  Since we now know $\mathbb{Q} \subseteq F_0$ and $\mathbb{Q}$ is a field, we can apply the same argument from before to conclude that $F_0 \cong \mathbb{Q}$.
     
     \section{7.5.4}
     Prove that any subfield of $\mathbb{R}$ must contain $\mathbb{Q}$.
         
         \subsection{Solution}
-        
+        Let $F$ be a subfield of $\mathbb{R}$.  As a field, it must contain 1.  By closure as an additive subgroup and as a subfield of $\mathbb{R}$, it must also contain all of $\mathbb{Z}$, i.e.\ if $x = \sum\limits_{i = 1}^{n} 1, n \in \mathbb{Z}$, then $x \in F$ by closure, and this generates all of $\mathbb{Z}$ because $F$ is also characteristic 0 like $\mathbb{R}$.  Furthermore, $\forall$ $x, y \in \mathbb{Z}$ s.t.\ $y \neq 0$, $\frac{x}{y} \in F$ by closure as a multiplicative subgroup.  $\frac{x}{y} \in \mathbb{Q}$, so $F$ must therefore contain $\mathbb{Q}$.
     
 \end{document}
