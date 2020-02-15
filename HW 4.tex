@@ -11,12 +11,12 @@
 \title{
 Math GU4042, Spring 2020 \\
 Modern Algebra II, Prof.\ Yihang Zhu \\
-HW 3 \\
+HW 4 \\
 Notes: Prop 8.3, Exercises 8.\{9, 13, 16-19\} \\
 D\&F: 8.1.\{1, 8.(a)\}, 13.5.1
 }
 \author{Khyber Sen}
-\date{2/13/2019}
+\date{2/20/2019}
 
 \DeclareMathOperator{\Char}{char}
 
@@ -27,24 +27,104 @@ D\&F: 8.1.\{1, 8.(a)\}, 13.5.1
     \maketitle
     
     \section{Prop. 8.3}
+    Prove \textbf{Proposition 8.3} (Compatibility between derivation and change of scalars).  For all $f \in R_1[x]$, we have
+    \begin{align}
+        (\phi_*(f))' &= \phi_*(f')
+    \end{align}
+        
+        \subsection{Solution}
+        
     
     \section{8.9}
+    Keep the setting of the above example.  Let $b$ be a root of $f = X^p - a$.  Show that $b' \in R$ is a root of $f$ if and only if the difference $\epsilon = b - b'$ satisfies $\epsilon^p = 0$.  Using this, find the example of a commutative ring $R$ with $\Char(R) = p$ prime, and find $a, b, b'$ such that $b, b'$ are both roots of $f = X^p - a$.  Conclude that the sum of the multiplicities of the roots of $f$ could exceed $\deg f$.
+        
+        \subsection{Solution}
+        
     
     \section{8.13}
+    Assume that $\phi$ is a Euclidean structure on a domain $R$ satisfying
+    \begin{align}
+        \phi(ab) &\geq \phi(b), \forall a \in R - \{0\}, \forall b \in R
+    \end{align}
+    and satisfying
+    \begin{align}
+        \max(\phi(a + b), \phi(a - b)) &\leq \min(\phi(a), \phi(b)), \forall a, b \in R
+    \end{align}
+    Show that $q, r$ as in Definition 8.11 must be uniquely determined by $f$ and $g$.
+        
+        \subsection{Solution}
+        
     
     \section{8.16}
+    Show that the Euclidean structure in Example 8.14 violates the assumptions in Exercise 8.13, while the Euclidean structure in Example 8.15 satisfies the assumptions in Exercise 8.13.
+        
+        \subsection{Solution}
+        
     
     \section{8.17}
+    Consider the ring $R = \mathbb{Z}[i]$.  Show that $R$ is an ED, with Euclidean structure given by $\phi(a + bi) = a^2 + b^2, a, b \in \mathbb{Z}$.  Does this Euclidean structure satisfy the assumptions in Exercise 8.13 or not?
+        
+        \subsection{Solution}
+        
     
     \section{8.18}
+    Consider the ring $R = \mathbb{Z}[X]$.  Define $\phi: R \to \mathbb{Z}_{\geq 0}$ by the same formula as in Example 8.15.  Show that $\phi$ is NOT an Euclidean structure.
+        
+        \subsection{Solution}
+        
     
     \section{8.19}
+    Show that any field is an ED by finding a suitable $\phi$.
+        
+        \subsection{Solution}
+        
     
     \section{8.1.1}
+    For each of the following five pairs of integers $a$ and $b$, determine their greatest common divisor $d$ and write $d$ as a linear combination $ax + by$ of $a$ and $b$.
+        
+        \subsection{(a)}
+        $a = 20, b = 13$
+            
+            \subsubsection{Solution}
+            
+        
+        \subsection{(b)}
+        $a = 69, b = 372$
+            
+            \subsubsection{Solution}
+            
+        
+        \subsection{(c)}
+        $a = 11391, b = 5673$
+            
+            \subsubsection{Solution}
+            
+        
+        \subsection{(d)}
+        $a = 507885, b = 60808$
+            
+            \subsubsection{Solution}
+            
+        
+        \subsection{(e)}
+        $a = 91442056588823, b = 779086434385541$
+            
+            \subsubsection{Solution}
+            
     
     \section{8.1.8.(a)}
+    Let $F = \mathbb{Q}\left(\sqrt{D}\right)$ be a quadratic field with associated quadratic integer ring $\mathcal{O}$ and field norm $N$ as in Section 7.1.
+        
+        \subsection{(a)}
+        Suppose $D$ is \sout{-1}, -2, -3, -7 or -11.  Prove that $\mathcal{O}$ is a Euclidean Domain with respect to $N$.  [Modify the proof for $\mathbb{Z}[i]$ ($D = -1$) in the text.  For $D = $ -3, -7, -11 prove that every element of $F$ differs from an element in $\mathcal{O}$ by an element whose norm is at most $\frac{(1 + |D|)^2}{16 |D|}$, which is less than 1 for these values of $D$.  Plotting the points of $\mathcal{O}$ in $\mathbb{C}$ may be helpful.]
+        
+        \subsection{Solution}
+        
     
     \section{13.5.1}
-    
+    Prove that the derivative $D_x$ of a polynomial satisfies $D_x(f(x) + g(x)) = D_x(f(x)) + D_x(g(x))$ and $D_x(f(x)g(x)) = D_x(f(x))g(x) + D_x(g(x))f(x)$ for any two polynomials $f(x)$ and $g(x)$.
+        
+        \subsection{Solution}
+        
     
 \end{document}
