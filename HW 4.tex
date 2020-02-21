@@ -19,6 +19,10 @@ D\&F: 8.1.\{1, 8.(a)\}, 13.5.1
 \date{2/20/2019}
 
 \DeclareMathOperator{\Char}{char}
+\DeclareMathOperator{\quot}{q}
+\DeclareMathOperator{\rem}{r}
+
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
 
 \setcounter{secnumdepth}{0}
 
@@ -29,17 +33,37 @@ D\&F: 8.1.\{1, 8.(a)\}, 13.5.1
     \section{Prop. 8.3}
     Prove \textbf{Proposition 8.3} (Compatibility between derivation and change of scalars).  For all $f \in R_1[x]$, we have
     \begin{align}
-        (\phi_*(f))' &= \phi_*(f')
+        (\phi_*(f))' &= \phi_*\left(f'\right)
     \end{align}
         
         \subsection{Solution}
-        
+        \begin{align}
+            (\phi_*(f))' &= \left(\phi_*\left(\sum\limits_i a_i X^i\right)\right)' \\
+                &= \left(\sum\limits_i \phi(a_i) X^i\right)' \\
+                &= \sum\limits_{i \geq 1} i \phi(a_i) X^{i - 1} \\
+                &= \sum\limits_{i \geq 1} \phi(i) \phi(a_i) X^{i - 1} \because{} i \in \mathbb{Z}, \therefore{} i = \phi(i) \\
+                &= \sum\limits_{i \geq 1} \phi(i a_i) X^{i - 1} \\
+                &= \phi_*\left(\sum\limits_{i \geq 1} i a_i X^{i - 1}\right) \\
+                &= \phi_*\left(\left(\sum\limits_i a_i X^i\right)'\right) \\
+                &= \phi_*\left(f'\right)
+        \end{align}
     
     \section{8.9}
     Keep the setting of the above example.  Let $b$ be a root of $f = X^p - a$.  Show that $b' \in R$ is a root of $f$ if and only if the difference $\epsilon = b - b'$ satisfies $\epsilon^p = 0$.  Using this, find the example of a commutative ring $R$ with $\Char(R) = p$ prime, and find $a, b, b'$ such that $b, b'$ are both roots of $f = X^p - a$.  Conclude that the sum of the multiplicities of the roots of $f$ could exceed $\deg f$.
         
         \subsection{Solution}
-        
+        $\forall$ roots $b$ of $f$, we have that $b^p = a$, so if $b$ and $b'$ are both roots of $f$, then we have $b^p = a = b'^p$, and thus $b^p - b'^p = 0$.  Since $p$ is prime, we can factor this into $(b - b')^p = 0$, so $\epsilon = b - b'$ satisfies $\epsilon^p = 0$.  Furthermore, this works both ways, where each step is an $\iff$:
+        \begin{align}
+            0 &= \epsilon^p \\
+                &= (b - b')^p \\
+                &= b^p - b'^p \\
+            b^p &= b'^p \\
+            b^p &= a \implies b'^p = a \\
+            b'^p - a &= 0 \\
+            f(b') &= 0 \\
+            b' & \text{ is a root of } f
+        \end{align}
+        As an example, consider $R = \mathbb{F}_2[x]/(x^2 + 1), b = x, b' = 1$.  $\Char(\mathbb{F}_2) = 2$, so $\Char(R) = 2$, so the characteristic of $R$ is prime.  Then we have $\epsilon^2 = (b - b')^2 = (x - 1)^2 = x^2 + 2x + 1 = x^2 + 1 = 0$.  Now let $a = 1$, so $b^p = 1^2 = 1 = a$.  Thus we have two roots of $f(x) = x^2 - a$, $1$ and $x$, both with multiplicities of 2, meaning the sum of the multiplicities of the roots of $f$ is at least 4, which exceeds $\deg(f) = 2$.
     
     \section{8.13}
     Assume that $\phi$ is a Euclidean structure on a domain $R$ satisfying
@@ -48,83 +72,299 @@ D\&F: 8.1.\{1, 8.(a)\}, 13.5.1
     \end{align}
     and satisfying
     \begin{align}
-        \max(\phi(a + b), \phi(a - b)) &\leq \min(\phi(a), \phi(b)), \forall a, b \in R
+        \phi(a - b) &\leq \max(\phi(a), \phi(b)), \forall a, b \in R
     \end{align}
     Show that $q, r$ as in Definition 8.11 must be uniquely determined by $f$ and $g$.
         
         \subsection{Solution}
-        
+        Assume that $q, r$ and $q', r'$ are both quotient, remainders of $\frac{f}{g}$.  We need to show that $q = q'$ and $r = r'$ under these conditions, implying the uniqueness of division with remainder.  Assume that $q \neq q'$.  Since $gq + r = gq' + r'$, $g(q - q') = r' - r$, so then we have
+        \begin{align}
+            f &= gq + r \\
+            f &= gq' + r' \\
+            gq + r &= gq' + r' \\
+            gq - gq' &= r' - r \\
+            g(q - q') &= r' - r \\
+            q \neq q' &\implies q - q' \neq 0 \\
+            \phi(g) &\leq \phi(g(q - q')) \\
+                &= \phi(r' - r) \\
+                &\leq \max(\phi(r'), \phi(r)) \\
+                &< \phi(g) \because{} \phi(r), \phi(r') < \phi(g)
+        \end{align}
+        This, $\phi(g) < \phi(g)$, is a contradiction, so therefore $q = q'$.  Thus, we know that $gq + r = gq + r'$, so $r = r'$ as well.  Thus the quotient and remainder are unique.
     
     \section{8.16}
     Show that the Euclidean structure in Example 8.14 violates the assumptions in Exercise 8.13, while the Euclidean structure in Example 8.15 satisfies the assumptions in Exercise 8.13.
         
         \subsection{Solution}
+        In Example 8.14, $\phi(n) := |n|$, so $\phi(ab) = |ab| = |a||b| = \phi(a)\phi(b)$.  Since $\phi(a)$ and $\phi(b)$ are always non-negative, $\phi(ab) \geq \phi(b)$ is true.  However, for the second property, $\phi(a - b) \leq \max(\phi(a), \phi(b))$, if we let $a = -1$ and $b = 1$, then
+        \begin{align}
+            \phi(a - b) &= |a - b| \\
+                &= |(-1) - 1| \\
+                &= |-2| \\
+                &= 2 \\
+            \max(\phi(a), \phi(b)) &= \max(|a|, |b|) \\
+                &= \max(|-1|, |1|) \\
+                &= \max(1, 1) \\
+                &= 1 \\
+            2 &\not\leq 1
+        \end{align}
+        Therefore, this second property is not satisfied by the absolute value Euclidean structure.
         
+        In Example 8.15, $\phi(f) := \begin{cases}
+            \deg(f) + 1, &f \neq 0 \in F[X] \\
+            0, &f = 0 \in F[X]
+        \end{cases}$ where $F$ is a field and $\phi: F[X] \to \mathbb{N}$.  For the first property, $\phi(ab) \geq \phi(b)$ where $a \neq 0$, if $b = 0$, then $ab = a0 = 0$, so $\phi(ab) = \phi(0) = 0 \geq \phi(0) = \phi(b)$.  If $b \neq 0$, then $ab \neq 0$, so $\phi(ab) = \deg(ab) + 1$.  Since $F$ is a domain since it's a field, $\deg(fg) = \deg(f) + \deg(g)$, so 
+        \begin{align}
+            \phi(ab) &= \deg(ab) + 1 \\
+                &= \deg(a) + \deg(b) + 1 \\
+                &\geq \deg(b) + 1 \\
+                &= \phi(b)
+        \end{align}
+        
+        For the second property, if $a - b = 0$, then $\phi(a - b) = \phi(0) = 0 \leq \max(\phi(a), \phi(b))$ since 0 is the minimum in $\mathbb{N}$.  If $a - b \neq 0$, then $\phi(a - b) = \deg(a - b) + 1$.  We know that $\deg(f + g) \leq \max(\deg(f), \deg(g))$, so 
+        \begin{align}
+            \phi(a - b) &= \deg(a - b) + 1 \\
+                &\leq \max(\deg(a), \deg(-b)) + 1 \\
+                &= \max(\deg(a), \deg(b)) + 1 \\
+                &= \max(\deg(a) + 1, \deg(b) + 1) \\
+                &= \max(\phi(a), \phi(b))
+        \end{align}
+        Thus, this Euclidean structures satisfies both of these additional properties.
     
     \section{8.17}
     Consider the ring $R = \mathbb{Z}[i]$.  Show that $R$ is an ED, with Euclidean structure given by $\phi(a + bi) = a^2 + b^2, a, b \in \mathbb{Z}$.  Does this Euclidean structure satisfy the assumptions in Exercise 8.13 or not?
         
         \subsection{Solution}
+        $\mathbb{Z}[i]$ is a special case of the quadratic integer ring $\mathcal{O}\left(\sqrt{D}\right)$, which I proved to be a Euclidean domain in 8.18.1.(a) with a field norm $N$ that is the same as this $\phi$ when $D = -1$.  The proof for $\mathbb{Z}[i]$ would be the same, so I'm skipping it here.
         
+        As for the additional properties from Exercise 8.13, the first property is satisfied:
+        \begin{align}
+            \phi((a + bi)(c + di)) &= \phi((ac - bd) + (bc + ad)i) \\
+                &= (ac - bd)^2 + (bc + ad)^2 \\
+                &= a^2c^2 - 2abcd + b^2d^2 + b^2c^2 + 2abcd + a^2d^2 \\
+                &= a^2c^2 + b^2d^2 + b^2c^2 + a^2d^2 \\
+                &= c^2 \left(a^2 + b^2\right) + d^2 \left(a^2 + b^2\right) \\
+                &= \left(c^2 + d^2\right) \left(a^2 + b^2\right) \\
+                &\geq c^2 + d^2 \\
+                &= \phi(c + di)
+        \end{align}
+        The second property is not satisfied, however, using the same example from the absolute value one.  Consider the complex numbers $z = -1$ and $w = 1$.  Then
+        \begin{align}
+            \phi(z - w) &= \phi(-1 - 1) \\
+                &= \phi(-2) \\
+                &= (-2)^2 \\
+                &= 4 \\
+            \max(\phi(z), \phi(w)) &= \max(\phi(-1), \phi(1)) \\
+                &= \max((-1)^2, (1)^2) \\
+                &= \max(1, 1) \\
+                &= 1 \\
+            4 &\not\leq 1
+        \end{align}
     
     \section{8.18}
     Consider the ring $R = \mathbb{Z}[X]$.  Define $\phi: R \to \mathbb{Z}_{\geq 0}$ by the same formula as in Example 8.15.  Show that $\phi$ is NOT an Euclidean structure.
         
         \subsection{Solution}
+        In Example 8.15, $\phi(f) := \begin{cases}
+            \deg(f) + 1, &f \neq 0 \in F[X] \\
+            0, &f = 0 \in F[X]
+        \end{cases}$ where $F$ is a field and $\phi: F[X] \to \mathbb{N}$.  Now we are considering the same $\phi$, except over a different domain, $\mathbb{Z}[X]$ instead of $F[X]$, and $\mathbb{Z}$ is not a field, only a domain, unlike $F$.  Thus, we now have $\phi: \mathbb{Z}[X] \to \mathbb{N} := f \mapsto \begin{cases}
+            \deg(f) + 1, &f \neq 0 \in \mathbb{Z}[X] \\
+            0, &f = 0 \in \mathbb{Z}[X]
+        \end{cases}$.  Now we want to show that this $\phi$ is not a Euclidean structure.
         
+        As a counter-example, consider the polynomials $f(x) = 1$ and $g(x) = 2$.  Assuming $\phi$ is a Euclidean structure, then $\exists$ $q, r \in \mathbb{Z}[X]$ s.t.\ $f = gq + r$ and $\phi(r) < \phi(g)$.  $r \neq 0$ because if it were, then we'd have $f = gq$ or $1 = 2q$ but no integer $q \in \mathbb{Z}$ satisfies this because 2 is not a unit in $\mathbb{Z}$, since $\mathbb{Z}$ is not a field.  Since $r, g \neq 0$, $\phi(r) < \phi(g)$ is the same as $\deg(r) < \deg(g)$.  $\deg(g) = 0$, however, so $\deg(r) < 0$ is impossible.  Thus, $\phi$ is not a Euclidean structure.
     
     \section{8.19}
     Show that any field is an ED by finding a suitable $\phi$.
         
         \subsection{Solution}
-        
+        Let $F$ be a field.  Then we need to define a Euclidean structure $\phi: F \to \mathbb{N}$ to show $F$ is a Euclidean domain.  Let $\phi(x) := \begin{cases}
+            1, & x \neq 0 \\
+            0, & x = 0
+        \end{cases}$.  To define the division with remainder, let the quotient of $x$ by $y$ be $q = xy^{-1}$ and the remainder be just $r = 0$.  Then for $x$ divided by $y$ where $y \neq 0$, we obviously have $yq + r = y(xy^{-1}) + 0 = x$.  We also have $\phi(r) < \phi(y)$, because $r = 0$, so $\phi(r) = 0$, and since $y \neq 0$, $\phi(y) = 1$, and $0 < 1$.
     
     \section{8.1.1}
     For each of the following five pairs of integers $a$ and $b$, determine their greatest common divisor $d$ and write $d$ as a linear combination $ax + by$ of $a$ and $b$.
+        
+        \subsection{Solution}
+        Using the extended Euclidean algorithm to compute the gcd and Bezout coefficients,
+        \begin{verbatim}
+def extended_gcd(a, b):
+     s_, s = 1, 0
+     t_, t = 0, 1
+     r_, r = a, b
+     while r != 0:
+         q = r_ // r
+         s_, s = s, s_ - q * s
+         t_, t = t, t_ - q * t
+         r_, r = r, r_ - q * r
+     x, y = s_, t_
+     gcd = r_
+     return gcd, (x, y)
+        \end{verbatim}, we get
         
         \subsection{(a)}
         $a = 20, b = 13$
             
             \subsubsection{Solution}
-            
+            \begin{align}
+                d &= 1 \\
+                (x, y) &= (2, -3) \\
+                1 &= 2(20) - 3(13)
+            \end{align}
         
         \subsection{(b)}
         $a = 69, b = 372$
             
             \subsubsection{Solution}
-            
+            \begin{align}
+                d &= 3 \\
+                (x, y) &= (27, -5) \\
+                3 &= 27(69) - 5(372)
+            \end{align}
         
         \subsection{(c)}
         $a = 11391, b = 5673$
             
             \subsubsection{Solution}
-            
+            \begin{align}
+                d &= 3 \\
+                (x, y) &= (-126, 253) \\
+                3 &= -126(11391) + 253(5673)
+            \end{align}
         
         \subsection{(d)}
         $a = 507885, b = 60808$
             
             \subsubsection{Solution}
-            
+            \begin{align}
+                d &= 691 \\
+                (x, y) &= (-17, 142) \\
+                691 &= -17(507885) + 142(60808)
+            \end{align}
         
         \subsection{(e)}
         $a = 91442056588823, b = 779086434385541$
             
             \subsubsection{Solution}
-            
+            \begin{align}
+                d &= 1403109613 \\
+                (x, y) &= (277522, -32573) \\
+                1403109613 &= 277522(91442056588823) - 32573(779086434385541)
+            \end{align}
     
     \section{8.1.8.(a)}
     Let $F = \mathbb{Q}\left(\sqrt{D}\right)$ be a quadratic field with associated quadratic integer ring $\mathcal{O}$ and field norm $N$ as in Section 7.1.
         
         \subsection{(a)}
-        Suppose $D$ is \sout{-1}, -2, -3, -7 or -11.  Prove that $\mathcal{O}$ is a Euclidean Domain with respect to $N$.  [Modify the proof for $\mathbb{Z}[i]$ ($D = -1$) in the text.  For $D = $ -3, -7, -11 prove that every element of $F$ differs from an element in $\mathcal{O}$ by an element whose norm is at most $\frac{(1 + |D|)^2}{16 |D|}$, which is less than 1 for these values of $D$.  Plotting the points of $\mathcal{O}$ in $\mathbb{C}$ may be helpful.]
+        Suppose $D$ is -1, -2, -3, -7 or -11.  Prove that $\mathcal{O}$ is a Euclidean Domain with respect to $N$.  [Modify the proof for $\mathbb{Z}[i]$ ($D = -1$) in the text.  For $D = $ -3, -7, -11 prove that every element of $F$ differs from an element in $\mathcal{O}$ by an element whose norm is at most $\frac{(1 + |D|)^2}{16 |D|}$, which is less than 1 for these values of $D$.  Plotting the points of $\mathcal{O}$ in $\mathbb{C}$ may be helpful.]
         
         \subsection{Solution}
+        \begin{align}
+            \mathcal{O} &= \mathbb{Q}\left[\sqrt{D}\right] = \begin{cases}
+                D \not\equiv 1 \Mod{4} &\implies \{a + b\sqrt{D} \mid a, b \in \mathbb{Z}\} \\
+                D \equiv 1 \Mod{4} &\implies \left\{\frac{a + b\sqrt{D}}{2} \mid a, b \in \mathbb{Z}, a \equiv b \Mod{2}\right\}
+            \end{cases}
+        \end{align}
+        Thus, I'll split this proof into these two cases depending on if $D \equiv 1 \Mod{4}$, when $D \in \{-1, -2\}$ and when $D \in \{-3, -7, -11\}$.
         
-    
+        $\forall$ $D \in \{-1, -2\}$ and $\forall$ $a = a_1 + a_2 \sqrt{D}, b = b_1 + b_2 \sqrt{D}$ s.t.\ $b \neq 0$, we need to show $\exists$ a quotient $q = q_1 + q_2 \sqrt{D}$ and remainder $r$ using the field norm $N = \left(a + b\sqrt{D}\right) \mapsto \left(a + b\sqrt{D}\right)\left(a - b\sqrt{D}\right) = a^2 - b^2 D$ as the Euclidean structure.
+        \begin{align}
+            \frac{a}{b} &= \frac{a_1 + a_2 \sqrt{D}}{b_1 + b_2 \sqrt{D}} \\
+                &= \frac{a_1 + a_2 \sqrt{D}}{b_1 + b_2 \sqrt{D}} \frac{b_1 - b_2 \sqrt{D}}{b_1 - b_2 \sqrt{D}} \\
+                &= \frac{(a_1 b_1 - a_2 b_2 D) + (a_2 b_1 - a_1 b_2)\sqrt{D}}{{b_1}^2 + {b_2}^2 D} \\
+                &= \frac{a_1 b_1 - a_2 b_2 D}{{b_1}^2 + {b_2}^2 D} + \frac{a_2 b_1 - a_1 b_2}{{b_1}^2 + {b_2}^2 D} \sqrt{D}
+        \end{align}
+        Let $x = \frac{a_1 b_1 - a_2 b_2 D}{{b_1}^2 + {b_2}^2 D}$ and $y = \frac{a_2 b_1 - a_1 b_2}{{b_1}^2 + {b_2}^2 D}$ for convenience, so $\frac{a}{b} = x + y\sqrt{D}$.  Now choose $q \in \mathbb{Z}\left[\sqrt{D}\right]$ s.t.\ $|x - q_1| < \frac{1}{2}$ and $|y - q_2| < \frac{1}{2}$, since we know there's always an integral point within this distance, and then define $r = a - bq$.  By this latter definition, it's clear that $a = bq + r$, so we just need to show that $N(r) < N(b)$:
+        \begin{align}
+            N(r) &= N(a - bq) \\
+                &= N\left(\left(\frac{a}{b} - q\right) b\right) \\
+                &= N\left(\frac{a}{b} - q\right) N(b) \\
+                &= N\left((x - q_1) + (y - q_2) \sqrt{D}\right) N(b) \\
+                &= \left((x - q_1)^2 - (y - q_2)^2 D\right) N(b) \\
+                &\leq \left(\left(\frac{1}{2}\right)^2 - \left(\frac{1}{2}\right)^2 D\right) N(b) \\
+                &= \frac{1 - D}{4} N(b) \\
+                &< N(b) \text{ when } D \in \{-1, -2\}
+        \end{align}
+        Thus, $\mathcal{O}$ is a Euclidean domain $\forall$ $D \in \{-1, -2\}$.
+        
+        Now, we'll do the same $\forall$ $D \in \{-3, -7, -11\}$.  For these $D$, $\mathcal{O} = \left\{\frac{a + b\sqrt{D}}{2} \mid a, b \in \mathbb{Z}, a \equiv b \Mod{2}\right\} = \mathbb{Z}[\omega]$, where $\omega = \frac{1 + \sqrt{D}}{2}$.  Then, $\forall$ $a = a_1 + a_2 \omega, b = b_1 + b_2 \omega$ s.t.\ $b \neq 0$, we need to show $\exists$ a quotient $q = \frac{q_1 + q_2 \sqrt{D}}{2}$ (where $q_1 \equiv q_2 \Mod{2}$) and remainder $r$ using the field norm $N = \left(a + b\sqrt{D}\right) \mapsto a^2 - b^2 D$ as the Euclidean structure.
+        \begin{align}
+            \frac{a}{b} &= \frac{a_1 + a_2 \omega}{b_1 + b_2 \omega} \\
+                &= \frac{a_1 + a_2 \omega}{b_1 + b_2 \omega} \frac{b_1 - b_2 \omega}{b_1 - b_2 \omega} \\
+                &= \frac{(a_1 b_1 - a_2 b_2 \omega^2) + (a_2 b_1 - a_1 b_2) \omega}{{b_1}^2 - {b_2}^2 \omega^2} \\
+                &= \frac{\left(a_1 b_1 - a_2 b_2 \left(\frac{1 + \sqrt{D}}{2}\right)^2\right) + (a_2 b_1 - a_1 b_2) \left(\frac{1 + \sqrt{D}}{2}\right)}{{b_1}^2 - {b_2}^2 \left(\frac{1 + \sqrt{D}}{2}\right)^2} \\
+                &= \frac{\left(a_1 b_1 - a_2 b_2 \left(1 + \sqrt{D}\right)^2 \frac{1}{4}\right) + (a_2 b_1 - a_1 b_2) \left(1 + \sqrt{D}\right) \frac{1}{2}}{{b_1}^2 - {b_2}^2 \left(1 + \sqrt{D}\right)^2 \frac{1}{4}} \\
+                &= \frac{\left(4a_1 b_1 - a_2 b_2 \left(1 + \sqrt{D}\right)^2\right) + 2(a_2 b_1 - a_1 b_2) \left(1 + \sqrt{D}\right)}{4{b_1}^2 - {b_2}^2 \left(1 + \sqrt{D}\right)^2} \\
+                &= \frac{((2a_1 + a_2)(2b_1 + b_2) - a_2 b_2 D) + (a_2(2b_1 + b_2) - (2a_1 + a_2) b_2)\sqrt{D}}{(2b_1 + b_2)^2 - {b_2}^2 D} \\
+                &= \frac{(2a_1 + a_2)(2b_1 + b_2) - a_2 b_2 D}{(2b_1 + b_2)^2 - {b_2}^2 D} + \frac{a_2(2b_1 + b_2) - (2a_1 + a_2) b_2}{(2b_1 + b_2)^2 - {b_2}^2 D} \sqrt{D}
+        \end{align}
+        For convenience, let $x = \frac{(2a_1 + a_2)(2b_1 + b_2) - a_2 b_2 D}{(2b_1 + b_2)^2 - {b_2}^2 D}$ and $y = \frac{a_2(2b_1 + b_2) - (2a_1 + a_2) b_2}{(2b_1 + b_2)^2 - {b_2}^2 D}$, so $\frac{a}{b} = x + y\sqrt{D}$.  Now choose $q_2 \in \mathbb{Z}$ s.t.\ $|2y - q_2| \leq \frac{1}{2}$, and then choose $p \in \mathbb{Z}$ s.t.\ $\left|x - \left(\frac{q_2}{2} + p\right)\right| \leq \frac{1}{2}$.  Then we let $q_1 = q_2 + 2p$, which ensures that $q_1 \equiv q_2 \Mod{2}$, so $q = \frac{q_1 + q_2 \sqrt{D}}{2} \in \mathcal{O}$.  We then define $r = a - qb$, so it's clear that $a = bq + r$, so we just need to show that $N(r) < N(b)$.  First, though, note that since $q_1 = q_2 + 2p$, $\frac{q_1}{2} = \frac{q_2}{2} + p$, so $\left|x - \frac{q_1}{2}\right| \leq \frac{1}{2}$.  Furthermore, since $|2y - q_2| \leq \frac{1}{2}$, we also know $\left|y - \frac{q_2}{2}\right| \leq \frac{1}{4}$.
+        \begin{align}
+            N(r) &= N(a - bq) \\
+                &= N\left(\left(\frac{a}{b} - q\right) b\right) \\
+                &= N\left(\frac{a}{b} - q\right) N(b) \\
+                &= N\left(\left(x - \frac{q_1}{2}\right) + \left(y - \frac{q_2}{2}\right) \sqrt{D}\right) N(b) \\
+                &= \left(\left(x - \frac{q_1}{2}\right)^2 - \left(y - \frac{q_2}{2}\right)^2 D\right) N(b) \\
+                &\leq \left(\left(\frac{1}{2}\right)^2 - \left(\frac{1}{4}\right)^2 D\right) N(b) \\
+                &= \left(\frac{1}{4} - \frac{1}{16} D\right) N(b) \\
+                &= \frac{4 - D}{16} N(b) \\
+                &< N(b) \text{ when } D \in \{-3, -7, -11\}
+        \end{align}
+        Thus, $\mathcal{O}$ is a Euclidean domain $\forall$ $D \in \{-3, -7, -11\}$.
+        
+        Furthermore, $\forall$ $D \in \{-3, -7, -11\}$, we have to prove that every element of $F = \mathbb{Q}\left(\sqrt{D}\right)$ differs from an element in $\mathcal{O}\left(\sqrt{D}\right)$ by an element whose norm is at most $\frac{(1 + |D|)^2}{16 |D|}$, i.e.\ $\forall$ $x \in \mathbb{Q}\left(\sqrt{D}\right)$, $\exists$ $y \in \mathcal{O}\left(\sqrt{D}\right)$ s.t.\ $N(x - y) \leq \frac{(1 + |D|)^2}{16 |D|} < 1$.
+        
+        The complex points in $\mathcal{O}\left(\sqrt{D}\right)$ are $\left\{a + b\left(\frac{1 + \sqrt{D}}{2}\right) \mid a, b \in \mathbb{Z}\right\}$.  As points, these are $\left(a + \frac{b}{2}, \frac{b \sqrt{-D}}{2}\right)$.  From the point generated from $(a, b)$, the nearest points are generated by changing $a$ or $b$ by 1.  When $a$ changes by 1, the point simply moves horizontally by 1 as well.  And when $b$ changes by 1, the point moves horizontally by $\frac{1}{2}$ and vertically by $\frac{\sqrt{-D}}{2}$.  Thus, $\mathcal{O}\left(\sqrt{D}\right)$ is the lattice of points generated by repeatedly moving like this from the origin.  Now we just need to show that for every point in the plane, one of the lattice points is within a (square of the) distance of $\frac{(1 + |D|)^2}{16 |D|} < 1$.  For this to not be true, one of the steps to an adjacent point would have to exceed twice this distance squared.  The $a$ steps move by $(1, 0)$, so for these steps, the max norm would be $\left(\frac{1}{2}\right)^2 = \frac{1}{4}$.  For the $b$ steps, they move by $\left(\frac{1}{2}, \frac{\sqrt{-D}}{2}\right)$, so for these steps, the max norm would be $\frac{1}{16}(1 - D)$.  This is indeed less then the minimum distance we are aiming for:
+        \begin{align}
+            \frac{1}{16} (1 - D) &\leq \frac{(1 + |D|)^2}{16 |D|} \\
+            (1 - D) &\leq \frac{(1 + |D|)^2}{|D|} \\
+            (1 + |D|) &\leq \frac{(1 + |D|)^2}{|D|} \\
+            1 &\leq \frac{1 + |D|}{|D|} \\
+            |D| &\leq 1 + |D| \\
+            0 &\leq 1
+        \end{align}
+        For the $a$ steps, we have
+        \begin{align}
+            \frac{1}{4} &\leq \frac{(1 + |D|)^2}{16 |D|} \\
+            1 &\leq \frac{(1 + |D|)^2}{4 |D|} \\
+            4 |D| &\leq (1 + |D|)^2
+        \end{align}
+        For $D = -3, -7, -11$, this is true as well.
+
     \section{13.5.1}
     Prove that the derivative $D_x$ of a polynomial satisfies $D_x(f(x) + g(x)) = D_x(f(x)) + D_x(g(x))$ and $D_x(f(x)g(x)) = D_x(f(x))g(x) + D_x(g(x))f(x)$ for any two polynomials $f(x)$ and $g(x)$.
         
         \subsection{Solution}
+        Let
+        \begin{align}
+            f(x) &= \sum\limits_i a_i x^i \\
+            g(x) &= \sum\limits_i b_i x^i
+        \end{align}
+        \textbf{addition rule}:
+        \begin{align}
+            (f + g)' &= \left(\sum\limits_i a_i x^i + \sum\limits_i b_i x^i\right)' \\
+                &= \left(\sum\limits_i (a_i + b_i) x^i\right)' \\
+                &= \sum\limits_{i \geq 1} i(a_i + b_i) x^{i - 1} \\
+                &= \sum\limits_{i \geq 1} ia_i x^{i - 1} + \sum\limits_{i \geq 1} ib_i x^{i - 1} \\
+                &= \left(\sum\limits_i a_i x^i\right)' + \left(\sum\limits_i b_i x^i\right)' \\
+                &= f' + g'
+        \end{align}
         
+        \textbf{multiplication rule}:
+        \begin{align}
+            (fg)' &= \left(\left(\sum\limits_i a_i x^i\right) \left(\sum\limits_i b_i x^i\right)\right)' \\
+                &= \left(\sum\limits_k \left(\sum\limits_{i + j = k} a_i b_j\right) x^k\right)' \\
+                &= \sum\limits_{k \geq 1} k \left(\sum\limits_{i + j = k} a_i b_j\right) x^{k - 1} \\
+                &= \sum\limits_k (k + 1) \left(\sum\limits_{i + j = k + 1} a_i b_j\right) x^k \\
+                &= \sum\limits_k \left(\sum\limits_{i + j = k} (i + 1) a_{i + 1} b_j + a_i (j + 1) b_{j + 1}\right) x^k \\
+                &= \sum\limits_k \left(\sum\limits_{i + j = k} (i + 1) a_{i + 1} b_j + \sum\limits_{i + j = k} a_i (j + 1) b_{j + 1}\right) x^k \\
+                &= \sum\limits_k \left(\sum\limits_{i + j = k} (i + 1) a_{i + 1} b_j\right) x^k + \sum\limits_k \left(\sum\limits_{i + j = k} a_i (j + 1) b_{j + 1}\right) x^k \\
+                &= \left(\sum\limits_i (i + 1) a_{i + 1} x^i\right) \left(\sum\limits_i b_i x^i\right) + \left(\sum\limits_i a_i x^i\right) \left(\sum\limits_i (i + 1) b_{i + 1} x^i\right) \\
+                &= \left(\sum\limits_{i \geq 1} i a_i x^{i - 1}\right) \left(\sum\limits_i b_i x^i\right) + \left(\sum\limits_i a_i x^i\right) \left(\sum\limits_{i \geq 1} i b_i x^{i - 1}\right) \\
+                &= \left(\sum\limits_i a_i x^i\right)' \left(\sum\limits_i b_i x^i\right) + \left(\sum\limits_i a_i x^i\right) \left(\sum\limits_i b_i x^i\right)' \\
+                &= f'g + fg'
+        \end{align}
     
 \end{document}
