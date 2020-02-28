@@ -18,6 +18,8 @@ Notes: 9.\{4, 10\} \\
 \author{Khyber Sen}
 \date{2/27/2019}
 
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+
 \setcounter{secnumdepth}{0}
 
 \begin{document}
@@ -28,10 +30,10 @@ Notes: 9.\{4, 10\} \\
     Let $R$ be a Euclidean Domain.
         
         \subsection{(a)}
-        Prove that if $(a, b) = 1$ and $a$ divides $bc$, then $a$ divides $c$.  More generally, show that $a$ divides $bc$ with nonzero $a, b$, then $\frac{a}{(a, b)}$ divides $c$.
+        Prove that if $(a, b) = 1$ and $a$ divides $bc$, then $a$ divides $c$.  More generally, show that if $a$ divides $bc$ with nonzero $a, b$, then $\frac{a}{(a, b)}$ divides $c$.
             
             \subsubsection{Solution}
-            
+            $(a, b)$ is a gcd of $a$ and $b$, so $(a, b) \mid a$ and $(a, b) \mid b$.  Since $a \mid bc$, $(a, b) \mid a$, and $(a, b) \mid b$, then if we divide by $(a, b)$, we get $\frac{a}{(a, b)} \mid \frac{bc}{(a, b)} = kc$, where $c = k (a, b)$.  Thus, $\frac{a}{(a, b)} \mid c$.  Then if $(a, b) = 1$, we get $\frac{a}{1} = a \mid c$.
         
         \subsection{(b)}
         Consider the Diophantine Equation $ax + by = N$ where $a, b$ and $N$ are integers and $a, b$ are nonzero.  Suppose $x_0, y_0$ is a solution: $ax_0 + by_0 = N$.  Prove that the full set of solutions to this equation is given by
@@ -42,7 +44,16 @@ Notes: 9.\{4, 10\} \\
         as $m$ ranges over the integers.  [If $x, y$ is a solution to $ax + by = N$, show that $a(x - x_0) = b(y_0 - y)$ and use (a).]
         
             \subsubsection{Solution}
-            
+            If $x, y$ is a solution, then
+            \begin{align}
+                ax + by &= N \\
+                ax_0 + by_0 &= N \\
+                (ax + by) - (ax_0 + by_0) &= N - N \\
+                a(x - x_0) + b(y - y_0) &= 0 \\
+                a(x - x_0) &= -b(y - y_0) \\
+                a(x - x_0) &= b(y_0 - y)
+            \end{align}
+            Thus, $a \mid b(y_0 - y)$, so by (a), $\frac{a}{(a, b) } \mid (y_0 - y)$, and $b \mid a(x - x_0)$, so by (a), $\frac{b}{(a, b)} \mid (x - x_0)$.  If we let $m \frac{a}{(a, b)} = y_0 - y$ and $m \frac{b}{(a, b)}$, then $\frac{a}{(a, b) } \mid (y_0 - y)$ and $\frac{b}{(a, b)} \mid (x - x_0)$ are true $\forall$ $m \in \mathbb{Z}$.  Thus, we have $x = x_0 + m \frac{b}{(a, b)}$ and $y = y_0 - m \frac{a}{(a, b)}$ $\forall$ $m \in \mathbb{Z}$.  This this is the form of all solutions $x, y$ that satisfy $ax + by = N$.
     
     \section{8.1.5}
     Determine all integer solutions of the following equations:
@@ -51,19 +62,38 @@ Notes: 9.\{4, 10\} \\
         $2x + 4y = 5$
             
             \subsubsection{Solution}
-            
+            $2x + 4y = 2(x + 2y)$, so $2x + 4y$ is even, but 5 is odd.  Therefore, there are no integer solutions.
         
-        \subsection{(a)}
+        \subsection{(b)}
         $17x + 29y = 31$
             
             \subsubsection{Solution}
+            (b) and (c) are very similar.  They can be reduced to the form $17x + 29y = N$, so I will solve this in general first.  Using the Euclidean algorithm, we get
+            \begin{align}
+                1 &= (12) 17 + (-7) 29 \\
+                N &= N ((12) 17 + (-7) 29) \\
+                    &= (12N) 17 + (-7N) 29
+            \end{align}
+            Thus, $(x, y) = (12N, -7N)$ is a solution, and from 8.1.4, we can calculate all the solutions from one, so the solutions are
+            \begin{align}
+                (x, y) &\in \left\{\left(x_0 + m \frac{b}{(a, b)}, y_0 - m \frac{a}{(a, b)}\right)\mid m \in \mathbb{Z}\right\} \\
+                    &= \left\{\left(12N + m \frac{29}{1}, -7N - m \frac{17}{1}\right)\mid m \in \mathbb{Z}\right\} \\
+                    &= \{(12N + 29m, -7N - 17m)\mid m \in \mathbb{Z}\}
+            \end{align}
             
+            For (b), $N = 31$, so we have
+            \begin{align}
+                (x, y) &\in \{(12(31) + 29m, -7(31) - 17m)\mid m \in \mathbb{Z}\}
+            \end{align}
         
-        \subsection{(a)}
+        \subsection{(c)}
         $85x + 145y = 505$
         
             \subsubsection{Solution}
-            
+            Dividing by 5, this can be simplified to $17x + 29y = 101$, which is the same form as (b).  Using the general solution to $17x + 29y = N$ I calculated in (b), now with $N = 101$, we have
+            \begin{align}
+                (x, y) &\in \{(12(101) + 29m, -7(101) - 17m)\mid m \in \mathbb{Z}\}
+            \end{align}
     
     \section{8.1.6}
     (\textit{The Postage Stamp Problem})
@@ -71,19 +101,62 @@ Notes: 9.\{4, 10\} \\
     Let $a$ and $b$ be two relatively prime positive integers.  Prove that every sufficiently large positive integer $N$ can be written as a linear combination $ax + by$ of $a$ and $b$ where $x$ and $y$ are both \textit{nonnegative}, i.e., there is an integer $N_0$ such that for all $N \geq N_0$ the equation $ax + by = N$ can be solved with both $x$ and $y$ nonnegative integers.  Prove in fact that the integer $ab - a - b$ cannot be written as a positive linear combination of $a$ and $b$ but that every integer greater than $ab - a - b$ is a positive linear combination of $a$ and $b$ (so every ``postage'' greater than $ab - a - b$ can be obtained using only stamps in denominations $a$ and $b$).
         
         \subsection{Solution}
+        Given $a, b \in \mathbb{Z}^+$ s.t.\ $(a, b) = 1$, we need to show that $\exists$ $N_0 = ab - a - b$ s.t.\ $\not\exists$ $x, y \in \mathbb{N}$ s.t.\ $ax + by = N_0$, but $\forall$ $N > N_0$, $\exists$ $x, y \in \mathbb{Z}^+$ s.t.\ $ax + by = N$.  This suffices to prove both versions of this in the problem.  Note that for $N_0$, $x, y \in \mathbb{N}$ because there non-existence means it's also true for $\mathbb{Z}^+$.  The opposite is true for $N$, where $x, y \in \mathbb{Z}^+$, because there existence means it's also true for $\mathbb{N}$.
         
+        To show $\not\exists$ $x, y$ for $N_0$, assume they do.  Then
+        \begin{align}
+            ax + by &= N_0 \\
+            ax + by &= ab - a - b \\
+            ab &= ax + a + by + b \\
+            ab &= a(x + 1) + b(y + 1) \\
+            b &= (x + 1) + \frac{b}{a}(y + 1)
+        \end{align}
+        However, $\frac{b}{a} \notin \mathbb{Z}$ because $(a, b) = 1$, so therefore, $b \notin \mathbb{Z}$, which is a contradiction.  Thus, such $x, y$ don't exists for $N_0$.
+        
+        For $N$, we need to show $\exists$ such $x, y$ that $ax + by = N$, where $N > ab - a - b$.  Since $(a, b) = 1$, $b$ is a generator for $\mathbb{Z}/a\mathbb{Z}$, so $\exists$ $y \in 0..a - 1$ s.t.\ $yb \equiv N \Mod{a}$.  Thus in $N = ax + by$, $y \in \mathbb{N}$*, so we need to show that $x \in \mathbb{N}$ as well.  If $x < 0$, then $N = ax + by \leq -a + yb \leq -a + (a + 1)b = ab - a - b$, but $N > ab - a - b$, so this is a contradiction, so $x \geq 0$.
+        
+        *Note that I changed to $x, y \in \mathbb{N}$ instead of $\mathbb{Z}^+$ here, because I realized that $\mathbb{Z}^+$ is actually wrong.  For example, consider $a, b = 3, 5$ and $N = 10$.  $10 > 3 \cdot 5 - 3 - 5 = 7$, but none of $10 - 3$, $10 - 6$, or $10 - 9$ are divisible by 5.  $10 = 2 \cdot 5 + 0 \cdot 3$ works, but here $y$ is not positive.
+    
+    \pagebreak
     
     \section{8.1.7}
-    Find a generator for the ideal $(85, 1 + 13i)$ in $\mathbb{Z}[i]$, i.e., a greatest common divisor for 85 and $1 + 13i$, by the Euclidean Algorithm.  Do the same for the ideal $(47 - 13i, 53 + 56i)$.
+    Find a generator for the ideal $(85, 1 + 13i)$ in $\mathbb{Z}[i]$, i.e., a greatest common divisor for 85 and $1 + 13i$, by the Euclidean Algorithm. 
+    Do the same for the ideal $(47 - 13i, 53 + 56i)$.
         
         \subsection{Solution}
+        The division algorithm in $\mathbb{Z}[i]$ is not unique, so the gcd and Bgcd aren't unique either, but we only need to find a Bgcd, i.e.\ a generator for the ideal.  Thus, we can choose the division algorithm that uses normal complex division and then rounds the real and imaginary parts to the nearest integer, which satisfies the constraints of the Euclidean structure since we are choosing the nearest Gaussian integer.  Using this division algorithm and running the Euclidean algorithm* to calculate the Bgcd, we get
+        \begin{align}
+            6 - 7i &= (85)(1) + (1 + 13i)(-1 + 6i) \\
+            -5 + 4i &= (47 - 13i)(-3 - 2i) + (53 + 56i)(2 - 1i)
+        \end{align}
+        Thus, $(85, 1 + 13i) = (6 - 7i)$ and $(47 - 13i, 53 + 56i) = (-5 + 4i)$ are generated ideals.
         
+        Here is the extended Euclidean algorithm used:
+        \begin{verbatim}
+def extended_gcd(a, b):
+    cls = type(a)
+    s_, s = 1, 0
+    t_, t = 0, 1
+    r_, r = a, b
+    while r != 0:
+        q = cls(r_) // cls(r)
+        s_, s = s, s_ - q * s
+        t_, t = t, t_ - q * t
+        r_, r = r, r_ - q * r
+    x, y = s_, t_
+    gcd = r_
+    return gcd, (x, y)
+        \end{verbatim}
     
     \section{8.1.10}
     Prove that the quotient ring $\mathbb{Z}[i]/I$ is finite for any nonzero ideal $I$ of $\mathbb{Z}[i]$.  [Use the fact that $I = (\alpha)$ for some nonzero $\alpha$ and then use the Division Algorithm in this Euclidean Domain to see that every coset of $I$ is represented by an element of norm less than $N(\alpha)$.]
         
         \subsection{Solution}
+        $\forall$ nonzero ideals $I \leq \mathbb{Z}[i]$, $\exists$ a nonzero $\alpha \in \mathbb{Z}[i]$ s.t.\ $I = (\alpha)$ since $\mathbb{Z}[i]$ is a PID.  To show $\mathbb{Z}[i]/I$ is finite, we can show that every element of $\mathbb{Z}[i]$, i.e.\ every coset of $I$ is equal to the coset of $I$ with an element of norm $< N(\alpha)$.  Since there are only a finite number of elements of bounded norm, this means that $\mathbb{Z}[i]/I$ is finite.
         
+        Let $x + I \in \mathbb{Z}[i]/I$ be a coset of $I$.  $x \in \mathbb{Z}[i]$, and since $\mathbb{Z}[i]$ is an ED, we know we can divide $x$ by $\alpha$, i.e.\ $\exists$ $q, r \in \mathbb{Z}[i]$ s.t.\ $x = \alpha q + r$ and $N(r) < N(\alpha)$, where $N$ is the Euclidean structure norm.  Since $x = \alpha q + r$, $x + I = r + I$, and $N(r) < N(\alpha)$, so every coset $x + I$ has a bounded norm, and thus $\mathbb{Z}[i]/I$ is finite.
+    
+    \pagebreak
     
     \section{8.2.4}
     Let $R$ be an integral domain.  Prove that if the following two conditions hold then $R$ is a Principle Ideal Domain:
@@ -95,7 +168,7 @@ Notes: 9.\{4, 10\} \\
         if $a_1, a_2, a_3, ...$ are nonzero elements of $R$ such that $a_{i + 1} \mid a_i$ for all $i$, then there is a positive integer $N$ such that $a_n$ is unit times $a_N$ for all $n \geq N$.
         
         \subsection{Solution}
-        
+        To show $R$ is a PID, let $I \leq R$ be an ideal.  Assume that $I$ is not a principal ideal.  Now we will construct strictly increasing ideals $I_n = (b_1, ..., b_n) = (a_n)$ s.t.\ $I_n < I_{n + 1}$.  Since $I$ is not principal, it is nonzero, so we can pick $a_1 = b_1 \in I$ and let $I_1 = (b_1) = (a_1)$.  All of the $I_n$ are principal, so $I \neq I_n$ for any $n$.  Thus, let $b_{n + 1} \in I - I_n$, which is nonempty since $I \neq I_n$.  $I_{n + 1} = (b_1, ..., b_n, b_{n + 1}) = (a_n, b_{n + 1}) = (a_{n + 1})$ for some $a_{n + 1}$ by (i).  Since $a_n \in I_{n + 1} = (a_{n + 1})$, we have that $a_{n + 1} \mid a_n$.  Thus, by (ii), at a certain point when $n \geq N$, $a_{n + 1} = u a_N$, where $u$ is a unit.  Thus, $I_{N + 1} = (a_{N + 1}) = (a_N) = I_N$.  Thus $I_{N + 1} = I_N$, which is a contradiction, because we have $I_n < I_{n + 1}$ $\forall$ $n$.  Thus, $I$ must be a principal ideal, and since all such ideals $I$ are principal ideals, $R$ must be a PID.
     
     \section{8.2.7.(a, b)}
     An integral domain $R$ in which every ideal generated by two elements is principal (i.e., for every $a, b \in R$, $(a, b) = (d)$ for some $d \in R$) is called a \textit{Bezout Domain}.
@@ -104,13 +177,24 @@ Notes: 9.\{4, 10\} \\
         Prove that the integral domain $R$ is a Bezout Domain if and only if every pair of elements $a, b$ of $R$ has a g.c.d. $d$ in $R$ that can be written as an $R$-linear combination of $a$ and $b$, i.e., $d = ax + by$ for some $x, y \in R$.
             
             \subsubsection{Solution}
+            If $R$ is a Bezout Domain, then $\forall$ $a, b \in R$, $\exists$ $d \in R$ s.t.\ $(a, b) = (d)$, i.e.\ every pair of elements has a Bgcd.  Thus, we have that $d \mid a$, $d \mid b$, and $ax + by = d$ for some $x, y \in R$.  Now we need to show that $d$ is also a gcd.  We already know $d \mid a$ and $d \mid b$, so we just need to show that $d' \mid a, d' \mid b \implies d' \mid d$, which is true because $d = ax + by$.
             
+            If every pair of elements $a, b \in R$ has a gcd $d \in R$ s.t.\ $d = ax + by$, $d \in (a, b)$, so $(d) \leq (a, b)$.  To show $(a, b) \leq (d)$, $\forall$ $d' \in (a, b)$, $\exists$ $x', y'$ s.t.\ $d' = ax' + by'$.  We know that $d \mid a$ and $d \mid b$, so $\exists$ $a', b'$ s.t.\ $a = a'd, b = b'd$.  Thus, $d' = a'dx' + b'dy' = d(a'x' + b'y')$, so $d' \in (d)$.  Since $(d) \leq (a, b)$ and $(a, b) \leq (d)$, $(a, b) = (d)$, so $R$ is a Bezout Domain.
+        
+        \pagebreak
         
         \subsection{(b)}
         Prove that every finitely generated ideal of a Bezout Domain is principal.
         
             \subsubsection{Solution}
-            
+            In a Bezout Domain, the sum of two principal ideals is a principal ideal.  Thus, to show a finitely generated ideal $(a_1, ..., a_n)$ is principal, i.e.\ $\exists$ $d$ s.t.\ $(a_1, ..., a_n) = (d)$, we can use induction.  For the base case, $(a_1) = (a_1)$ is obviously principal.  Then, assuming the inductive hypothesis that $(a_1, ..., a_n) = (d)$ is ideal, we need to prove that $(a_1, ..., a_n, a_{n + 1})$ is also ideal:
+            \begin{align}
+                (a_1, ..., a_n, a_{n + 1}) &= (a_1, ..., a_n) + (a_{n + 1}) \\
+                    &= (d) + (a_{n + 1}) \\
+                    &= (d, a_{n + 1}) \\
+                    &= (e)
+            \end{align}
+            The last step is true for some $e \in R$ since the sum of two principal ideals, or equivalently, the ideal generated by two elements, is a principal ideal in a Bezout Domain.
     
     \section{8.3.11}
     (\textit{Characterization of P.I.D.s})
@@ -118,13 +202,15 @@ Notes: 9.\{4, 10\} \\
     Prove that $R$ is a P.I.D. if \sout{and only if} $R$ is a U.F.D. that is also a Bezout Domain.  [One direction is given by Theorem 14.  For the converse, let $a$ be a nonzero element of the ideal $I$ with a minimal number of irreducible factors.  Prove that $I = (a)$ by showing that if there is an element $b \in I$ that is not in $(a)$ then $(a, b) = (d)$ leads to a contradiction.]
         
         \subsection{Solution}
-        
+        If $R$ is a UFD and a Bezout Domain, let $I \leq R$ be an ideal, and let $a \in I$ be a nonzero element of $I$ with a minimal number of irreducible factors.  Assume $I$ is not a principal ideal, so $\exists$ $b \in I$ s.t.\ $b \notin (a)$.  Since $R$ is a Bezout Domain, we know $\exists$ $d \in R$ s.t.\ $(a, b) = (d)$.  $d \mid a$, so $a = kd$ for some $k$.  However, $a$ already has a minimal number of irreducible factors, so $d$ can't have fewer irreducible factors, which means that $k$ must be a unit.  Thus, $d = k^{-1} a$, so $d \in (a)$, so $(a, b) = (a)$.  However, we assume $I$ is not a principal ideal, so this a contradiction.  Thus, $I$ must be a principal ideal, and thus $R$ is a PID.
     
     \section{9.4}
-    Check that $~$ is an equivalence relation on $R$.  Also check that the set of equivalence classes in $R$ is in bijection with the set of principal ideals in $R$.  (Warning: a principal ideal $(a)$, however, is not equal to the equivalence class of $a$.)
+    Check that $\sim$ is an equivalence relation on $R$.  Also check that the set of equivalence classes in $R$ is in bijection with the set of principal ideals in $R$.  (Warning: a principal ideal $(a)$, however, is not equal to the equivalence class of $a$.)
         
         \subsection{Solution}
+        An equivalence relation must be reflexive, symmetric, and transitive.  This equivalence relation $\sim$ is defined by $a \sim b := (a) = (b)$.  Since equality between ideals, i.e.\ just sets, is an equivalence relation, $\sim$ must also be reflexive, symmetric, and transitive and thus an equivalence relation by inheritance, too.  That is, $\sim$ is reflexive because $a \sim a$ because $(a) = (a)$ because $=$ is reflexive because $=$ is an equivalence relation, $\sim$ is symmetric because $a \sim b \iff b \sim a$ because $(a) = (b) \iff (b) = (a)$ because $=$ is symmetric because $=$ is an equivalence relation, and $\sim$ is transitive because $a \sim b, b \sim c \implies a \sim c$ because $(a) = (b), (b) = (c) \implies (a) = (c)$ because $=$ is transitive because $=$ is an equivalence relation.
         
+        Let $[a]$ denote the equivalence class of $a$.  $[a] = \{b \in R \mid a \sim b\} = \{b \in R \mid (a) = (b)\}$.  To show that the set of equivalence classes of $R$ is in bijection with the set of principal ideals of $R$, we need to show that the function $[a] \mapsto (a)$ is a bijection.  This function has an inverse $(a) \mapsto [a]$, so it must be a bijection.  
     
     \section{9.10}
     Check all the statements in the above example.
@@ -133,6 +219,8 @@ Notes: 9.\{4, 10\} \\
         Consider $a = 2, b = X \in R = \mathbb{Z}[X]$.  Then 1 is a gcd of $a, b$ (and hence $\pm 1$ are all the gcd's because $R^\times = \mathbb{Z}^\times = \{\pm 1\}$).  However, 1 is not a Bgcd, because $(2, X) \neq 1$.
         
         \subsection{Solution}
+        $a$ is the constant polynomial $a(X) = 2$, and $b$ is the polynomial $b(X) = X$.  $1 \mid 2$, $1 \mid X$, and $\forall$ $d \in R - \{0\}$ s.t.\ $d \mid 2$ and $d \mid X$, we know that $d \mid 1$.  This is because $d$ must be either $\pm 1$ or $\pm 2$ to divide $2$, but $\pm 2$ don't divide $X$, so $d$ must be $\pm 1$, both of which divide $1$.  The same logic can be used to show $-1$ is also a gcd of $a, b$ and that there are no other gcd's, since the only other polynomials that divide $2$ don't divide $X$.  Thus, $\pm$ are all of the gcd's of $a, b$.
         
+        1 is not a Bgcd of $a, b$, however, since $(a, b) = (2, X) \neq 1$.  This is because $2x + Xy = 1$ would imply $y = 0$ since $1$ has no $X$ term, meaning we'd have $2x = 1$, but $2$ is not a unit in $R$, so this is impossible.
     
 \end{document}
