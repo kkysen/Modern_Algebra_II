@@ -1,0 +1,84 @@
+\documentclass[fleqn]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{ulem}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathabx}
+
+\title{
+Math GU4042, Spring 2020 \\
+Modern Algebra II, Prof.\ Yihang Zhu \\
+HW 6 \\
+D\&F: 8.3.6.(a, b), 9.2.\{4, 8\} \\
+Notes: 12.2 \\
+}
+\author{Khyber Sen}
+\date{3/5/2019}
+
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+
+\setcounter{secnumdepth}{0}
+
+\begin{document}
+    
+    \maketitle
+    
+    \section{8.3.6.(a, b)}
+        
+        \subsection{(a)}
+        Prove that the quotient ring $\mathbb{Z}[i]/(1 + i)$ is a field of order 2.
+            
+            \subsubsection{Solution}
+            $\forall$ $a + bi \in \mathbb{Z}[i]$, we can show that $a + bi \in (1 + i)$ or $a + bi \in 1 + (1 + i)$.  If $2 \mid a + b$, then $\left(\frac{a + b}{2} + \frac{b - a}{2}i\right)(1 + i) = a + bi$, so $a + bi \in (1 + i)$.  If $2 \not\mid a + b$, then $a - 1 + bi \in (1 + i)$, so $a + bi \in 1 + (1 + i)$.  Thus, $\mathbb{Z}[i]/(1 + i)$ has only two elements, $(1 + i)$ and $1 + (1 + i)$, so it's a finite ring of order 2.  Since it only has two elements and $(1 + (1 + i))(1 + (1 + i)) = 1 + (1 + i) \neq (1 + i) = 0$, it doesn't have any non-zero zero-divisors, so it's a domain.  Finite domains are fields, so therefore, $\mathbb{Z}[i]/(1 + i)$ is a field of order 2.
+        
+        \subsection{(b)}
+        Let $q \in \mathbb{Z}$ be a prime with $q \equiv 3 \Mod{4}$.  Prove that the quotient ring $\mathbb{Z}[i]/(q)$ is a field with $q^2$ elements.
+        
+            \subsubsection{Solution}
+            $\forall$ $a, b \in \mathbb{Z}[i]$, $a + (q) = b + (q)$ iff $q \mid a - b$.  Thus, $Re(a) \equiv Re(b) \Mod{q}$ and $Im(a) \equiv Im(b) \Mod{q}$, so for $a$, there are $q^2$ other $b$s that aren't equivalent $\Mod{q}$, i.e., $\mathbb{Z}[i]/(q)$ has $q^2$ elements.  Since $q$ is prime in $\mathbb{Z}$ and $q \equiv 3 \Mod{4}$, $q$ is also prime in $\mathbb{Z}[i]$, so $(q)$ is prime.  An ideal $I \leq R$ is prime iff $R/I$ is a domain, so $\mathbb{Z}[i]/(q)$ must be a domain.  Since a finite domain is a field, this means $\mathbb{Z}[i]/(q)$ is a field and it has order $q^2$.
+            
+    
+    \section{9.2.4}
+    Let $F$ be a finite field.  Prove that $F[x]$ contains infinitely many primes.  (Note that over an infinite field the polynomials of degree 1 are an infinite set of primes in the ring of polynomials).
+        
+        \subsection{Solution}
+        Assume $F[x]$ has a finite number of primes: $p_1, ..., p_n$.  Since primes are non-unit and non-zero, no polynomials of degree 0 or $-\infty$ are prime.  Thus, $\deg(p_i) \geq 1$ $\forall$ $i$.  Thus, $\deg\left(\prod\limits_{i = 1}^{n} p_i\right) = \sum\limits_{i = 1}^{n} \deg(p_i) \geq n$.  Thus, $\deg\left(1 + \prod\limits_{i = 1}^{n} p_i\right) \geq n$, so $1 + \prod\limits_{i = 1}^{n} p_i$ is non-zero and non-unit.  Since there are finitely many primes in $F[x]$, $1 + \prod\limits_{i = 1}^{n} p_i$ is not a prime, so we can factor it.  In particular, we can factor one of the primes out of it: $\exists$ $k, q$ s.t.\ $1 + \prod\limits_{i = 1}^{n} p_i = p_k q$.  Thus, we have $1 = p_k q - \prod\limits_{i = 1}^{n} p_i = p_k \left(q - \prod\limits_{i \neq k} p_i\right)$, which means that $p_k$ is a unit.  $p_k$ is a prime, though, and primes can't be units, so this is a contradiction.  Thus, $F[x]$ must have infinitely many primes.
+    
+    \section{9.2.8}
+    Determine the greatest common divisor of $a(x) = x^3 - 2$ and $b(x) = x + 1$ in $\mathbb{Q}[x]$ and write it as a linear combination (in $\mathbb{Q}[x]$) of $a(x)$ and $b(x)$.
+        
+        \subsection{Solution}
+        \begin{align}
+            a(x) &= x^3 - 2 \\
+            b(x) &= x + 1 \\
+            (x^3 - 2) &= (x + 1)(x^2 - x + 1) + (-3) \\
+            (x + 1) &= (-3)\left(\frac{1}{3} x\right) + (1) \\
+            (-3) &= (1)(-3) + (0) \\
+            \therefore{} \gcd(a(x), b(x)) &= 1
+        \end{align}
+        \begin{align}
+            (x^3 - 2) &= (x + 1)(x^2 - x + 1) + (-3) \\
+            3 &= -(x^3 - 2) + (x^2 - x + 1)(x + 1) \\
+            3 &= -a(x) + (x^2 - x + 1) b(x) \\
+            1 &= -\frac{1}{3} a(x) + \frac{1}{3} (x^2 - x + 1) b(x)
+        \end{align}
+    
+    \section{12.2}
+    Prove Lemma 12.2:
+        
+        \subsection{Lemma 12.2}
+        The four elements $1 + i, 1 - i, -1 + i, -1 - i$ are $\sim$ to each other, and they are all irreducible in $\mathbb{Z}[i]$.  Moreover, these four elements are the only elements which are $\sim$ to $1 + i$.
+        
+        \subsection{Solution}
+        $a \sim b$ if $(a) = (b)$, i.e.\ if $a$ equals $b$ times a unit.  Since the units in $\mathbb{Z}[i]$ are just $\{1, -1, i, -i\}$, we can just check $1 + i$ times all the units and show that they produce exactly $\{1 + i, 1 - i, -1 + i, -1 - i\}$:
+        \begin{align}
+            (1 + i) (1) &= 1 + i \\
+            (1 + i) (-1) &= -1 - i \\
+            (1 + i) (i) &= i + i^2 = i - 1 = -1 + i \\
+            (1 + i) (-i) &= -i - i^2 = -i + 1 = 1 - i
+        \end{align}
+
+\end{document}
