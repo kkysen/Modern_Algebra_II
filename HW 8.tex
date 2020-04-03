@@ -32,8 +32,7 @@ Notes: 15.\{4, 8, 17, 24\} \\
         Let $R$ be a PID and $p \in R$ be an irreducible element.  Then the quotient ring $R/(p)$ is a field.
         
         \subsection{Solution}
-        
-    
+        Let $R = \mathbb{Z}[X]$, a UFD that's not a PID, and let $p = X$, an irreducible polynomial in $\mathbb{Z}[X]$.  Then $R/(p) = \mathbb{Z}[X]/(X) = \mathbb{Z}$ (all non-constant terms can be cancelled out since $\overline{X} = 0$) is a domain but not a field.
     
     \section{15.8}
         
@@ -41,24 +40,48 @@ Notes: 15.\{4, 8, 17, 24\} \\
         Take $F = \mathbb{Q}$, $p = X^2 + 1$.  Then $p$ is irreducible in $F[x]$.  Let $L = \mathbb{Q}[X]/(X^2 + 1)$.  Prove that every element in $L$ can be written as $a + b\overline{X}$, with $a, b \in \mathbb{Q}$, and $a, b$ are unique.
             
             \subsubsection{Solution}
-            
+            In $L = \mathbb{Q}[X]/(X^2 + 1)$, $X^2 = -1$, so for every $\overline{f} \in L$ where $f \in F[X]$, we can reduce every term of degree $> 1$ by replacing $X^2$ with $-1$.  Thus, $\overline{f}$ will be reduced to a degree $\leq 1$ polynomial $a + b\overline{X}$.  Specifically, if $f = \sum c_i X^i$, then $a = \sum c_{4i} - \sum c_{4i + 2}$ and $b = \sum c_{4i + 1} - \sum c_{4i + 3}$.  Thus, since $c_i \in \mathbb{Q}$, we know $a, b \in \mathbb{Q}$, and $a$ and $b$ are unique, given by the above formula.
         
         \subsection{2.}
         Thus $L = \{a + b\overline{X} \mid a, b \in \mathbb{Q}\}$, and $\overline{X}^2 = -1$.  Then the element $\overline{X} \in L$ is a root of the polynomial $p = X^2 + 1$, as $\overline{X}^2 + 1 = 0$.  Prove that $L$ is ring-isomorphic to $\mathbb{Q}(i) = \Frac(\mathbb{Z}[i])$, where $a + bi \in \mathbb{Q}(i)$ corresponds to $a + b\overline{X} \in L$.
         
             \subsubsection{Solution}
-            
+            To prove that $L \cong \mathbb{Q}(i)$, we can just show they are the same rings, up to renaming $\overline{X}$ to $i$.  $i^2 = -1$ and $\overline{X}^2 = -1$, so they are functionally equivalent, meaning the two sets are the same up to renaming.  Furthermore, in both $L$ and $\mathbb{Q}(i)$, addition, additive inverses, and multiplication are defined the same way, so the rings themselves are the same up to renaming $\overline{X}$ to $i$, i.e., $L$ is isomorphic to $\mathbb{Q}(i)$.
     
     \section{15.17}
     $F[a_1, ..., a_n]$ is the smallest subring of $K$ containing $F$ and $a_1, ..., a_n$.  Similarly, $F(a_1, ..., a_n)$ is the smallest subfield of $K$ containing $F$ and $a_1, ..., a_n$.  Moreover, $F(a_1, ..., a_n)$ is the fraction field of $F[a_1, ..., a_n]$.
     
         \subsection{Solution}
+        $F[\vec{a}] = \left\{f(\vec{a}) \mid f \in F[\vec{X}]\right\}$ and $F(\vec{a}) = \left\{\frac{f(\vec{a})}{g(\vec{a})} \mid f, g \in F[\vec{X}], g(\vec{a}) \neq 0\right\}$, where $\vec{a} = a_1, ..., a_n$.  We need to show that $F[\vec{a}] = \min(\{$ring $G \mid F \cup \vec{a} \subseteq G \subseteq K\})$, $F(\vec{a}) = \min(\{$field $G \mid F \cup \vec{a} \subseteq G \subseteq K\})$, and $F(\vec{a}) = \Frac(F[\vec{a}])$.
         
+        For the first part, we need to show that $F[\vec{a}]$ is a subring of $K$, and that $\forall$ subrings $G$ of $K$, if $F \cup \vec{a} \subseteq G$, then $F[\vec{a}] \subseteq G$.  To prove the latter, $\forall$ subrings $G$ of $K$ and $\forall$ $f \in F[\vec{X}]$, $f(\vec{a}) \in G$, because $f(\vec{a})$ is the sum of terms, each of which is an element of $F$ times a power of an element of $\vec{a}$.  A ring is closed under all of these operations, so since $G$ contains $F$ and $\vec{a}$, it must contain $f(\vec{a})$.  Since it contains all such $f(\vec{a})$s $\forall$ $f \in F[\vec{X}]$, it must be a superset of $F[\vec{a}]$.
+        
+        For the second part, we need to show that $F(\vec{a})$ is a subfield of $K$, and that $\forall$ subfields $G$ of $K$, if $F \cup \vec{a} \subseteq G$, then $F(\vec{a}) \subseteq G$.  To prove the latter, $\forall$ subfields $G$ of $K$ and $\forall$ $f, g \in F[\vec{X}]$ s.t.\ $g(\vec{a}) \neq 0$, $\frac{f(\vec{a})}{g(\vec{a})} \in G$.  By the above argument for $F[\vec{a}]$, we know both $f(\vec{a})$ and $g(\vec{a}) \in G$.  Since $G$ is a field now, we also know that $\frac{f(\vec{a})}{g(\vec{a})} = f(\vec{a})g(\vec{a})^{-1} \in G$, because inverses always exist for non-zero $g(\vec{a})$.
+        
+        Showing $F(\vec{a}) = \Frac(F[\vec{a}])$ is simple: by definition,
+        \begin{align}
+            \Frac(F[\vec{a}]) &= \left\{\frac{x}{y} \mid x, y \in F[\vec{a}], y \neq 0\right\} \\
+                &= \left\{\frac{x}{y} \mid x, y \in \left\{f(\vec{a}) \mid f \in F[\vec{X}]\right\}, y \neq 0\right\} \\
+                &= \left\{\frac{f(\vec{a})}{g(\vec{a})} \mid f, g \in F[\vec{X}], g(\vec{a}) \neq 0\right\} \\
+                &= F(\vec{a})
+        \end{align}
+        
+        Now we just need to show that $F[\vec{a}]$ is itself a subring of $K$, and that $F(\vec{a})$ is itself a subfield of $K$.  Proving the latter is simple, since $F(\vec{a})$ is the fraction field of $F[\vec{a}]$.  $F(\vec{a})$ is obviously a subset of $K$, and as a fraction field, it is a field, so thus it must be a subfield of $K$.
+        
+        To prove that $F[\vec{a}]$ is a subring of $K$.  $F[\vec{a}]$ is obviously a subset of $K$, so we just need to show it's closed under subtraction and multiplication and contains 1.  For, $f(\vec{X}) = 1$, $f(\vec{a}) = 1$, so $1 \in F[\vec{a}]$.  $f(\vec{a}) - g(\vec{a}) = (f - g)(\vec{a})$, so $F[\vec{a}]$ is closed under subtraction.  And $f(\vec{a})g(\vec{a}) = (fg)(\vec{a})$, so $F[\vec{a}]$ is closed under multiplication.  Thus, $F[\vec{a}]$ is a subring of $K$.
+    
+    \pagebreak
     
     \section{15.24}
     Let $F$ be a field and $f \in F[X]$ a non-constant monic.  Let $K/F$ be a splitting field of $f$.  Let $F'$ be a field, contained in $K$, and containing $F$.  Show that $K$ is also a splitting field of $f$ when we view $F'$ as the base field and view $f$ as in $F'[X]$.
     
         \subsection{Solution}
+        We NTS that $\begin{rcases}
+            F \subseteq F' \subseteq K \text{ are fields} \\
+            K/F \text{ is a splitting field of monic } f \in F[X]
+        \end{rcases} \implies K/F'$ is a splitting field of $f \in F'[X]$.  Since $K/F$ is a splitting field of $f \in F[X]$, we know that $f \in F[X]$ splits over $K$, and that $K = F(a_1, ..., a_d)$, where $f = \prod (X - a_i)$ and $a_i \in K$.  To show that $K/F'$ is also a splitting field of $f \in F'[X]$, we need to show that $f \in F'[X]$ splits over $K$, and that $K = F'(a_1, ..., a_d)$.
+        
+        The first part is simple.  Since $f \in F[X]$ splits over $K$, $f \in K[X]$ is split, which means $f \in F'[X]$ is also spit over $K$, since $K$ is a superfield of $F$ and $F'$.  For the second part, by Proposition 15.17, we know that $F(a_1, ..., a_d)$ is the smallest subfield of $K$ containing $F$ and $a_1, ..., a_d$, and that $F'(a_1, ..., a_d)$ is the smallest subfield of $K$ containing $F'$.  Now, the smallest subfield of $K$ containing $F'$ must contain $F$, since $F \subseteq F'$, so the smallest subfield of $K$ containing $F'$ must be the smallest subfield of $K$ containing $F$.  Thus, $F(a_1, ..., a_d) = F'(a_1, ..., a_d)$, so therefore, $K/F'$ is a splitting field of $f \in F'[X]$.
         
     
 \end{document}
