@@ -1,0 +1,92 @@
+\documentclass[fleqn]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{ulem}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathabx}
+
+\title{
+Math GU4042, Spring 2020 \\
+Modern Algebra II, Prof.\ Yihang Zhu \\
+HW 10 \\
+Notes: 18.18, 19.\{6, 14\} \\
+Morandi: I.\{1.21, 2.1-2\} \\
+}
+
+\author{Khyber Sen}
+\date{4/16/2020}
+
+\DeclareMathOperator{\Gal}{Gal}
+
+\setcounter{secnumdepth}{0}
+
+\begin{document}
+    
+    \maketitle
+    
+    \section{18.18}
+        
+        \subsection{1.}
+        We give an example where we have strict inequality in (18.13.1).  Let $a = \sqrt[4]{2}, b = \sqrt[4]{18}, c = \sqrt{3} \in \mathbb{C}$.  (Note the similar example on [Morandi] p. 10 is wrong.)  We have $\deg(a : \mathbb{Q}) = \deg(b : \mathbb{Q}) = 4$.  But we are going to show $[\mathbb{Q}(a, b) : \mathbb{Q}] = 8 < 4 \cdot 4$.  Firstly, we claim $\mathbb{Q}(a, b) = \mathbb{Q}(a, c)$.  Prove the above claim by using the fact that $c = \frac{b}{a}$ and $b = ac$.
+            
+            \subsubsection{Solution}
+            
+        
+        \subsection{2.}
+        Now we claim $[\mathbb{Q}(a, c) : \mathbb{Q}] = 8$.  We have $[\mathbb{Q}(a, c) : \mathbb{Q}] = [\mathbb{Q}(a, c) : \mathbb{Q}(a)] [\mathbb{Q}(a) : \mathbb{Q}] = 4 [\mathbb{Q}(a, c) : \mathbb{Q}(a)]$.  It suffices to show $[\mathbb{Q}(a, c) : \mathbb{Q}(a)] = 2$.  Since $[\mathbb{Q}(a, c) : \mathbb{Q}(a)] \leq [\mathbb{Q}(c) : \mathbb{Q}] = 2$, it suffices to show $\mathbb{Q}(a, c) \neq \mathbb{Q}(a)$, i.e., $c \notin \mathbb{Q}(a)$.  So we need to check that in $\mathbb{Q}(a) = \mathbb{Q}\left(\sqrt[4]{2}\right)$, there is no square root of 3 (i.e., no element of $\mathbb{Q}(a)$ squares to 3).  Check this.
+            
+            \subsubsection{Solution}
+            
+    
+    \section{19.6}
+    Let $K/F$ be an arbitrary field extension.  Assume that we have an \textbf{infinite} tower of subfields of $K$:
+    \begin{align}
+        F \subset L_1 \subset L_2 \subset ... \subset L_n \subset L_{n + 1} \subset ... \subset K
+    \end{align}
+    Assume that $L_1$ is an algebraic extension of $F$, and that each $L_{i + 1}$ is an algebraic extension of $L_i$.  Define $L = \bigcup\limits_{i = 1}^{\infty} L_i$.  Show that $L$ is a subfield of $K$, and that $L/F$ is an algebraic extension.
+        
+        \subsection{Solution}
+        
+    
+    \section{19.14}
+    The exercise in the proof of Lemma 19.14.
+        
+        \subsection{Lemma 19.14}
+        Assume $K/F$ is a field extension.  Let $S \subset K$ be a subset such that $K = F(S)$.  Then $F$-automorphisms of $K$ are determined by their behavior on $S$.  To be more precise, suppose $\phi, \tau \in \Gal(K/F)$.  If $\phi(s) = \tau(s)$ for all $s \in S$, then $\phi = \tau$.
+        
+        \begin{proof}
+            Define
+            \begin{align}
+                K' &:= \{k \in K \mid \phi(k) = \tau(k)\}
+            \end{align}.
+            Then $K'$ contains both $F$ and $S$.  We can check that $K'$ is a subfield of $K$ (exercise).  Hence $K'$ must contain $F(S)$.  But $K = F(S)$ and $K$ contains $K'$.  Therefore $K' = K$.  Thus $\forall$ $k \in K$, $\phi(k) = \tau(k)$, which means $\phi = \tau$.
+        \end{proof}
+        
+        \subsection{Solution}
+        
+    
+    \section{I.1.21}
+    Let $a \in \mathbb{C}$ be a root of $x^n - b$, where $b \in \mathbb{C}$.  Show that $x^n - b$ factors as $\prod\limits_{i = 0}^{n - 1} (x - \omega^i a)$, where $\omega = e^{\frac{2 \pi i}{n}}$.
+        
+        \subsection{Solution}
+        
+    
+    \section{I.2.1}
+    Show that the only automorphisms of $\mathbb{Q}$ is the identity.
+        
+        \subsection{Solution}
+        
+    
+    \section{I.2.2}
+    Show that the only automorphism of $\mathbb{R}$ is the identity.  (Hint: If $\sigma$ is an automorphism, show that $\sigma\mid_\mathbb{Q} = id$, and if $a > 0$, then $\sigma(a) > 0$.  It is an interesting fact that there are infinitely many automorphisms of $\mathbb{C}$, even though $[\mathbb{C} : \mathbb{R}] = 2$.  Why is this fact not a contradiction to this problem?
+    
+    (Ignore the question in the parentheses.)
+        
+        \subsection{Solution}
+        
+    
+\end{document}
