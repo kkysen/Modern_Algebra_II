@@ -1,0 +1,69 @@
+\documentclass[fleqn]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{ulem}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathabx}
+
+\title{
+Math GU4042, Spring 2020 \\
+Modern Algebra II, Prof.\ Yihang Zhu \\
+Midterm 2
+}
+
+\author{Khyber Sen}
+\date{4/14/2020}
+
+\DeclareMathOperator{\Frac}{Frac}
+\DeclareMathOperator{\lcm}{lcm}
+
+\setcounter{secnumdepth}{0}
+
+\begin{document}
+
+    \section{1.}
+    
+    To start, we can first factor out a constant 5 to get 5 and a monic, and in particular, a primitive, polynomial:
+    \begin{align}
+        f(X) &= 35 + 35X + 35X^2 + 5X^3 \\
+            &= 5\left(7 + 7X + 7X^2 + X^3\right)
+    \end{align}
+    For the monic polynomial $7 + 7X + 7X^2 + X^3$, we can show this is irreducible by applying the Eisenstein criterion.  $7 + 7X + 7X^2 + X^3$ is 7-Eisenstein because $p = 7$ divides $a_0, ..., a_{n - 1}$, i.e., $7, 7, 7$, but does not divide $a_n = 1$, and $p^2 = 7^2 = 49$ does not divide $a_0 = 7$.  Thus, by Eisenstein's criterion, $7 + 7X + 7X^2 + X^3$ is irreducible in $\Frac(\mathbb{Z}[i])[X] = \mathbb{Q}[i][X]$.  By Corollary 14.3, we know that the irreducible elements of $R[X]$ are the irreducibles in $R$ and the primitive polynomials in $R[X]$ of degree at least 1 that are irreducible in $F[X]$, where $F$ is the fraction field of $R$.  Since $7 + 7X + 7X^2 + X^3$ is a primitive (since it's monic) polynomial in $\mathbb{Z}[i][X]$ of degree $3 \geq 1$ that is irreducible in $\mathbb{Q}[i][X]$ by Eisenstein's criterion, it must be irreducible in $\mathbb{Z}[i][X]$, too.
+    
+    For the constant factor 5, although 5 is prime, $5 = 1 \pmod{4}$, not $3 \pmod{4}$, so it's not irreducible in $\mathbb{Z}[i]$.  5 is a sum of two squares, so it's reducible in $\mathbb{Z}[i]$: $5 = 2^2 + 1^2 = 2^2 - i^2 = (2 + i)(2 - i)$.  $2 + i$ and $2 - i$ are conjugates that multiply to 5, a prime $1 \pmod{4}$, so by Lemma 12.5, they are irreducible in $\mathbb{Z}[i]$, which means they're also irreducibles in $\mathbb{Z}[i][X]$.  Thus, the full irreducible factorization of $f(X) = 35 + 35X + 35X^2 + 5X^3 \in \mathbb{Z}[i][X]$ is $f(X) = (2 + i)(2 - i)(7 + 7X + 7X^2 + X^3)$.
+    
+    \pagebreak
+    
+    \section{2.}
+    
+    I'm not quite sure if ``assume $\alpha \in K$ is algebraic over $L$'' refers to a specific $\alpha$ or a general $\alpha$, i.e., if $K$ is algebraic over $L$, or just $\alpha \in K$ is algebraic over $L$.  I'll assume the former, but if it's the latter, we can just replace $K$ with the algebraic closure of $L$ instead, which will also contain $\alpha$ and will be algebraic over $L$.
+    
+    (i) Now we have that $K/L/F$ is an algebraic extension, i.e., $K/L$ and $L/F$ are both algebraic extensions.  By Corollary 19.5, this means $K/F$ is also an algebraic extension, even if $K/L$ or $L/F$ aren't finite.  Since $K$ is algebraic over $F$, all $a \in K$ are algebraic in $F$, and in particular, $\alpha \in K$ is algebraic over $F$.
+    
+    (ii) Since we have that $\alpha \in K$ is algebraic over $F$ from (i), and since $K/L/F$ is a field extension, we know by Lemma 18.7 that $\deg(\alpha : L) \leq \deg(\alpha : F)$.
+    
+    \pagebreak
+    
+    \section{3.}
+    
+    (i) By Proposition 18.2, if $K/F$ is a field extension and $\alpha \in K$ is algebraic over $F$, then $[F(\alpha) : F] = \deg(\min(\alpha : F))$.  Thus, if we let $F = \mathbb{Q}$ and $\alpha = \sqrt[n]{p}$, we get that $[\mathbb{Q}(\sqrt[n]{p}) : \mathbb{Q}] = \deg(\min(\sqrt[n]{p} : \mathbb{Q}))$, i.e., this dimension that we are computing equals the degree of the minimal polynomial of $\sqrt[n]{p}$ in $\mathbb{Q}$.  $\min(\sqrt[n]{p} : \mathbb{Q}) = X^n - p$, which also shows that $\sqrt[n]{p}$ is algebraic over $\mathbb{Q}$.  We know that this is a minimal polynomial because there are no duplicate roots.  $\deg(X^n - p) = n$, so $[K : \mathbb{Q}] = n$.
+    
+    (ii) Now that we have $\alpha = \sqrt[n]{p^k}$ where $k \geq 2$ instead of $k = 1$ like in (i), the naive ``minimal'' polynomial, $X^n - p^k$ is no longer minimal because it contains duplicate roots.  These are ``roots of unity''-like roots that cycle around the complex plane, instead of $p^{\frac{ki}{n}}, i \in 0..n - 1$ being unique roots like when $k = 1$, $ki \pmod{n}$ sometimes repeats, leading to duplicate roots.  Thus, to determine the degree of the minimal polynomial amounts to determining the number of unique roots.  That is, we want $|\{ki \in \mathbb{Z}/n\mathbb{Z} \mid i \in \mathbb{Z}\}|$.  To find this cardinality, we can just find the maximum element in the set, $\lcm(k, n)$, and divide by $k$, yielding $\frac{\lcm(k, n)}{k}$.  $\lcm(a, b) = \frac{ab}{\gcd(a, b)}$, so $\frac{\lcm(k, n)}{k} = \frac{kn}{k \gcd(k, n)} = \frac{n}{\gcd(k, n)}$.  Thus, $[L : \mathbb{Q}] = \frac{n}{\gcd(k, n)}$.
+    
+    \pagebreak
+    
+    \section{4.}
+    
+    By Theorem 18.13, since $K/F$ is a finite field extension, $\exists$ $a_1, ..., a_n \in K$ s.t.\ all $a_i$ are algebraic over $F$ and $K = F(a_1, ..., a_n)$.  Now, let $f(X) = \prod\limits_i (X - a_i)$, a non-zero, monic polynomial in $F[X]$.  $f \in F[X]$ because all the $a_i$ are algebraic in $F$, so if $f_i(a_i) = 0$ where $f_i \in F[X]$, then $f = \prod\limits_i f_i$.  $f$ splits over $K$ and $K = F(a_1, ..., a_n)$, so $K/F$ is a splitting field of $f$.  Now we can apply the following lemma, letting $\phi = id$, to show that $\exists$ a ring homomorphism $\theta: K \to K'$ extending the identity map $\phi = id: F \to F$ (i.e., $\theta \rvert_F = \phi$).
+    
+    \textbf{Lemma}: Let $\phi: F \to F'$ be a field isomorphism, $K/F$ a splitting field of $f$, and $K'/F'$ a field extension s.t.\ $\phi(f)$ splits over $K'$.  Then $\exists$ a ring homomorphism $\theta: K \to K'$ s.t.\ $\theta \rvert_F = \phi$.
+    
+    \textbf{Proof of Lemma}: Let $f = \prod\limits_{i = 1}^n p_i$, where $p_i \in F[X]$ are irreducible.  Then $\phi(f) = \prod\limits_{i = 1}^n \phi(p_i)$ and each $\phi(p_i)$ is irreducible in $F'[X]$.  Now we can induct on $[K : F]$.  If $[K : F] = 1$, then $K = F$, so just let $\theta = \phi$.
+    
+    If $[K : F] > 1$, then some $p_i$ is not linear.  Let $a \in K$ be a root of $p_i$, and let $b \in K'$ be a root of $\phi(p_i)$.  By the Isomorphism Extension Theorem, $\exists$ a field isomorphism $\psi: F(a) \to F'(b)$ s.t.\ $\psi \rvert_F = \phi$.  Now $K$ is a splitting field of $f$ over $F(a)$, and $\phi(f)$ splits over $F'(b)$.  Since $[K : F(a)] < [K : F]$ (because $[K : F] = [K : F(a)] [F(a) : F]$ and $F(a) \neq F$), we can apply the inductive hypothesis to get a $\phi: K \to K'$ s.t.\ $\phi \rvert_{F(a)} = \psi$.
+    
+\end{document}
