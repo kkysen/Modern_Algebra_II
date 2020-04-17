@@ -34,13 +34,13 @@ Morandi: I.\{1.21, 2.1-2\} \\
         We give an example where we have strict inequality in (18.13.1).  Let $a = \sqrt[4]{2}, b = \sqrt[4]{18}, c = \sqrt{3} \in \mathbb{C}$.  (Note the similar example on [Morandi] p. 10 is wrong.)  We have $\deg(a : \mathbb{Q}) = \deg(b : \mathbb{Q}) = 4$.  But we are going to show $[\mathbb{Q}(a, b) : \mathbb{Q}] = 8 < 4 \cdot 4$.  Firstly, we claim $\mathbb{Q}(a, b) = \mathbb{Q}(a, c)$.  Prove the above claim by using the fact that $c = \frac{b}{a}$ and $b = ac$.
             
             \subsubsection{Solution}
-            
+            $ac = \sqrt[4]{2} \sqrt{3} = \sqrt[4]{2} \sqrt[4]{3^2} = \sqrt[4]{2 \cdot 3^2} = \sqrt[4]{18} = b$, i.e., $ac = b$.  Thus, $\mathbb{Q}(a, b) = \mathbb{Q}(a, ac)$.  $ac \in \mathbb{Q}(a, c)$, so $\mathbb{Q}(a, ac) \subseteq \mathbb{Q}(a, c)$.  Furthermore, $c = \frac{b}{a}$, so $\mathbb{Q}(a, c) = \mathbb{Q}\left(a, \frac{b}{a}\right)$.  $\frac{b}{a} \in \mathbb{Q}(a, b)$, so $\mathbb{Q}\left(a, \frac{b}{a}\right) \subseteq \mathbb{Q}(a, b)$.  Thus, we have $\mathbb{Q}(a, b) \subseteq \mathbb{Q}(a, c)$ and $\mathbb{Q}(a, b) \supseteq \mathbb{Q}(a, c)$, so therefore, $\mathbb{Q}(a, b) = \mathbb{Q}(a, c)$.
         
         \subsection{2.}
         Now we claim $[\mathbb{Q}(a, c) : \mathbb{Q}] = 8$.  We have $[\mathbb{Q}(a, c) : \mathbb{Q}] = [\mathbb{Q}(a, c) : \mathbb{Q}(a)] [\mathbb{Q}(a) : \mathbb{Q}] = 4 [\mathbb{Q}(a, c) : \mathbb{Q}(a)]$.  It suffices to show $[\mathbb{Q}(a, c) : \mathbb{Q}(a)] = 2$.  Since $[\mathbb{Q}(a, c) : \mathbb{Q}(a)] \leq [\mathbb{Q}(c) : \mathbb{Q}] = 2$, it suffices to show $\mathbb{Q}(a, c) \neq \mathbb{Q}(a)$, i.e., $c \notin \mathbb{Q}(a)$.  So we need to check that in $\mathbb{Q}(a) = \mathbb{Q}\left(\sqrt[4]{2}\right)$, there is no square root of 3 (i.e., no element of $\mathbb{Q}(a)$ squares to 3).  Check this.
             
             \subsubsection{Solution}
-            
+            First, it's clear that $\sqrt{3} \notin \mathbb{Q}(\sqrt{2})$.  Now we can consider $\mathbb{Q}(\sqrt[4]{2})$ as a dimension 2 $\mathbb{Q}(\sqrt{2})$-vector space.  Thus, proving $\sqrt{3} \notin \mathbb{Q}(\sqrt[4]{2})$ amounts to proving $\not\exists$ $a + b \sqrt[4]{2} \in \mathbb{Q}(\sqrt[4]{2}$ with $a, b \in \mathbb{Q}(\sqrt{2})$ s.t.\ $\left(a + b \sqrt[4]{2}\right)^2 = 3$.  Assume such a square root exists.  Then $\left(a + b \sqrt[4]{2}\right)^2 = \left(a^2 + b^2 \sqrt{2}\right) + (2ab) \sqrt[4]{2} = 3$, so $2ab \sqrt[4]{2} = 0$, so either $a = 0$ or $b = 0$.  Since $\sqrt{3} \notin \mathbb{Q}(\sqrt{2})$, $b \neq 0$, so $a = 0$.  Thus we have $b^2 \sqrt{2} = 3$, so $b^2 = \frac{3}{\sqrt{2}} = \frac{3 \sqrt{2}}{\sqrt{2} \sqrt{2}} = \frac{3}{2} \sqrt{2}$.  Since $b \in \mathbb{Q}(\sqrt{2})$, $b = x + y \sqrt{2}$ for some $x, y \in \mathbb{Q}$, so $\left(x + y \sqrt{2}\right)^2 = x^2 + 2y^2 + 2xy \sqrt{2} = \frac{3}{2} \sqrt{2}$.  Thus, $x^2 + 2y^2 = \left(\frac{3}{2} - 2xy\right) \sqrt{3}$.  The left side is rational and the right side is irrational, unless they both equal 0, so for the left side, $x = y = 0$, so $xy = 0$, and for the right side, $xy = \frac{1}{3}$.  This is a contradiction, so therefore, $\sqrt{3} \notin \mathbb{Q}(\sqrt[4]{2})$.
     
     \section{19.6}
     Let $K/F$ be an arbitrary field extension.  Assume that we have an \textbf{infinite} tower of subfields of $K$:
@@ -50,7 +50,10 @@ Morandi: I.\{1.21, 2.1-2\} \\
     Assume that $L_1$ is an algebraic extension of $F$, and that each $L_{i + 1}$ is an algebraic extension of $L_i$.  Define $L = \bigcup\limits_{i = 1}^{\infty} L_i$.  Show that $L$ is a subfield of $K$, and that $L/F$ is an algebraic extension.
         
         \subsection{Solution}
+        To show that $L$ is a subfield of $K$, we need to show that $L$ is a field and $L \subseteq K$.  For the latter, $\forall$ $a \in L$, $\exists$ $i$ s.t.\ $a \in L_i$.  By the infinite tower of subfields of $K$, $L_i \subseteq K$, so $a \in K$, meaning $L \subseteq K$.  As a subset of a field, $K$, to show $L$ is a field, we just need to show that it's closed.  Indeed, $\forall a, b \in L$, $\exists$ $i, j$ s.t.\ $a \in L_i$ and $b \in L_j$.  WLOG, let $i \geq j$, so $L_j \subset L_i$, meaning $b \in L_i$, too.  $L_i$ is a field, so the result of $a$ and $b$ under any field operation is in $L_i \subseteq L$, meaning $L$ is closed under all field operations, so it is a subfield of $K$.
         
+        To show that $L/F$ is an algebraic extension, we need to show that all $a \in L$ are algebraic over $F$.  Since $L = \bigcup\limits_{i = 1}^{\infty} L_i$, $\exists$ $i \in \mathbb{Z}^+$ s.t.\ $a \in L_i$. 
+        $L_i/L_{i - 1}/.../L_1/F$ is an algebraic extension, i.e., $\forall$ $j$, $L_j/L_{j - 1}$ is an algebraic extension.  By Corollary 19.5, if $K/L/F$ is an algebraic extension, i.e., if $K/L$ and $L/F$ are both algebraic extensions, $K/F$ is an algebraic extension.  Applying this $i$ times, we get that $L_i/F$ is an algebraic extension.  Thus, since $a \in L_i$, $a$ is algebraic over $F$.  Thus, $L/F$ is an algebraic extension.
     
     \section{19.14}
     The exercise in the proof of Lemma 19.14.
@@ -62,31 +65,35 @@ Morandi: I.\{1.21, 2.1-2\} \\
             Define
             \begin{align}
                 K' &:= \{k \in K \mid \phi(k) = \tau(k)\}
-            \end{align}.
+            \end{align}
             Then $K'$ contains both $F$ and $S$.  We can check that $K'$ is a subfield of $K$ (exercise).  Hence $K'$ must contain $F(S)$.  But $K = F(S)$ and $K$ contains $K'$.  Therefore $K' = K$.  Thus $\forall$ $k \in K$, $\phi(k) = \tau(k)$, which means $\phi = \tau$.
         \end{proof}
         
         \subsection{Solution}
-        
+        Obviously $K'$ is a subset of $K$ by definition, so we just need to show that $K'$ is closed under field operations to show that $K'$ is a subfield of $K$.  $\forall$ $a, b \in K$, we know that $\phi(a) = \tau(a)$ and $\phi(b) = \tau(b)$, and we need to prove that $a - b, \frac{a}{b} \in K'$, i.e., $\phi(a - b) = \tau(a - b)$ and $\phi\left(\frac{a}{b}\right) = \tau\left(\frac{a}{b}\right)$.  $\phi$ and $\tau$ are automorphism of $K$ (since they're in $\Gal(K/F)$), and in particular, homomorphisms, so $\phi(a - b) = \phi(a) - \phi(b) = \tau(a) - \tau(b) = \tau(a - b)$, and $\phi\left(\frac{a}{b}\right) = \frac{\phi(a)}{\phi(b)} = \frac{\tau(a)}{\tau(b)} = \tau\left(\frac{a}{b}\right)$.  Thus, $K'$ is a subfield of $K$.
+    
+    \pagebreak
     
     \section{I.1.21}
     Let $a \in \mathbb{C}$ be a root of $x^n - b$, where $b \in \mathbb{C}$.  Show that $x^n - b$ factors as $\prod\limits_{i = 0}^{n - 1} (x - \omega^i a)$, where $\omega = e^{\frac{2 \pi i}{n}}$.
         
         \subsection{Solution}
+        Firstly, I'll rewrite the $i$ in $\prod\limits_{i = 0}^{n - 1} (x - \omega^i a)$ as $j$ so as to not confuse the index $i$ with $i \in \mathbb{C}$.  Thus, we want to show that $x^n - b = \prod\limits_{j = 0}^{n - 1}\left(x - \left(e^{\frac{2 \pi i}{n}}\right)^j a\right) = \prod\limits_{j = 0}^{n - 1}\left(x - e^{2 \pi i \frac{j}{n}} a\right)$.  Now we can show that $\left\{e^{2 \pi i \frac{j}{n}} a \mid j \in 0..n - 1\right\}$ are roots of $x^n - b$.  $\left(e^{2 \pi i \frac{j}{n}} a\right)^n - b = e^{2 \pi i j} a^n - b = \left(e^{2 \pi i}\right)^j a^n - b = 1^j a^n - b = a^n - b = 0$ (since $a$ is a root, too).  
         
+        We still need to show that these are the only roots, however.  $\deg\left(\prod\limits_{j = 0}^{n - 1}\left(x - \omega^j a\right)\right) = \sum\limits_{j = 0}^{n - 1} \deg\left(x - \omega^j a\right) = \sum\limits_{j = 0}^{n - 1} 1 = n = \deg(x^n - b)$.  Furthermore, both are monic, so there can't be any other factors of $x^n - b$, meaning there can't be any other roots or constant factors, so $\left\{e^{2 \pi i \frac{j}{n}} a \mid j \in 0..n - 1\right\}$ are the only roots, and thus, $x^n - b = \prod\limits_{j = 0}^{n - 1}\left(x - \omega^j a\right)$.
     
     \section{I.2.1}
-    Show that the only automorphisms of $\mathbb{Q}$ is the identity.
+    Show that the only automorphism of $\mathbb{Q}$ is the identity.
         
         \subsection{Solution}
-        
+        Let $f: \mathbb{Q} \to \mathbb{Q}$ be an arbitrary field automorphism of $\mathbb{Q}$.  In particular, $f$ is a homomorphism so it maps 0 to 0 and 1 to 1, i.e., $f(0) = 0, f(1) = 1$.  Therefore, $f(n \in \mathbb{N}) = \sum\limits_{i = 0}^n f(1) = \sum\limits_{i = 0}^n 1 = n$, $f(-n \in \mathbb{Z}^-) = -f(n) = -n$, $f\left(\frac{1}{n}\right) = \frac{1}{f(n)} = \frac{1}{n}$, and $f\left(\frac{m}{n}\right) = f(m)f\left(\frac{1}{n}\right) = m \frac{1}{n} = \frac{m}{n}$.  Thus, $f = id$.
     
     \section{I.2.2}
-    Show that the only automorphism of $\mathbb{R}$ is the identity.  (Hint: If $\sigma$ is an automorphism, show that $\sigma\mid_\mathbb{Q} = id$, and if $a > 0$, then $\sigma(a) > 0$.  It is an interesting fact that there are infinitely many automorphisms of $\mathbb{C}$, even though $[\mathbb{C} : \mathbb{R}] = 2$.  Why is this fact not a contradiction to this problem?
+    Show that the only automorphism of $\mathbb{R}$ is the identity.  (Hint: If $\sigma$ is an automorphism, show that $\sigma \rvert_\mathbb{Q} = id$, and if $a > 0$, then $\sigma(a) > 0$.  It is an interesting fact that there are infinitely many automorphisms of $\mathbb{C}$, even though $[\mathbb{C} : \mathbb{R}] = 2$.  Why is this fact not a contradiction to this problem?
     
     (Ignore the question in the parentheses.)
         
         \subsection{Solution}
-        
+        Let $f: \mathbb{R} \to \mathbb{R}$ be an arbitrary field automorphism of $\mathbb{R}$.  $f \rvert_\mathbb{Q}$ is an automorphism of $\mathbb{Q}$, so by the above problem, it must be the identity: $f \rvert_\mathbb{Q} = id$.  Now we will first show that $x \in \mathbb{R}^+ \implies f(x) \in \mathbb{R}^+$, i.e., $x > 0 \implies f(x) > 0$.  Since $x > 0$, $\sqrt{x} \in \mathbb{R}$ and $x = \sqrt{x}^2$.  Thus, $f(x) = f\left(\sqrt{x}^2\right) = f(\sqrt{x}\sqrt{x}) = f(\sqrt{x})f(\sqrt{x}) = f(\sqrt{x})^2 > 0$.  Now we'll show that $x > y \implies f(x) > f(y)$.  $x > y \implies x - y > 0 \implies 0 < f(x - y) = f(x) - f(y) \implies f(x) > f(y)$.  Now, combined with the fact that $f \rvert_\mathbb{Q} = id$, we can prove $f = id$ in $\mathbb{R}$.  Assume $f \neq id$, so $f(x) \neq x$ for some $x \in \mathbb{R}$.  Thus, either $x < f(x)$ or $x > f(x)$.  If $x < f(x)$, then since $\mathbb{Q}$ is dense in $\mathbb{R}$, $\exists$ $q \in \mathbb{R}$ s.t.\ $x < q < f(x)$.  Since $x < q$, $f(x) < f(q)$.  Since $f \rvert_\mathbb{Q} = id$, $f(q) = q$, so $f(x) < q$, but $q < f(x)$, which is a contradiction.  The same argument works if $x > f(x)$, except with $<$ replaced by $>$.  Thus, by contradiction, $f = id$.
     
 \end{document}
