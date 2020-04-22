@@ -1,0 +1,137 @@
+\documentclass[fleqn]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{ulem}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathabx}
+
+\title{
+Math GU4042, Spring 2020 \\
+Modern Algebra II, Prof.\ Yihang Zhu \\
+HW 11 \\
+Notes: 20.\{14, 16, 18, 26, 28, 29\} \\
+Morandi: I.2.3.\{$\sigma, \tau$\} \\
+}
+
+\author{Khyber Sen}
+\date{4/23/2020}
+
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Char}{char}
+
+\setcounter{secnumdepth}{0}
+
+\begin{document}
+    
+    \maketitle
+    
+    \section{Exercise 20.14}
+    Check that $K^H$ is an intermediate field, i.e., it is a subfield of $K$ containing $F$.
+        
+        \subsection{Solution}
+        
+    
+    \section{Proposition 20.16}
+    Let $H \in \mathcal{SG}$.  Then the following statements hold.
+    
+    (1) $H \subset \Gal\left(K/K^H\right)$.
+    
+    (2) If $H = \Gal(K/L)$ for some intermediate field $L$, then $H = \Gal\left(K/K^H\right)$.
+        
+        \subsection{Solution}
+        
+    
+    \section{Lemma 20.18}
+    Let $K/F$ be a field extension.  Then the following statements are all equivalent:
+    
+    (1) $F = K^H$ for some subgroup $H$ of the group $\Aut(K)$ of all automorphisms of $K$.
+    
+    (2) $F = K^H$ for some subgroup $H$ of $\Gal(K/F)$.
+    
+    (3) $F = K^{\Gal(K/F)}$.
+        
+        \subsection{Solution}
+        
+    
+    \section{Example 20.26}
+    Let $K/F$ be an extension with $[K : F] = 2$, and $\Char(F) \neq 2$.  We show that $\Gal(K/F) \cong S_2$ (that is, the unique group consisting of two elements), and that $K/F$ is a Galois, without using Theorem 20.22.  In fact, by Exercise 17.17, we can find $\alpha \in K$ such that $K = F(\alpha)$, and such that $u = \alpha^2 \in F$.  Then $\min(\alpha : F) = X^2 - u$, and it has two distinct roots in $K$: $\alpha$ and $-\alpha$.  (They are distinct because $\alpha \neq 0$ and $\Char(K) \neq 2$.)  Thus we have a natural injective group homomorphism $\Gal(K/F) \to S_2$.  In order to show that $\Gal(K/F) \cong S_2$, we need to find an element of $\Gal(K/F)$ that corresponds to the nontrivial element of $S_2$, i.e., that sends $\alpha$ to $-\alpha$.  For this, note that every element of $K$ can be written as $a + b\alpha$ for unique $a, b \in F$.  Hence we may unambiguously define a map $\sigma: K \to K$ by the formula $\sigma(a + b\alpha) = a - b\alpha$.
+        
+        \subsection{Exercise 1}
+        Check that this $\sigma$ is indeed an $F$-automorphism of $K$.
+            
+            \subsection{Solution}
+            
+    Therefore, $\Gal(K/F) = \{1, \sigma\} \cong S_2$.
+        
+        \subsection{Exercise 2}
+        Use the above description of $\Gal(K/F)$ to show that $K/F$ is Galois.
+            
+            \subsection{Solution}
+            
+    
+    \section{Exercise 20.28}
+    Let $K/F$ be a field extension, such that $[K : F] = 2$, and $\Char(F) = 2$.  Let $\alpha \in K$ be an element not in $F$.  Let $p = \min(\alpha : F) \in F[X]$.
+        
+        \subsection{(1)}
+        Show that $K = F(\alpha)$, and that $\deg(p) = 2$.
+            
+            \subsubsection{Solution}
+            
+        
+        \subsection{(2)}
+        Write $p = X^2 + bX + c$.  Show that $p$ splits in $K[X]$, i.e., $p = (X - \alpha)(X - \beta)$ for some $\beta \in K$.  Moreover, find an explicit formula for $\beta$ in terms of $\alpha$ and $b$.
+            
+            \subsubsection{Solution}
+            
+        
+        \subsection{(3)}
+        Assume $b = 0$.  Show that $\Gal(K/F) = \{id\}$, and that $K/F$ is not Galois.
+            
+            \subsubsection{Solution}
+            
+        
+        \subsection{(4)}
+        Assume $b \neq 0$.  Show that $\Gal(K/F) = S_2$, and that $K/F$ is Galois.  (Hint: Similarly to Example 20.26, try and construct explicitly an element $\sigma \in \Gal(K/F)$ such that $\sigma(\alpha) = \beta$.)
+        
+            \subsubsection{Solution}
+            
+    
+    \section{20.29}
+    Let $K/F$ be a field extension such that $[K : F] = 2$.  Assume it is Galois.  Show that for all $\alpha \in K$, the derivative of $\min(\alpha : F)$ is not the zero polynomial.  (Hint: If $\Char(F) \neq 2$, this is easy.  If $\alpha \in F$, this is also easy.  If $\Char(F) = 2$ and $\alpha \notin F$, use Exercise 20.28.)
+        
+        \subsection{Solution}
+        
+    
+    \section{1.2.3.\{$\sigma, \tau$\}}
+    Show that the six functions given in Example 2.21 extend to $\mathbb{Q}$-automorphisms of $\mathbb{Q}\left(\sqrt[3]{2}, \omega\right)$.
+        
+        \subsection{Example 2.21}
+        The extension $\mathbb{Q}\left(\sqrt[3]{2}, \omega\right)/\mathbb{Q}$ is Galois, where $\omega = e^{\frac{2}{3} \pi i}$.  In fact, the field $\mathbb{Q}\left(\sqrt[3]{2}, \omega\right)$ is the field generated over $\mathbb{Q}$ by the three roots $\sqrt[3]{2}$, $\omega \sqrt[3]{2}$, and $\omega^2 \sqrt[3]{2}$, of $x^3 - 2$, and since $\omega$ satisfies $x^2 + x + 1$ over $\mathbb{Q}$ and $\omega$ is not in $\mathbb{Q}\left(\sqrt[3]{2}\right)$, we see that $\left[\mathbb{Q}\left(\sqrt[3]{2}, \omega\right) : \mathbb{Q}\right] = 6$.  It can be shown (see Problem 3) that the six functions
+        \begin{align}
+            id &: \sqrt[3]{2} \to \sqrt[3]{2}, \omega \to \omega \\
+            \sigma &: \sqrt[3]{2} \to \omega \sqrt[3]{2}, \omega \to \omega \\
+            \tau &: \sqrt[3]{2} \to \sqrt[3]{2}, \omega \to \omega^2 \\
+            \rho &: \sqrt[3]{2} \to \omega \sqrt[3]{2}, \omega \to \omega^2 \\
+            \mu &: \sqrt[3]{2} \to \omega^2 \sqrt[3]{2}, \omega \to \omega \\
+            \xi &: \sqrt[3]{2} \to \omega^2 \sqrt[3]{2}, \omega \to \omega^2
+        \end{align}
+        extend to distinct automorphism of $\mathbb{Q}\left(\sqrt[3]{2}, \omega\right)/\mathbb{Q}$.  Thus, 
+        \begin{align}
+            \left|\Gal\left(\mathbb{Q}\left(\sqrt[3]{2}, \omega\right)/\mathbb{Q}\right)\right| &= \left[\mathbb{Q}\left(\sqrt[3]{2}, \omega\right) : \mathbb{Q}\right]
+        \end{align}
+        and so $\mathbb{Q}\left(\sqrt[3]{2}, \omega\right)/\mathbb{Q}$ is Galois.
+        
+        One reason we did not do the calculation that shows that we do get six automorphisms from these formulas is that this calculation is long and not particularly informative.  Another reason is that later on we will see easier ways to determine when an extension is Galois.  Knowing ahead of time that $\mathbb{Q}\left(\sqrt[3]{2}, \omega\right)/\mathbb{Q}$ is Galois and that the degree of this extension is six tells us that we have six $\mathbb{Q}$-automorphisms of $\mathbb{Q}\left(\sqrt[3]{2}, \omega\right)$.  There are only six possibilities for the images of $\sqrt[3]{2}$ and $\omega$ under an automorphism, and so all six must occur.
+        
+        \subsection{Hint}
+        First use Remark 18.16 in the notes to find an explicit $\mathbb{Q}$-basis of $K = \mathbb{Q}\left(\sqrt[3]{2}, \omega\right)$.  Using this basis, extend the maps to $\mathbb{Q}$-linear maps from $K \to K$.  Then check that the extended maps are field automorphisms.  Also, you may use the following fact that could simplify the computation:  In order to check a $\mathbb{Q}$-linear map $f: K \to K$ is a ring homomorphism, you only need to check $f(ab) = f(a) f(b)$, where $a, b$ are elements of a $\mathbb{Q}$-basis.
+        
+        \subsection{Solution}
+        
+    
+\end{document}
