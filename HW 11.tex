@@ -34,7 +34,11 @@ Morandi: I.2.3.\{$\sigma, \tau$\} \\
     Check that $K^H$ is an intermediate field, i.e., it is a subfield of $K$ containing $F$.
         
         \subsection{Solution}
+        By definition, $K^H = \{k \in K \mid \tau(k) = k$, $\forall$ $\tau \in H\}$.  This is obviously a subset of $K$, so we just have to show that it's a field, i.e., it's closed under field operations, and that it contains $F$.
         
+        For closure, let $a, b \in K^H$.  Thus, $\tau(a) = a$ and $\tau(b) = b$ $\forall$ $\tau \in H$.  We want to show $a - b, \frac{a}{b} \in K^H$, i.e., $\tau(a - b) = a - b$ and $\tau\left(\frac{a}{b}\right) = \frac{a}{b}$ $\forall$ $\tau \in H$.  $\forall$ $\tau \in H$, $\tau$ is a homomorphism, so $\tau(a - b) = \tau(a) - \tau(b) = a - b$, and $\tau\left(\frac{a}{b}\right) = \frac{\tau(a)}{\tau(b)} = \frac{a}{b}$.  Thus, $K^H$ is a subfield of $K$.
+        
+        To show $F \subseteq K^H$, we need to show that $\forall$ $a \in F$, $a \in K^H$, i.e., $\forall$ $\tau \in H$, $\tau(a) = a$.  $H$ is a subgroup of $\Gal(K/F)$, which is the set of $F$-automorphisms of $K$, so every $\tau \in H$ is an $F$-automorphism of $K$, which, by definition, has the property that $\tau(a) = a$ $\forall$ $a \in F$.  Thus, $K^H$ contains $F$, so $K^H$ is an intermediate field of $K/F$.
     
     \section{Proposition 20.16}
     Let $H \in \mathcal{SG}$.  Then the following statements hold.
@@ -44,7 +48,11 @@ Morandi: I.2.3.\{$\sigma, \tau$\} \\
     (2) If $H = \Gal(K/L)$ for some intermediate field $L$, then $H = \Gal\left(K/K^H\right)$.
         
         \subsection{Solution}
+        (1) $H \in \mathcal{SG}$, so $H$ is a subgroup of $\Gal(K/F)$.  That is, every $f \in H$ is an $F$-automorphism of $K$.  To show that $H \subseteq \Gal\left(K/K^H\right)$, we need to show that $f \in \Gal\left(K/K^H\right)$, i.e., $f$ is also an $K^H$-automorphism of $K$.  This means that we have to show that $f(a) = a$ $\forall$ $a \in K^H \supseteq F$.  Since $a \in K^H$, $\forall$ $g \in H$, $g(a) = a$.  $f$ is one such $g$, so therefore, $f(a) = a$.  Thus, $H \subseteq \Gal\left(K/K^H\right)$.
         
+        $ $ \\
+        \noindent
+        (2) If $H = \Gal(K/L)$ for some intermediate field $L$, then we have to prove that $H = \Gal\left(K/K^H\right)$, i.e., that $\Gal(K/L) = \Gal\left(K/K^H\right)$.  By (1), we already know that $H \subseteq \Gal\left(K/K^H\right)$, so if we can show that $H \supseteq \Gal\left(K/K^H\right)$, then we'll have shown that $H = \Gal\left(K/K^H\right)$.  That is, we just have to show $\forall$ $f \in \Gal\left(K/K^H\right)$, $f \in H = \Gal(K/L)$, i.e., the $K^H$-automorphism of $K$ $f$ is also an $L$-automorphism of $K$.  As a $K^H$-automorphism of $K$, $f(a) = a$ $\forall$ $a \in K^H$, so we just have to show that $f(a) = a$ $\forall$ $a \in L$.
     
     \section{Lemma 20.18}
     Let $K/F$ be a field extension.  Then the following statements are all equivalent:
@@ -56,7 +64,11 @@ Morandi: I.2.3.\{$\sigma, \tau$\} \\
     (3) $F = K^{\Gal(K/F)}$.
         
         \subsection{Solution}
+        For $(2) \implies (3)$, we know by Prop. 20.15 (2), since $F = K^H$ for some $H \in \mathcal{SG}$, i.e.\ $H$ is a subgroup of $\Gal(K/F)$, then $F = K^{\Gal(K/F)}$.
         
+        For $(2) \implies (1)$, if $H$ is a subgroup of $\Gal(K/F)$, then every $f \in H$ is an $F$-automorphism of $K$.  In particular, every $f$ is an automorphism of $K$, so $H$ is a subgroup of $\Aut(K)$.
+        
+        // TODO
     
     \section{Example 20.26}
     Let $K/F$ be an extension with $[K : F] = 2$, and $\Char(F) \neq 2$.  We show that $\Gal(K/F) \cong S_2$ (that is, the unique group consisting of two elements), and that $K/F$ is a Galois, without using Theorem 20.22.  In fact, by Exercise 17.17, we can find $\alpha \in K$ such that $K = F(\alpha)$, and such that $u = \alpha^2 \in F$.  Then $\min(\alpha : F) = X^2 - u$, and it has two distinct roots in $K$: $\alpha$ and $-\alpha$.  (They are distinct because $\alpha \neq 0$ and $\Char(K) \neq 2$.)  Thus we have a natural injective group homomorphism $\Gal(K/F) \to S_2$.  In order to show that $\Gal(K/F) \cong S_2$, we need to find an element of $\Gal(K/F)$ that corresponds to the nontrivial element of $S_2$, i.e., that sends $\alpha$ to $-\alpha$.  For this, note that every element of $K$ can be written as $a + b\alpha$ for unique $a, b \in F$.  Hence we may unambiguously define a map $\sigma: K \to K$ by the formula $\sigma(a + b\alpha) = a - b\alpha$.
@@ -101,7 +113,7 @@ Morandi: I.2.3.\{$\sigma, \tau$\} \\
             \subsubsection{Solution}
             
     
-    \section{20.29}
+    \section{Exercise 20.29}
     Let $K/F$ be a field extension such that $[K : F] = 2$.  Assume it is Galois.  Show that for all $\alpha \in K$, the derivative of $\min(\alpha : F)$ is not the zero polynomial.  (Hint: If $\Char(F) \neq 2$, this is easy.  If $\alpha \in F$, this is also easy.  If $\Char(F) = 2$ and $\alpha \notin F$, use Exercise 20.28.)
         
         \subsection{Solution}
