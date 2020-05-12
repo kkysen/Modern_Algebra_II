@@ -1,0 +1,69 @@
+\documentclass[fleqn]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{ulem}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathabx}
+
+\title{
+Math GU4042, Spring 2020 \\
+Modern Algebra II, Prof.\ Yihang Zhu \\
+HW 12 \\
+Notes: 22.\{7-9, 16, 20\} \\
+Morandi: I.\{2.10, 3.5-7\} \\
+}
+
+In the notes, Exercise in Example 22.7. Exercises 22.8,  22.9,  22.16,  22.20. 
+
+Morandi, I.2:
+
+Problems 10 (use Theorem 23.2 in the notes, which we will prove next Tuesday.)
+
+I.3. Problems 5,6,7. (Hint for 6: Assume f is no longer irreducible over K, and has an irreducible factor g. Construct a field extension L/K, in which g has a root. Then compare degrees.) 
+
+\author{Khyber Sen}
+\date{4/23/2020}
+
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Char}{char}
+\DeclareMathOperator{\Frac}{Frac}
+
+\setcounter{secnumdepth}{0}
+
+\begin{document}
+    
+    \maketitle
+    
+    \section{Exercise in Example 22.7}
+    Let $F = \mathbb{F}_p(t) = \Frac\left(\mathbb{F}_p[t]\right)$.  Let $f = X^p - t \in F[X]$.  Then $f' = pX^{p - 1} = 0$.  Let $K/F$ be a splitting field of $f$, and let $\alpha \in K$ be a root of $f$.  Then $\alpha^p = t$, and we have $f = X^p - \alpha^p = (X - \alpha)^p$.  Thus $\alpha$ is a root of multiplicity $p$.  Exercise: use the last factorization of $f$ to show that $f$ is irreducible in $F[X]$.  This $f$ is an example of irreducible, inseparable polynomial.
+    
+    \section{Exercise 22.8}
+    Let $F$ be a field, and $f \in F[X]$.  We do not assume that $f$ is irreducible.  Let $K/F$ and $K'/F$ be two splitting fields of $f$.
+        
+        \subsection{(1)}
+        Show that $f$ has no multiple roots in $K$, if and only if it has no multiple roots in $K'$.
+        
+        \subsection{(2)}
+        Assume $f$ has no multiple roots in $K$.  Show that $f$ is separable as a polynomial in $F[X]$.
+    
+    \section{Exercise 22.9}
+    Let $F$ be a field, and let $n$ be an integer $\geq 2$.  Assume that $n \neq 0$ in $F$.  Let $a$ be a non-zero element of $F$, and let $f = X^n - a \in F[X]$.  Show that $f$ is separable.  (Warning: since $F$ is a general field, we do not have an explicit irreducible factorization of $f$ in $F[X]$.)
+    
+    If $F$ has characteristic zero, then we have already seen that any monic irreducible $f \in F[X]$ is separable.  Now assume $\Char(F) = p > 0$.  (Then $p$ has to be a prime number.)  Recall that the map $\Phi: F \to F = a \mapsto a^p$ is a ring homomorphism, called the \textit{Frobenius}.  This is necessarily injective since $F$ is a field.  We call $F$ \textit{perfect}, if $\Phi$ is also surjective.
+    
+    \section{Exercise 22.16}
+    Let $K/L/F$ be field extensions.  Assume $K/F$ is separable.  Show that $K/L$ and $L/F$ are both separable.
+    
+    \section{Exercise 22.20}
+    Let $K/L/F$ be field extensions.  Assume $K/F$ is normal.  Show that $K/L$ is normal.
+    
+    \section{I.2.10}
+    
+        
+    
+\end{document}
